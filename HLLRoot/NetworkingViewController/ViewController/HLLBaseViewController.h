@@ -1,0 +1,71 @@
+//
+//  HLLBaseViewController.h
+//  HLLRoot
+//
+//  Created by Rocky Young on 16/10/21.
+//  Copyright © 2016年 HLL. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "HLLBaseRequestAdapter.h"
+
+@interface HLLBaseViewController : UIViewController<HLLBaseRequestAdapterProtocol>
+
+/** 是否隐藏导航栏，默认不隐藏 */
+@property (nonatomic ,assign ,getter=isHidenNavigationBar) BOOL hidenNavigationBar;
+
+@property (nonatomic, readonly, strong) V_3_X_Networking * networkManager;
+
+@property (nonatomic, readonly, strong) HLLBaseRequestAdapter * baseRequest;
+
+- (HLLBaseRequestAdapter *)generateRequest;
+
+- (void) refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo;
+
+/** HUD */
+- (void) hud_showLoading;
+- (void) hud_showSuccessWithMessage:(NSString *)message;
+- (void) hud_showErrorWithMessage:(NSString *)message;
+- (void) hud_hidenLoading;
+
+@end
+
+
+
+/*///////////////
+ 
+ `-generateRequest`方法用于为每一个界面生成一个网络请求，子类可以重写也可以不重写
+ 
+ 子类如果就一个网络请求，重写比较方便
+ 
+ 子类如果涉及到多个网络请求，需要自己写方法进行请求类的实例化
+ 
+ 这个时候`-refreshUIWithRequest:withUserInfo:`的作用就凸显出来了，
+ 这个方法是在网络请求成功之后可以拿到结果的，`info`可以用来区别不同的请求，类似于tag的作用
+ 
+ ///////////////*/
+
+
+
+
+/*///////////////
+ 
+ 关于`HLLBaseRequestAdapterProtocol`，子类可以重写其中的方法，如果没有特殊的需求，只要重写`-refreshUIWithRequest:withUserInfo:`方法获取数据就可以
+ 
+ ///////////////*/
+
+
+
+
+/*///////////////
+ 
+ HUD部分可供子类进行调用
+ 
+ 在进行网络加载的情况下(包括开始加载、成功或失败)子类不需要再进行调用
+ 
+ ///////////////*/
+
+
+
+
+

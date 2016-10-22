@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "TestOneRequestViewController.h"
+
 
 @interface ViewController ()
 
@@ -16,7 +18,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor randomColor];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(100, 100, 80, 40);
+    [button setTitle:@"Next" forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor randomColor];
+    [button addTarget:self action:@selector(sendRequest:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
     // Do any additional setup after loading the view, typically from a nib.
+}
+- (IBAction)sendRequest:(id)sender {
+
+    TestOneRequestViewController * vc = [[TestOneRequestViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
