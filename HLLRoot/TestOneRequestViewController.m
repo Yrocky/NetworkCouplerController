@@ -15,7 +15,7 @@
 
     [super viewDidLoad];
     
-//    [self testOne];
+    [self testOne];
     
     [self testTwo];
 }
@@ -29,16 +29,16 @@
 }
 - (void) testOne{
 
-    TestOneAPI * one = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
-    one.delegate = self;
-    [one startRequest];
+    self.testOneAPI = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testOneAPI.delegate = self;
+    [self.testOneAPI startRequest];
 }
 
 - (void) testTwo{
     
-    TestTwoAPI * two = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
-    two.delegate = self;
-    [two startRequest];
+    self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testTwoAPI.delegate = self;
+    [self.testTwoAPI startRequest];
 }
 
 //- (HLLBaseRequestAdapter *)generateRequest{

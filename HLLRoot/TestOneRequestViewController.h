@@ -8,8 +8,13 @@
 
 #import "HLLBaseViewController.h"
 
+@class TestTwoAPI;
+@class TestOneAPI;
+
 @interface TestOneRequestViewController : HLLBaseViewController
 
+@property (nonatomic ,strong) TestOneAPI * testOneAPI;
+@property (nonatomic ,strong) TestTwoAPI * testTwoAPI;
 @end
 
 
