@@ -19,3 +19,9 @@
 
 @property (nonatomic ,strong) NSArray * top_stories;
 @end
+
+
+@interface TestTwoAPI : HLLBaseRequestAdapter
+
+@property (nonatomic ,strong) NSArray * temp_data;
+@end

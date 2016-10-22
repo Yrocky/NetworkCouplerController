@@ -12,7 +12,6 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 @interface HLLBaseRequestAdapter ()
 
-@property (nonatomic, strong, readwrite) id data;
 @end
 
 @implementation HLLBaseRequestAdapter
@@ -49,7 +48,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
     
-    /** 供子类进行response的操作 */
+    /** 供子类进行解析response的操作 */
 }
 
 + (NSMutableDictionary *)createParamWithApp:(NSString *)app class:(NSString *)cls

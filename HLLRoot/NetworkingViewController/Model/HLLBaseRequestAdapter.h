@@ -26,7 +26,7 @@ extern NSString * const HLLHostURL;
 @property (nonatomic, weak) id<HLLBaseRequestAdapterProtocol> delegate;
 
 /** 在网络请求返回的数据进行解析之后的有用数据，详见`-parseResponse:withUserInfo:`方法 */
-@property (nonatomic, strong, readonly) id data;
+@property (nonatomic, strong) id data;
 
 - (instancetype)initWithNetworkManager:(HLLNetworking *)manager;
 
@@ -53,7 +53,7 @@ extern NSString * const HLLHostURL;
  
     }
 
- 那么`data`属性是用来方便取相应数据中data部分的，是响应数据，需要设置成`readonly`
+ 那么`data`属性是用来方便取相应数据中data部分的
  
  并且用`-parseResponse:withUserInfo:`对`data`进行获取，以及`-objectForKey:`具体字段下数据的获取
  针对于其他的response结构可以重新实现`-parseResponse:withUserInfo:`方法

@@ -26,7 +26,7 @@
         self.method          = [HLLGETMethodType type];
         self.requestType     = [HLLHTTPBodyType type];
         self.responseType    = [HLLHttpDataType type];
-        self.timeoutInterval = @(30);
+        self.timeoutInterval = @(15);
 
         self.session         = [AFHTTPSessionManager manager];
         
@@ -96,7 +96,7 @@
                                failure:failure];
     }
     
-//    NSLog(@"RequestURL:%@",[self descriptionRequestURL]);
+    NSLog(@"RequestURL:%@",[self descriptionRequestURL]);
 }
 
 - (void) resetData{
@@ -134,6 +134,8 @@
         
         self.session.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
+    
+    self.session.responseSerializer.acceptableContentTypes = [self.session.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     self.session.responseSerializer.acceptableContentTypes = [self.session.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
     
 }

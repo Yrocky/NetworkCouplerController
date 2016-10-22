@@ -10,16 +10,46 @@
 
 @implementation TestOneRequestViewController
 
-- (HLLBaseRequestAdapter *)generateRequest{
 
-    return [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
+- (void)viewDidLoad{
+
+    [super viewDidLoad];
+    
+//    [self testOne];
+    
+    [self testTwo];
 }
 
-- (void)refreshUIWithRequest:(TestOneAPI *)request withUserInfo:(id)userInfo{
+- (void)viewDidAppear:(BOOL)animated{
 
+    [super viewDidAppear:animated];
     
-    NSLog(@"%@",request.stories);
-        
+//    [self testTwo];
+    
+}
+- (void) testOne{
+
+    TestOneAPI * one = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
+    one.delegate = self;
+    [one startRequest];
+}
+
+- (void) testTwo{
+    
+    TestTwoAPI * two = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
+    two.delegate = self;
+    [two startRequest];
+}
+
+//- (HLLBaseRequestAdapter *)generateRequest{
+//
+//    return [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
+//}
+
+- (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
+
+    NSLog(@"%@",userInfo);
+    
 }
 @end
 
@@ -42,5 +72,26 @@
 
     _top_stories = response[@"top_stories"];
     _stories = response[@"stories"];
+}
+@end
+
+
+@implementation TestTwoAPI
+
+- (void)startRequest{
+    
+    NSDictionary * p = @{
+                         @"app" :@"Goods",
+                         @"class"  :@"Recommend",
+                         @"sign" : @"3e3ae73f6be8ea3f333af93c76d20c0f",
+                         @"uid" :@"1932891"
+                         };
+    
+    [self post:@"http://175.102.24.16/api" parameters:p userInfo:@"test-two-api"];
+}
+
+- (void)parseResponse:(id)response withUserInfo:(id)userInfo{
+    
+    self.data = response[@"data"];
 }
 @end
