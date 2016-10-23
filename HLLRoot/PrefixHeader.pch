@@ -14,6 +14,7 @@
 
 #import "UIColor+Common.h"
 #import "UIImage+Common.h"
+#import "NSString+Common.h"
 
 #import "HLLNibProtocol.h"
 

@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjcAssociatedObjectHelpers.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HLLRoot.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7EFEAC8626370EBC79D467B1F923AEA4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>89A9E7167A0AD37603D6B91A3F72BEAC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB6F206B48989EDE9D1695E0D3A2C9F9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C219C39DD722C0B2425CE7B837BF089F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBEEE9759DE999E53A8B87F7025B9A7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

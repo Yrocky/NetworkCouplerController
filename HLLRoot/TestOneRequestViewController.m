@@ -20,6 +20,7 @@
 
     [super viewDidLoad];
     
+    self.networkManager.needCache = YES;
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(80, 30, CGRectGetWidth(self.view.bounds) - 160, 40);
     button.titleLabel.font = [UIFont systemFontOfSize:15];

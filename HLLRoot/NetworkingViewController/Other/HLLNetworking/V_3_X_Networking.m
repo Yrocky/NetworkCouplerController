@@ -8,6 +8,8 @@
 
 #import "V_3_X_Networking.h"
 #import "AFNetworking.h"
+#import "AFHTTPSessionManager+AutoRetry.h"
+
 
 @interface V_3_X_Networking ()
 
@@ -27,10 +29,14 @@
         self.requestType     = [HLLHTTPBodyType type];
         self.responseType    = [HLLHttpDataType type];
         self.timeoutInterval = @(15);
-
         self.session         = [AFHTTPSessionManager manager];
         
         self.HTTPHeaderFieldsWithValues = [NSMutableDictionary dictionary];
+
+        self.timesToRetry       = 0;
+        self.intervalInSeconds  = 0;
+        
+        self.EnableLogParseResponseDebug = YES;
     }
     return self;
 }
@@ -61,12 +67,27 @@
             weakSelf.serializerResponseData = [weakSelf.responseDataSerializer serializerResponseDictionary:responseObject];
         }
         
+        id response = (weakSelf.serializerResponseData == nil ?
+                       weakSelf.originalResponseData :
+                       weakSelf.serializerResponseData);
+        
+        if( weakSelf.needCache ){
+            
+            // 进行缓存操作
+            [weakSelf cacheResponseObject:response
+                                  request:task.currentRequest
+                               parameters:requestDictionary];
+        }
+        
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
             
-            id data = (weakSelf.serializerResponseData == nil ? weakSelf.originalResponseData : weakSelf.serializerResponseData);
             
             [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                      data:data];
+                                                      data:response];
+            // 打印成功信息
+            [weakSelf logWithSuccessResponse:response
+                                         url:weakSelf.urlString
+                                      params:requestDictionary];
         }
     };
     
@@ -75,17 +96,49 @@
         
         weakSelf.isRunning = NO;
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)]) {
-            [weakSelf.delegate networkingDidRequestFailed:weakSelf error:error];
+            
+            [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                    error:error];
+            
+            [weakSelf logWithFailError:error
+                                   url:weakSelf.urlString
+                                params:requestDictionary];
         }
     };
 
+    if( self.needCache ){
+        
+        //获得缓存中的响应数据
+        id cacheResponse = [self getCacheResponseWithURL:self.urlString parameters:self.requestDictionary];
+        
+        if( cacheResponse ){
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+                    
+                    [weakSelf.delegate networkingDidRequestSuccess:weakSelf
+                                                              data:cacheResponse];
+                    // 打印成功信息
+                    [self logWithSuccessResponse:cacheResponse
+                                             url:self.urlString
+                                          params:requestDictionary];
+                }
+            });
+            // 有数据，直接发给请求发起者，结束
+            return;
+        }
+    }
+    
     if ([self.method isKindOfClass:[HLLGETMethodType class]]) {
         
         _dataTask = [self.session GET:self.urlString
                            parameters:requestDictionary
                              progress:nil
                               success:success
-                              failure:failure];
+                              failure:failure
+                            autoRetry:self.timesToRetry
+                        retryInterval:self.intervalInSeconds];
         
     }else if ([self.method isKindOfClass:[HLLPOSTMethodType class]]){
         
@@ -93,10 +146,12 @@
                             parameters:requestDictionary
                               progress:nil
                                success:success
-                               failure:failure];
+                               failure:failure
+                             autoRetry:self.timesToRetry
+                         retryInterval:self.intervalInSeconds];
     }
     
-    NSLog(@"RequestURL:%@",[self descriptionRequestURL]);
+    NSLog(@"RequestURL:%@",[self generateGETAbsoluteURL:self.urlString params:self.requestDictionary]);
 }
 
 - (void) resetData{
@@ -107,6 +162,9 @@
 
 - (void) accessRequestSerializer{
 
+    // 设置最大并发数，不宜过多
+    self.session.operationQueue.maxConcurrentOperationCount = 5;
+    
     if ([self.requestType isKindOfClass:[HLLJsonBodyType class]]) {
         self.session.requestSerializer = [AFJSONRequestSerializer serializer];
         

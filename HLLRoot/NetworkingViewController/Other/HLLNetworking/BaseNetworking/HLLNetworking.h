@@ -13,6 +13,7 @@
 #import "HLLRequestDictionarySerializer.h"
 #import "HLLResponseDataSerializer.h"
 
+
 @class HLLNetworking;
 
 @protocol HLLUploadFileProtocol <NSObject>
@@ -60,6 +61,15 @@
 @property (nonatomic) BOOL isRunning;
 
 @property (nonatomic ,strong) NSNumber *timeoutInterval;
+/** 网络请求失败之后重试的次数，默认为0 */
+@property (nonatomic ,assign) int timesToRetry;
+/** 每次重试之间的间隔，默认为0 */
+@property (nonatomic ,assign) int intervalInSeconds;
+/** 是否需要进行缓存响应结果，默认为NO */
+@property (nonatomic ,assign) BOOL needCache;
+/** 是否进行解析过后的响应数据log输出，默认为NO */
+@property (nonatomic ,assign) BOOL EnableLogParseResponseDebug;
+
 
 - (void) startRequest;
 
@@ -78,5 +88,23 @@
 - (NSDictionary *) accessRequestDictionarySerializerWithRequestDictionary:(NSDictionary *)requestDictionary;
 
 - (NSString *) descriptionRequestURL;
+
+
+- (void)logWithSuccessResponse:(id)response
+                           url:(NSString *)url
+                        params:(NSDictionary *)params;
+- (void)logWithFailError:(NSError *)error
+                     url:(NSString *)url
+                  params:(id)params;
+
+- (NSString *)generateGETAbsoluteURL:(NSString *)url params:(id)params;
+- (id)tryToParseData:(id)responseData;
+
+/** 进行缓存数据以及获取缓存数据 */
+- (void)cacheResponseObject:(id)responseObject
+                    request:(NSURLRequest *)request
+                 parameters:params ;
+- (id)getCacheResponseWithURL:(NSString *)url
+                   parameters:params ;
 @end
 

@@ -15,6 +15,8 @@
 		D71040B41DBCCD3A000A8F9B /* TestMultiRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040B31DBCCD3A000A8F9B /* TestMultiRequestViewController.m */; };
 		D71040B71DBCF2CA000A8F9B /* TestDownloadRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040B61DBCF2CA000A8F9B /* TestDownloadRequestViewController.m */; };
 		D71040BA1DBCF2E1000A8F9B /* TestUploadRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040B91DBCF2E1000A8F9B /* TestUploadRequestViewController.m */; };
+		D71040BD1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */; };
+		D71040C01DBD255C000A8F9B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040BF1DBD255C000A8F9B /* NSString+Common.m */; };
 		D7A09F3E1DBB99CD00C93B2D /* HLLNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F3D1DBB99CD00C93B2D /* HLLNoDataView.m */; };
 		D7A09F4C1DBB9C5500C93B2D /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F421DBB9C5500C93B2D /* UIColor+Common.m */; };
 		D7A09F4D1DBB9C5500C93B2D /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F471DBB9C5500C93B2D /* PullToRefreshView.m */; };
@@ -67,6 +69,10 @@
 		D71040B61DBCF2CA000A8F9B /* TestDownloadRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDownloadRequestViewController.m; sourceTree = "<group>"; };
 		D71040B81DBCF2E1000A8F9B /* TestUploadRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUploadRequestViewController.h; sourceTree = "<group>"; };
 		D71040B91DBCF2E1000A8F9B /* TestUploadRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUploadRequestViewController.m; sourceTree = "<group>"; };
+		D71040BB1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+AutoRetry.h"; sourceTree = "<group>"; };
+		D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+AutoRetry.m"; sourceTree = "<group>"; };
+		D71040BE1DBD255C000A8F9B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		D71040BF1DBD255C000A8F9B /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		D7A09F3C1DBB99CD00C93B2D /* HLLNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLNoDataView.h; sourceTree = "<group>"; };
 		D7A09F3D1DBB99CD00C93B2D /* HLLNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLNoDataView.m; sourceTree = "<group>"; };
 		D7A09F3F1DBB9A3100C93B2D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -184,6 +190,10 @@
 				D71040A61DBC9821000A8F9B /* UIImage+Common.m */,
 				D71040AC1DBC9FD2000A8F9B /* UILabel+ContentSize.h */,
 				D71040AD1DBC9FD2000A8F9B /* UILabel+ContentSize.m */,
+				D71040BE1DBD255C000A8F9B /* NSString+Common.h */,
+				D71040BF1DBD255C000A8F9B /* NSString+Common.m */,
+				D71040BB1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.h */,
+				D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -552,12 +562,14 @@
 			files = (
 				D7A09F4C1DBB9C5500C93B2D /* UIColor+Common.m in Sources */,
 				D7BB790B1DB925080073B2DC /* HLLBaseViewController.m in Sources */,
+				D71040BD1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m in Sources */,
 				D7A09F6A1DBBD72D00C93B2D /* HLLNetworking.m in Sources */,
 				D7BB78E61DB91CB20073B2DC /* ViewController.m in Sources */,
 				D7A09F551DBBD11000C93B2D /* HLLListViewController.m in Sources */,
 				D7A09F4F1DBB9C5500C93B2D /* UIScrollView+HLLPullToRefreshView.m in Sources */,
 				D7A09F741DBBEC7400C93B2D /* HLLBaseListItem.m in Sources */,
 				D71040AE1DBC9FD2000A8F9B /* UILabel+ContentSize.m in Sources */,
+				D71040C01DBD255C000A8F9B /* NSString+Common.m in Sources */,
 				D71040AB1DBC9E71000A8F9B /* HLLPlaceholderTextView.m in Sources */,
 				D7A09F4E1DBB9C5500C93B2D /* UIScrollView+HLLInfiniteScrollingView.m in Sources */,
 				D7A09F831DBC0D0E00C93B2D /* TestOneRequestViewController.m in Sources */,

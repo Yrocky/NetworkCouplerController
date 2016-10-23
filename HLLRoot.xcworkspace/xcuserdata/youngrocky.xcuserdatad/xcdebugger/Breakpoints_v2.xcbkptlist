@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "HLLRoot/NetworkingViewController/Model/HLLBaseRequestAdapter.m"
-            timestampString = "498924255.801823"
+            timestampString = "498931008.718071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-networkingDidRequestFailed:error:"
             landmarkType = "7">
             <Actions>
@@ -34,11 +34,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "HLLRoot/NetworkingViewController/Model/HLLBaseRequestAdapter.m"
-            timestampString = "498924255.801823"
+            timestampString = "498931008.718071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-networkingDidRequestSuccess:data:"
             landmarkType = "7">
             <Actions>

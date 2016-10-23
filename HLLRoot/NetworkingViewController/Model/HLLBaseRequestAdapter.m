@@ -46,6 +46,12 @@ NSString * const HLLHostURL = @"www.baidu.com";
     return key;
 }
 
+- (void) setTimesToRetry:(int)timesToRetry intervalInSeconds:(int)intervalInSeconds{
+
+    _networkManager.timesToRetry = timesToRetry;
+    _networkManager.intervalInSeconds = intervalInSeconds;
+}
+
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
     
     /** 供子类进行解析response的操作 */

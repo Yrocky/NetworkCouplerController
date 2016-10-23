@@ -81,6 +81,8 @@
     self.hidenNavigationBar = NO;
     self.allowHUDWhenRequestLoading = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+    
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 }
 
 - (void) configureBaseRequest{

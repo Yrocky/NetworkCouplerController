@@ -68,6 +68,7 @@
     
     self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
     self.testTwoAPI.delegate = self;
+    [self.testTwoAPI setTimesToRetry:3 intervalInSeconds:1];
     [self.testTwoAPI startRequest];
 }
 

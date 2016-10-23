@@ -43,6 +43,9 @@ extern NSString * const HLLHostURL;
 - (void)refreshRequest;
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo;
 
+/** 为请求失败设置重连次数以及每次之间的时间间隔 */
+- (void)setTimesToRetry:(int)timesToRetry intervalInSeconds:(int)intervalInSeconds;
+
 - (id)objectForKey:(NSString *)key;
 
 + (NSMutableDictionary *)createParamWithApp:(NSString *)app class:(NSString *)cls;
@@ -91,6 +94,15 @@ extern NSString * const HLLHostURL;
 /*///////////////
  
  `-startRequest`和`-refreshRequest`用来进行网络请求的加载以及重复加载，后者基本用于刷新表数据
+ 
+ ///////////////*/
+
+
+
+
+/*///////////////
+ 
+ `-setTimesToRetry:intervalInSeconds:`方法用来设置请求失败之后的重连次数以及每次之间的间隔
  
  ///////////////*/
 

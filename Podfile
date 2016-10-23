@@ -9,6 +9,7 @@ pod 'AFNetworking', '~> 3.1.0'
 pod 'MJRefresh', '~> 3.1.12'
 pod 'Masonry', '~> 1.0.2'
 pod 'SVProgressHUD', '~> 2.0.3'
+pod 'ObjcAssociatedObjectHelpers', '~> 2.0.1'
 
 end
 
