@@ -13,6 +13,8 @@
 
 /** 是否隐藏导航栏，默认不隐藏 */
 @property (nonatomic ,assign ,getter=isHidenNavigationBar) BOOL hidenNavigationBar;
+/** 是否在进行网络请求的时候出现HUD，默认YES */
+@property (nonatomic ,assign) BOOL allowHUDWhenRequestLoading;
 
 @property (nonatomic, readonly, strong) V_3_X_Networking * networkManager;
 
@@ -67,5 +69,10 @@
 
 
 
-
-
+/*///////////////
+ 
+ `allowHUDWhenRequestLoading`属性用来决定在开始进行网络请求开始的时候是否进行HUD展示
+ 
+ 因为有的控制器具有下拉刷新功能，一般下拉刷新都有动画进行指示，不需要额外再多一个HUD
+ 
+ ///////////////*/

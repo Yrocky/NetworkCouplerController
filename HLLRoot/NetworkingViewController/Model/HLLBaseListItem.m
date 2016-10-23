@@ -14,7 +14,7 @@
 {
     if( self = [super initWithNetworkManager:manager])
     {
-        _pageSize = 10;
+        _pageSize = 30;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
@@ -27,13 +27,12 @@
     self = [super init];
     if (self)
     {
-        _pageSize = 10;
+        _pageSize = 30;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
     return self;
 }
-
 
 - (void)refresh
 {
@@ -63,12 +62,14 @@
 
     [super parseResponse:response withUserInfo:userInfo];
     
-    if(_currentPage == 1)
-    {
-        [_items removeAllObjects];
+    if(_currentPage == 0){
+        
+        [self clear];
     }
     
     [_items addObjectsFromArray:[self parsePage:response withUserInfo:userInfo]];
+    
+    _result = [self parsePage:response withUserInfo:userInfo];
 }
 
 - (void)startRequest{

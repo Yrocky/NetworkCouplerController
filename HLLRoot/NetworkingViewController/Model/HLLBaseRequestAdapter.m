@@ -91,6 +91,8 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 - (void) networkingDidRequestSuccess:(HLLNetworking *)networking data:(id)data{
 
+    self.response = data;
+
     [self parseResponse:data withUserInfo:networking.tag];
     
     if([_delegate respondsToSelector:@selector(requestAdapter:didCompleteWithUserInfo:)]){

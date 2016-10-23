@@ -7,65 +7,73 @@
 //
 
 #import "TestOneRequestViewController.h"
+#import "HLLPlaceholderTextView.h"
+
+@interface TestOneRequestViewController ()
+
+@property (nonatomic ,strong) HLLPlaceholderTextView * logView;
+@end
 
 @implementation TestOneRequestViewController
-
 
 - (void)viewDidLoad{
 
     [super viewDidLoad];
     
-    [self testOne];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(80, 30, CGRectGetWidth(self.view.bounds) - 160, 40);
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    [button setTitle:@"点击发送一个请求" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(startTestRequest:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitleColor:[UIColor colorWithHexString:@"EFF3F4"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"FE8A8A"]] forState:UIControlStateNormal];
+    button.layer.cornerRadius = 5.0f;
+    button.layer.masksToBounds = YES;
+    [self.view addSubview:button];
     
-    [self testTwo];
+    self.logView = [[HLLPlaceholderTextView alloc] init];
+    self.logView.placeholder = @"请求成功会在这里输出日志";
+    self.logView.placeholderColor = [UIColor colorWithHexString:@"#84949E"];
+    self.logView.textColor = [UIColor colorWithHexString:@"#84949E"];
+    self.logView.font = [UIFont systemFontOfSize:14];
+    self.logView.frame = CGRectMake(20, CGRectGetMaxY(button.frame) + 40, CGRectGetWidth(self.view.bounds) - 40, 300);
+    self.logView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.logView];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
 
-    [super viewDidAppear:animated];
-    
-//    [self testTwo];
-    
-}
-- (void) testOne{
-
-    self.testOneAPI = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
-    self.testOneAPI.delegate = self;
-    [self.testOneAPI startRequest];
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
 }
 
-- (void) testTwo{
-    
-    self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
-    self.testTwoAPI.delegate = self;
-    [self.testTwoAPI startRequest];
+- (void)startTestRequest:(UIButton *)sender{
+
+    [self.baseRequest refreshRequest];
 }
 
-//- (HLLBaseRequestAdapter *)generateRequest{
-//
-//    return [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
-//}
+- (HLLBaseRequestAdapter *)generateRequest{
 
-- (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
+    return [[TestAPI alloc] initWithNetworkManager:self.networkManager];
+}
 
-    NSLog(@"%@",userInfo);
-    
+- (void)refreshUIWithRequest:(TestAPI *)request withUserInfo:(id)userInfo{
+
+    self.logView.text = [NSString stringWithFormat:@"%@请求成功\n================\n%@",userInfo,request.response];
 }
 @end
 
 
-@implementation TestOneAPI
+@implementation TestAPI
+
+- (NSString *)userInfo{
+
+    return @"test-api";
+}
 
 - (void)startRequest{
 
-    NSDictionary * p = @{
-                         @"app" :@"Goods",
-                         @"class"  :@"Recommend",
-                         @"sign" : @"3e3ae73f6be8ea3f333af93c76d20c0f",
-                         @"uid" :@"1932891"
-                         };
-    
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:@"test-one-api"];
+    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
@@ -75,23 +83,3 @@
 }
 @end
 
-
-@implementation TestTwoAPI
-
-- (void)startRequest{
-    
-    NSDictionary * p = @{
-                         @"app" :@"Goods",
-                         @"class"  :@"Recommend",
-                         @"sign" : @"3e3ae73f6be8ea3f333af93c76d20c0f",
-                         @"uid" :@"1932891"
-                         };
-    
-    [self post:@"http://175.102.24.16/api" parameters:p userInfo:@"test-two-api"];
-}
-
-- (void)parseResponse:(id)response withUserInfo:(id)userInfo{
-    
-    self.data = response[@"data"];
-}
-@end

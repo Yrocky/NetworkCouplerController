@@ -25,8 +25,14 @@ extern NSString * const HLLHostURL;
 
 @property (nonatomic, weak) id<HLLBaseRequestAdapterProtocol> delegate;
 
+/** 在网络请求成功之后返回的原始数据 */
+@property (nonatomic ,strong) id response;
+
 /** 在网络请求返回的数据进行解析之后的有用数据，详见`-parseResponse:withUserInfo:`方法 */
 @property (nonatomic, strong) id data;
+
+/** 用来标示每一个request，类似于tag */
+@property (nonatomic ,strong) NSString * userInfo;
 
 - (instancetype)initWithNetworkManager:(HLLNetworking *)manager;
 

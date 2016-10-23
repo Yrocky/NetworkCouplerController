@@ -8,10 +8,15 @@
 
 #import "ViewController.h"
 #import "TestOneRequestViewController.h"
+#import "TestMultiRequestViewController.h"
+#import "TestPageRequestViewController.h"
+#import "TestDownloadRequestViewController.h"
+#import "TestUploadRequestViewController.h"
 
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@interface ViewController ()
-
+@property (nonatomic ,strong) UITableView * testListView;
+@property (nonatomic ,strong) NSArray * listItems;
 @end
 
 @implementation ViewController
@@ -19,25 +24,75 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor randomColor];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(100, 100, 80, 40);
-    [button setTitle:@"Next" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor randomColor];
-    [button addTarget:self action:@selector(sendRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-- (IBAction)sendRequest:(id)sender {
-
-    TestOneRequestViewController * vc = [[TestOneRequestViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    self.title = @"测试列表";
+    
+    self.testListView = [[UITableView alloc] init];
+    self.testListView.dataSource = self;
+    self.testListView.delegate = self;
+    self.testListView.tableFooterView = [UIView new];
+    [self.view addSubview:self.testListView];
+    [self.testListView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.edges.mas_equalTo(0);
+    }];
+    
+    self.listItems = @[@"单请求",
+                       @"多请求",
+                       @"分页请求",
+                       @"下载文件",
+                       @"上传文件"];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark -
+#pragma mark UITableViewDataSource,UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+    return self.listItems.count;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"#6F818D"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",self.listItems[indexPath.row]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString * title = self.listItems[indexPath.row];
+    
+    if (indexPath.row == 0) {
+        TestOneRequestViewController * vc = [[TestOneRequestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 1) {
+        TestMultiRequestViewController * vc = [[TestMultiRequestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 2) {
+        TestPageRequestViewController * vc = [[TestPageRequestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 3) {
+        TestDownloadRequestViewController * vc = [[TestDownloadRequestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 4) {
+        TestUploadRequestViewController * vc = [[TestUploadRequestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 @end

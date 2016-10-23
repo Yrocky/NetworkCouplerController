@@ -21,6 +21,11 @@
     self.window = [[UIWindow alloc] init];
     [self.window makeKeyAndVisible];
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"EFF3F4"]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"84949E"]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#FE8A8A"]}];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
     ViewController * viewController = [[ViewController alloc] init];
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:viewController];
     self.window.rootViewController = nav;

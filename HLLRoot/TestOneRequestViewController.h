@@ -8,25 +8,16 @@
 
 #import "HLLBaseViewController.h"
 
-@class TestTwoAPI;
-@class TestOneAPI;
+@class TestAPI;
 
 @interface TestOneRequestViewController : HLLBaseViewController
 
-@property (nonatomic ,strong) TestOneAPI * testOneAPI;
-@property (nonatomic ,strong) TestTwoAPI * testTwoAPI;
 @end
 
 
-@interface TestOneAPI : HLLBaseRequestAdapter
+@interface TestAPI : HLLBaseRequestAdapter
 
 @property (nonatomic ,strong) NSArray * stories;
 
 @property (nonatomic ,strong) NSArray * top_stories;
-@end
-
-
-@interface TestTwoAPI : HLLBaseRequestAdapter
-
-@property (nonatomic ,strong) NSArray * temp_data;
 @end

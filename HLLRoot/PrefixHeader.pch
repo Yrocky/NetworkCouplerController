@@ -10,9 +10,11 @@
 #define PrefixHeader_pch
 
 #import "Masonry.h"
-#import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 
 #import "UIColor+Common.h"
+#import "UIImage+Common.h"
+
 #import "HLLNibProtocol.h"
 
 #endif /* PrefixHeader_pch */

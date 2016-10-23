@@ -61,7 +61,7 @@
 - (void)setNoDataView:(UIView *)noDataView{
     
     objc_setAssociatedObject(self, @selector(noDataView), noDataView, OBJC_ASSOCIATION_RETAIN);
-    noDataView.hidden=YES;
+    noDataView.hidden = YES;
     [self addSubview:self.noDataView];
 }
 

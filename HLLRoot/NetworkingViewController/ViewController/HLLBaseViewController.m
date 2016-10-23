@@ -64,6 +64,7 @@
 
 - (void)dealloc {
 
+    [self hud_hidenLoading];
     [self.networkManager cancelRequest];
 }
 
@@ -78,14 +79,14 @@
 - (void) loadDefaultConfigure{
     
     self.hidenNavigationBar = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#EFF3F4"];
+    self.allowHUDWhenRequestLoading = YES;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
 }
 
 - (void) configureBaseRequest{
     
     _baseRequest = [self generateRequest];
     _baseRequest.delegate = self;
-    [_baseRequest startRequest];
 }
 
 #pragma mark -
@@ -108,15 +109,22 @@
 /** HUD */
 - (void) hud_showLoading{
     
+    if (![SVProgressHUD isVisible]) {
+        
+        [SVProgressHUD show];
+    }
 }
 - (void) hud_showSuccessWithMessage:(NSString *)message{
-
+    
+    [SVProgressHUD showSuccessWithStatus:message];
 }
 - (void) hud_showErrorWithMessage:(NSString *)message{
 
+    [SVProgressHUD showErrorWithStatus:message];
 }
 - (void) hud_hidenLoading{
 
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark -
@@ -124,7 +132,10 @@
 
 - (void)requestAdapterDidStartRequest:(HLLBaseRequestAdapter *)requestAdapter{
 
-    [self hud_showLoading];
+    if (self.allowHUDWhenRequestLoading) {
+        
+        [self hud_showLoading];
+    }
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo{
@@ -137,7 +148,7 @@
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error{
-
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self hud_showErrorWithMessage:[error localizedDescription]];
     });
