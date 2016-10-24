@@ -24,9 +24,14 @@
 
 @protocol HLLNetworkingDelegate <NSObject>
 
+/** 请求成功的时候调用 */
 - (void) networkingDidRequestSuccess:(HLLNetworking *)networking data:(id)data;
 
+/** 请求失败的时候调用 */
 - (void) networkingDidRequestFailed:(HLLNetworking *)networking error:(NSError *)error;
+
+/** 在请求失败并且有缓存数据的时候调用 */
+- (void) networkingDidRequestFailed:(HLLNetworking *)networking response:(id)response error:(NSError *)error;
 
 @end
 @interface HLLNetworking : NSObject

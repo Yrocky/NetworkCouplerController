@@ -40,6 +40,14 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor whiteColor];
+}
+
+- (void) configureCollectionView{
+
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark NoDataView
@@ -49,12 +57,15 @@
     CGRect noDataViewFrame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.tableView.bounds));
     HLLNoDataView * noDataView = [[HLLNoDataView alloc] initWithFrame:noDataViewFrame];
     [noDataView configureNoDataViewWithCapion:title alertImage:[UIImage imageNamed:imageName]];
+
     self.tableView.noDataView = noDataView;
+    self.collectionView.noDataView = noDataView;
 }
 
 - (void) autoHidenNoDataView:(BOOL)hiden{
 
     self.tableView.noDataView.hidden = hiden;
+    self.collectionView.noDataView.hidden = hiden;
 }
 
 #pragma mark -
@@ -72,7 +83,19 @@
     return nil;
 }
 
+#pragma mark -
+#pragma mark UICollectionViewDataSource,UICollectionViewDelegate
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+
+    return self.listRequest.items.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    /** 不建议在这里做很多东西，子类可以重写改数据源方法 */
+    return nil;
+}
 
 #pragma mark -
 #pragma mark HLLBaseRequestAdapterProtocol
@@ -88,33 +111,55 @@
     
     [super requestAdapter:requestAdapter didCompleteWithUserInfo:userInfo];
     
-    [self hidenRefreshForTableView:self.tableView
-                            header:self.listRequest.currentPage == 0
-                            footer:self.listRequest.currentPage != 0
-                        noMoreData:self.listRequest.result.count == 0];
+    if (self.tableView) {
+        
+        [self hidenRefreshForListView:self.tableView
+                               header:self.listRequest.currentPage == 0
+                               footer:self.listRequest.currentPage != 0
+                           noMoreData:self.listRequest.result.count == 0];
+    }
+
+    if (self.collectionView) {
+        
+        [self hidenRefreshForListView:self.collectionView
+                               header:self.listRequest.currentPage == 0
+                               footer:self.listRequest.currentPage != 0
+                           noMoreData:self.listRequest.result.count == 0];
+    }
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error{
     
     [super requestAdapter:requestAdapter didFailWithError:error];
     
-    [self hidenRefreshForTableView:self.tableView
-                            header:YES
-                            footer:YES
-                        noMoreData:NO];
+    if (self.tableView) {
+        
+        [self hidenRefreshForListView:self.tableView
+                               header:YES
+                               footer:YES
+                           noMoreData:NO];
+    }
+    if (self.collectionView) {
+        
+        [self hidenRefreshForListView:self.collectionView
+                               header:YES
+                               footer:YES
+                           noMoreData:NO];
+    }
+
 }
 
 
 #pragma mark -
 #pragma mark MJRefresh
 
-- (void) addRefreshForTableView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle footerHandle:(void(^)())footerHandle{
+- (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle footerHandle:(void(^)())footerHandle{
     
-    [self addRefreshForTableView:scrollView headerHandle:headerHandle];
-    [self addRefreshForTableView:scrollView footerHandle:footerHandle];
+    [self addRefreshForListView:scrollView headerHandle:headerHandle];
+    [self addRefreshForListView:scrollView footerHandle:footerHandle];
 }
 
-- (void) addRefreshForTableView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
+- (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
     
     //添加下拉刷新
     scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:headerHandle];
@@ -124,13 +169,13 @@
     [scrollView.mj_header beginRefreshing];
 }
 
-- (void) addRefreshForTableView:(UIScrollView *)scrollView footerHandle:(void(^)())footerHandle{
+- (void) addRefreshForListView:(UIScrollView *)scrollView footerHandle:(void(^)())footerHandle{
     
     // 添加上拉加载更多
     scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:footerHandle];
 }
 
-- (void) hidenRefreshForTableView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
+- (void) hidenRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
     
     if (header) {
         

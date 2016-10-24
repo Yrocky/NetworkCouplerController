@@ -56,6 +56,27 @@
     
     NSDictionary * requestDictionary = [self accessRequestDictionarySerializerWithRequestDictionary:self.requestDictionary];
     
+    //获得缓存中的响应数据
+    id cacheResponse = [self getCacheResponseWithURL:self.urlString parameters:self.requestDictionary];
+    
+    if( cacheResponse ){
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+                
+                [weakSelf.delegate networkingDidRequestSuccess:weakSelf
+                                                          data:cacheResponse];
+                // 打印成功信息
+                [self logWithSuccessResponse:cacheResponse
+                                         url:self.urlString
+                                      params:requestDictionary];
+            }
+        });
+        // 有数据，直接发给请求发起者，结束
+        return;
+    }
+    
     void (^success)(NSURLSessionDataTask *, id)
     = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         
@@ -95,7 +116,7 @@
     = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         
         weakSelf.isRunning = NO;
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)]) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)] && !cacheResponse) {
             
             [weakSelf.delegate networkingDidRequestFailed:weakSelf
                                                     error:error];
@@ -104,31 +125,19 @@
                                    url:weakSelf.urlString
                                 params:requestDictionary];
         }
-    };
-
-    if( self.needCache ){
         
-        //获得缓存中的响应数据
-        id cacheResponse = [self getCacheResponseWithURL:self.urlString parameters:self.requestDictionary];
-        
-        if( cacheResponse ){
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:response:error:)] && cacheResponse) {
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
-                    
-                    [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                              data:cacheResponse];
-                    // 打印成功信息
-                    [self logWithSuccessResponse:cacheResponse
-                                             url:self.urlString
-                                          params:requestDictionary];
-                }
-            });
-            // 有数据，直接发给请求发起者，结束
-            return;
+            [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                 response:cacheResponse
+                                                    error:error];
+            
+            [weakSelf logWithFailError:error
+                                   url:weakSelf.urlString
+                                params:requestDictionary];
         }
-    }
+    };
+    
     
     if ([self.method isKindOfClass:[HLLGETMethodType class]]) {
         

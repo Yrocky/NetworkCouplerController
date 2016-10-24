@@ -10,7 +10,7 @@
 #import "HLLPlaceholderTextView.h"
 
 @interface TestMultiRequestViewController ()
-
+@property (nonatomic ,strong) UISegmentedControl * segmentControl;
 @property (nonatomic ,strong) HLLPlaceholderTextView * logView;
 @end
 
@@ -20,7 +20,7 @@
     
     [super viewDidLoad];
     
-    NSArray * items = @[@"测试请求一",@"测试请求二"];
+    NSArray * items = @[@"测试请求一",@"测试请求二",@"测试同时发送"];
     UISegmentedControl * segmentControl = [[UISegmentedControl alloc] initWithItems:items];
     segmentControl.frame = CGRectMake(20, 30, CGRectGetWidth(self.view.bounds) - 40, 40);
     [segmentControl addTarget:self
@@ -31,6 +31,7 @@
     [segmentControl setTintColor:[UIColor colorWithHexString:@"EFF3F4"]];
     [segmentControl setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"FE8A8A"]] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.view addSubview:segmentControl];
+    self.segmentControl = segmentControl;
     
     self.logView = [[HLLPlaceholderTextView alloc] init];
     self.logView.placeholder = @"请求成功会在这里输出日志";
@@ -52,7 +53,11 @@
     
     if (sender.selectedSegmentIndex == 0) {
         [self testOne];
-    }else{
+    }else if (sender.selectedSegmentIndex == 1) {
+        [self testTwo];
+    }else if (sender.selectedSegmentIndex == 2) {
+        self.logView.text = nil;
+        [self testOne];
         [self testTwo];
     }
 }
@@ -74,7 +79,13 @@
 
 - (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
     
-    self.logView.text = [NSString stringWithFormat:@"%@请求成功\n================\n%@",userInfo,request.response];
+    if (self.segmentControl.selectedSegmentIndex == 2) {
+        
+        self.logView.text = [NSString stringWithFormat:@"%@\n请求成功%@",self.logView.text,userInfo];
+    }else{
+    
+        self.logView.text = [NSString stringWithFormat:@"%@请求成功\n================\n%@",userInfo,request.response];
+    }
 }
 @end
 

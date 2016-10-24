@@ -68,6 +68,13 @@
                            maskImage:nil];
 }
 
+- (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor{
+
+    return [self applyBlurWithRadius:blurRadius
+                           tintColor:tintColor
+               saturationDeltaFactor:1.4
+                           maskImage:nil];
+}
 - (UIImage *)blurImageWithRadius:(CGFloat)radius {
     
     return [self applyBlurWithRadius:radius

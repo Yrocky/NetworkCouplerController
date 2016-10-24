@@ -14,7 +14,7 @@
 {
     if( self = [super initWithNetworkManager:manager])
     {
-        _pageSize = 30;
+        _pageSize = 25;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
@@ -27,7 +27,7 @@
     self = [super init];
     if (self)
     {
-        _pageSize = 30;
+        _pageSize = 25;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
@@ -55,6 +55,8 @@
 - (void)clear
 {
     [_items removeAllObjects];
+    
+    _result = nil;
 }
 
 /** 模型执行startRequest-->self.networkmanager请求成功-->self.networkmanager的代理模型执行request-->请求成功后调用parseResponse:withUserInfo:*/

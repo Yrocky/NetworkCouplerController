@@ -12,6 +12,9 @@
 @interface TestUploadRequestViewController ()
 
 @property (nonatomic ,strong) HLLPlaceholderTextView * logView;
+
+@property (nonatomic ,strong) UIProgressView * progressView;
+
 @property (nonatomic ,strong) UIImageView * imageView;
 
 @end
@@ -51,17 +54,27 @@
     self.logView = [[HLLPlaceholderTextView alloc] init];
     self.logView.placeholder = @"上传进度会在这里进行输出";
     self.logView.placeholderColor = [UIColor colorWithHexString:@"#84949E"];
+    self.logView.userInteractionEnabled = NO;
     self.logView.textColor = [UIColor colorWithHexString:@"#84949E"];
     self.logView.font = [UIFont systemFontOfSize:14];
-    self.logView.frame = CGRectMake(20, CGRectGetMaxY(button.frame) + 40, CGRectGetWidth(self.view.bounds) - 40, 40);
+    self.logView.frame = CGRectMake(20, CGRectGetMaxY(button.frame) + 40, CGRectGetWidth(self.view.bounds) - 40, 30);
     self.logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.logView];
- 
+    
+    self.progressView = [[UIProgressView alloc] init];
+    self.progressView.frame = CGRectMake(20, CGRectGetMaxY(self.logView.frame) + 10, CGRectGetWidth(self.logView.frame), 10);
+    self.progressView.layer.cornerRadius = 2.0f;
+    self.progressView.layer.masksToBounds = YES;
+    self.progressView.tintColor = [UIColor colorWithHexString:@"FE8A8A"];
+    self.progressView.backgroundColor = [UIColor colorWithHexString:@"84949E"];
+    [self.progressView setProgress:0.43];
+    [self.view addSubview:self.progressView];
+    
     self.imageView = [[UIImageView alloc] init];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
     width = CGRectGetWidth(self.view.bounds) - 60.0f;
-    self.imageView.frame = CGRectMake(30, CGRectGetMaxY(self.logView.frame) + 30, width,width);
+    self.imageView.frame = CGRectMake(30, CGRectGetMaxY(self.progressView.frame) + 30, width,width);
     [self.view addSubview:self.imageView];
 }
 

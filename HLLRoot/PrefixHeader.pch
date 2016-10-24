@@ -15,6 +15,7 @@
 #import "UIColor+Common.h"
 #import "UIImage+Common.h"
 #import "NSString+Common.h"
+#import "UIKit+AFNetworking.h"
 
 #import "HLLNibProtocol.h"
 

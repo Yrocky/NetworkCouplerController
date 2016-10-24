@@ -27,7 +27,7 @@
     
     [self addNoDataView:@"没有数据~" image:@"no_data"];
     
-    [self addRefreshForTableView:self.tableView headerHandle:^{
+    [self addRefreshForListView:self.tableView headerHandle:^{
         
         [weakSelf.listRequest refresh];
     } footerHandle:^{
@@ -62,7 +62,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    id data = self.listRequest.items[indexPath.row];
+    id data = [self.listRequest objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#6F818D"];
     cell.textLabel.text = [NSString stringWithFormat:@"NO.%ld\t%@\t%@",(long)indexPath.row + 1,data[@"title"],data[@"year"]];

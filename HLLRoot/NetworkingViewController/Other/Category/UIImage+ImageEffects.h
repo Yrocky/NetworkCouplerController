@@ -22,6 +22,8 @@
  */
 - (UIImage *)blurImage;
 
+- (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor;
+
 /**
  *  获得一个被另外一个image设置成mask的blur image.
  *

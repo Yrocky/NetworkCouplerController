@@ -20,7 +20,7 @@
 - (void)refresh;//刷新
 - (void)loadMore;//加载更多
 
-- (id)objectAtIndex:(NSInteger)index;
+- (id)objectAtIndex:(NSInteger)index;//items中的对象
 
 - (void)clear;//清除所有数据
 

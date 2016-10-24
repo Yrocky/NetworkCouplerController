@@ -12,11 +12,15 @@
 #import "TestPageRequestViewController.h"
 #import "TestDownloadRequestViewController.h"
 #import "TestUploadRequestViewController.h"
+#import "TestPageRequestSecondViewController.h"
+
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic ,strong) UITableView * testListView;
 @property (nonatomic ,strong) NSArray * listItems;
+
+@property (nonatomic ,strong) NSArray * classItems;
 @end
 
 @implementation ViewController
@@ -37,10 +41,17 @@
     
     self.listItems = @[@"单请求",
                        @"多请求",
-                       @"分页请求",
+                       @"分页请求 01",
+                       @"分页请求 02",
                        @"下载文件",
                        @"上传文件"];
     
+    self.classItems = @[@"TestOneRequestViewController",
+                        @"TestMultiRequestViewController",
+                        @"TestPageRequestViewController",
+                        @"TestPageRequestSecondViewController",
+                        @"TestDownloadRequestViewController",
+                        @"TestUploadRequestViewController"];
 }
 
 #pragma mark -
@@ -67,32 +78,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     NSString * title = self.listItems[indexPath.row];
     
-    if (indexPath.row == 0) {
-        TestOneRequestViewController * vc = [[TestOneRequestViewController alloc] init];
-        vc.title = title;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.row == 1) {
-        TestMultiRequestViewController * vc = [[TestMultiRequestViewController alloc] init];
-        vc.title = title;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.row == 2) {
-        TestPageRequestViewController * vc = [[TestPageRequestViewController alloc] init];
-        vc.title = title;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.row == 3) {
-        TestDownloadRequestViewController * vc = [[TestDownloadRequestViewController alloc] init];
-        vc.title = title;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.row == 4) {
-        TestUploadRequestViewController * vc = [[TestUploadRequestViewController alloc] init];
-        vc.title = title;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    NSString * className = self.classItems[indexPath.row];
+    
+    id vc = [[NSClassFromString(className) alloc] init];
+    [vc setValue:title forKey:@"title"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -11,31 +11,35 @@
 #import "HLLNoDataView.h"
 #import "MJRefresh.h"
 
-@interface HLLListViewController : HLLBaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface HLLListViewController : HLLBaseViewController<UITableViewDataSource, UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, readonly) HLLBaseListItem * listRequest;
 
 @property (strong, nonatomic) UITableView * tableView;
 
+@property (strong, nonatomic) UICollectionView * collectionView;
+
 - (HLLBaseListItem *)generateListRequest;
 
 - (void) configureTableView;
 
+- (void) configureCollectionView;
+
 #pragma mark -
 #pragma mark MJRefresh
 
-- (void) addRefreshForTableView:(UIScrollView *)scrollView
-                   headerHandle:(void(^)())headerHandle
-                   footerHandle:(void(^)())footerHandle;
-- (void) addRefreshForTableView:(UIScrollView *)scrollView
-                   headerHandle:(void(^)())headerHandle;
-- (void) addRefreshForTableView:(UIScrollView *)scrollView
-                   footerHandle:(void(^)())footerHandle;
+- (void) addRefreshForListView:(UIScrollView *)scrollView
+                  headerHandle:(void(^)())headerHandle
+                  footerHandle:(void(^)())footerHandle;
+- (void) addRefreshForListView:(UIScrollView *)scrollView
+                  headerHandle:(void(^)())headerHandle;
+- (void) addRefreshForListView:(UIScrollView *)scrollView
+                  footerHandle:(void(^)())footerHandle;
 
 /** `header:`下拉刷新的时候进行处理，`footer:`上提加载的时候进行处理，`noMore:`即用于下拉也用于上提 */
 /** 如果是下拉刷新，`noMore`根据返回的数据个数决定1-0，并且要处理是否显示`noDataView视图` */
 /** 如果是上提加载，`noMore`根据返回的数据个数决定1-0 */
-- (void) hidenRefreshForTableView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore;
+- (void) hidenRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore;
 
 #pragma mark -
 #pragma mark NoDataView
