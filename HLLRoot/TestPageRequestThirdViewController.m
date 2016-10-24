@@ -83,44 +83,47 @@
 - (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
     
     // add pull to refresh
-    PullToRefreshView * pullToRefreshView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
-    [self.tableView hll_AddPullToRefreshWithHandleView:pullToRefreshView
+    PullToRefreshView * pullToRefreshView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(scrollView.bounds), 60)];
+    [scrollView hll_AddPullToRefreshWithHandleView:pullToRefreshView
                                          actionHandler:headerHandle];
-    self.tableView.pullToRefreshContentView.autoFadeEffect = YES;
-    self.tableView.pullToRefreshContentView.detectDisplayStatusMode = YES;
-    [self.tableView hll_TriggerPullToRefresh];
+    scrollView.pullToRefreshContentView.autoFadeEffect = YES;
+    scrollView.pullToRefreshContentView.detectDisplayStatusMode = YES;
+    [scrollView hll_TriggerPullToRefresh];
 }
 
 - (void) addRefreshForListView:(UIScrollView *)scrollView footerHandle:(void(^)())footerHandle{
     
     // add bottom view
     PullToRefreshView * infiniteScrollingView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
-    [self.tableView hll_AddInfiniteScrollingWithHandleView:infiniteScrollingView
+    [scrollView hll_AddInfiniteScrollingWithHandleView:infiniteScrollingView
                                              actionHandler:footerHandle];
-    self.tableView.infiniteScrollingContentView.autoFadeEffect = YES;
+    scrollView.infiniteScrollingContentView.alwaysDisplayNoMoreDataView = YES;
+    scrollView.infiniteScrollingContentView.autoFadeEffect = YES;
 }
 
 - (void) hidenRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
     
     if (header) {
         
-        [self.tableView.pullToRefreshContentView stopAnimatingAndScrollToTop];
+        [scrollView.pullToRefreshContentView stopAnimatingAndScrollToTop];
         
         [self autoHidenNoDataView:!noMore];
+        
+        [scrollView.infiniteScrollingContentView setupState:HLLInfiniteScrollingStateNormal];
     }
     if (footer) {
         
-        [self.tableView.infiniteScrollingContentView stopAnimating];
+        [scrollView.infiniteScrollingContentView stopAnimating];
         
         [self autoHidenNoDataView:YES];
         
-//        if (noMore) {
-//            
-//            [scrollView.mj_footer setState:MJRefreshStateNoMoreData];
-//        }else{
-//            
-//            [scrollView.mj_footer setState:MJRefreshStateIdle];
-//        }
+        if (noMore) {
+            
+            [scrollView.infiniteScrollingContentView setupState:HLLInfiniteScrollingStateNoMore];
+        }else{
+
+            [scrollView.infiniteScrollingContentView setupState:HLLInfiniteScrollingStateNormal];
+        }
     }
 }
 

@@ -28,14 +28,17 @@
 - (void)HLLInfiniteScrollingLoading:(UIScrollView *)scrollView;
 
 @optional
+
 /**
  *  返回最大拖动高度与添加的handle view的高度比例，默认是1.0，不建议修改为小于1.0的数值
  */
 - (CGFloat)HLLInfiniteScrollingTriggerDistanceTimes:(UIScrollView *)scrollView;
+
 /**
  *  scrollView拖动的代理回调方法
  */
 - (void)HLLInfiniteScrollingDragging:(UIScrollView *)scrollView;
+
 /**
  *  scrollView滚动的时候的代理回调方法，可以在这个方法中进行进度、动画的调整
  *
@@ -43,6 +46,13 @@
  *  @param progress   拖动进度
  */
 - (void)HLLInfiniteScrollView:(UIScrollView *)scrollView draggingWithProgress:(CGFloat)progress;
+
+/**
+ *  在进行分页的表加载时，上提加载更多返回的数据为0时显示的视图
+ *
+ *  @param scrollView UIScrollView、UITableView、UICollectionView
+ */
+- (UIView *)HLLInfiniteScrollViewNoMoreDataView:(UIScrollView *)scrollView;
 
 @end
 
@@ -65,7 +75,7 @@
 /**
  *  上提加载视图的内容视图，用于盛放handle view，可以用来传递scrollView的状态
  */
-@property (nonatomic, readonly) HLLInfiniteScrollingContentView *infiniteScrollingContentView;
+@property (nonatomic, readonly) HLLInfiniteScrollingContentView * infiniteScrollingContentView;
 
 /**
  *  是否显示上提加载视图
@@ -83,6 +93,11 @@ typedef NS_ENUM(NSInteger ,HLLInfiniteScrollingState) {
     HLLInfiniteScrollingStateLoading,
 };
 
+typedef NS_ENUM(NSInteger ,HLLInfiniteScrollingEnableState) {
+
+    HLLInfiniteScrollingStateNormal = 1010,// 正常状态，可以上提加载以及展示中间进度
+    HLLInfiniteScrollingStateNoMore,// 没有更多数据的状态
+};
 @interface HLLInfiniteScrollingContentView : UIView
 
 - (void)startAnimating;
@@ -101,4 +116,9 @@ typedef NS_ENUM(NSInteger ,HLLInfiniteScrollingState) {
  *  是否在显示的时候有渐变的效果
  */
 @property (nonatomic, assign) BOOL autoFadeEffect;
+
+/** 用于外部进行设置状态，主要设置1010以后的枚举 */
+- (void) setupState:(HLLInfiniteScrollingEnableState)state;
+/** 是否一直显示noMoreDataView，如果为YES，会通过改变scrollView的contentInset来展示 默认为NO */
+@property (nonatomic, assign) BOOL alwaysDisplayNoMoreDataView;
 @end

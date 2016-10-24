@@ -33,6 +33,8 @@
 @property (nonatomic, assign) HLLInfiniteScrollingState previousState;
 @property (nonatomic, assign) BOOL isObserving;
 
+@property (nonatomic, assign) HLLInfiniteScrollingEnableState enableState;
+@property (nonatomic ,strong) UIView * noMoreDataView;
 @end
 
 
@@ -51,8 +53,14 @@ NSString * const infiniteScrollingHandleViewKey;
         HLLInfiniteScrollingContentView *infiniteScrollingContentView = [[HLLInfiniteScrollingContentView alloc] initWithFrame:scrollingViewFrame];
         infiniteScrollingContentView.scrollView = self;
         [self addSubview:infiniteScrollingContentView];
+        
         [infiniteScrollingContentView addSubview:infiniteScrollingHandleView];
         
+        UIView * noMoreDataView = [infiniteScrollingHandleView HLLInfiniteScrollViewNoMoreDataView:self];
+        noMoreDataView.hidden = YES;
+        [infiniteScrollingContentView addSubview:noMoreDataView];
+        
+        infiniteScrollingContentView.noMoreDataView = noMoreDataView;
         infiniteScrollingContentView.originalTopInset = self.contentInset.top;
         infiniteScrollingContentView.originalBottomInset = self.contentInset.bottom;
         infiniteScrollingContentView.infiniteScrollingActionHandler = actionHandler;
@@ -162,16 +170,46 @@ NSString * const infiniteScrollingHandleViewKey;
     self = [super initWithFrame:frame];
     if (self) {
         self.state = HLLInfiniteScrollingStateStopped;
+        self.alwaysDisplayNoMoreDataView = NO;
+        self.enableState = HLLInfiniteScrollingStateNormal;
     }
     
     return self;
 }
 
+- (void) setupState:(HLLInfiniteScrollingEnableState)state{
+
+    if (self.enableState != state) {
+        _enableState = state;
+        
+        if (state == HLLInfiniteScrollingStateNormal) {
+        
+            self.noMoreDataView.hidden = YES;
+        }
+        
+        if (state == HLLInfiniteScrollingStateNoMore) {
+            
+            self.noMoreDataView.hidden = NO;
+        }
+        
+        if (self.alwaysDisplayNoMoreDataView) {
+            [self setScrollViewContentInsetForLoading];
+        }else{
+            [self resetScrollViewContentInset];
+        }
+    }
+}
+
 - (void)setState:(HLLInfiniteScrollingState)state
 {
+    
+    if (self.enableState != HLLInfiniteScrollingStateNormal) {
+        return;
+    }
     if (self.state != state) {
         _state = state;
         UIView <HLLInfiniteScrollingViewProtocol> *infiniteScrollingHandleView = self.scrollView.infiniteScrollingHandleView;
+        
         switch (self.state) {
             case HLLInfiniteScrollingStateStopped:
                 [self resetScrollViewContentInset];
@@ -290,7 +328,10 @@ NSString * const infiniteScrollingHandleViewKey;
 
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset
 {
-    self.scrollView.contentInset = contentInset;
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.scrollView.contentInset = contentInset;
+    }];
 }
 
 - (void)startAnimating

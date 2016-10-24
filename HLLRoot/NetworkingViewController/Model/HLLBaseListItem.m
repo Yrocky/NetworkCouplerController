@@ -14,7 +14,7 @@
 {
     if( self = [super initWithNetworkManager:manager])
     {
-        _pageSize = 25;
+        _pageSize = 50;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
@@ -27,7 +27,7 @@
     self = [super init];
     if (self)
     {
-        _pageSize = 25;
+        _pageSize = 50;
         _currentPage = 0;
         _items = [NSMutableArray array];
     }
