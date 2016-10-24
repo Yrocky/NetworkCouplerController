@@ -56,7 +56,7 @@
 @end
 
 
-@implementation UIScrollView (DefaultView)
+@implementation UIScrollView (NoDataView)
 
 - (void)setNoDataView:(UIView *)noDataView{
     

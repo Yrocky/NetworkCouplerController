@@ -203,7 +203,11 @@ NSString * const pullToRefreshContentViewBottomMarginKey;
                     [pullToRefreshHandleView HLLPullToRefreshLoading:self.scrollView];
                 }
                 if (self.previousState == HLLPullToRefreshStateTriggered && self.pullToRefreshActionHandler) {
-                    self.pullToRefreshActionHandler();
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                        self.pullToRefreshActionHandler();
+                    });
                 }
                 break;
         }

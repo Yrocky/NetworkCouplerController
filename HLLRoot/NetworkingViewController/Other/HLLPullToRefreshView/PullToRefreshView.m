@@ -91,7 +91,7 @@
 }
 - (CGFloat)HLLPullToRefreshTriggerDistanceTimes:(UIScrollView *)scrollView{
 
-    return 1.3f;
+    return 1.f;
 }
 
 #pragma mark - HLLInfiniteScrollingViewProtocol
@@ -131,7 +131,7 @@
 
 - (CGFloat)HLLInfiniteScrollingTriggerDistanceTimes:(UIScrollView *)scrollView
 {
-    return 1.6f;
+    return 1.3f;
 }
 
 @end

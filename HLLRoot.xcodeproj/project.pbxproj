@@ -42,6 +42,7 @@
 		D7E82C601DBDF42F00EF6564 /* TestPageRequestSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E82C5F1DBDF42F00EF6564 /* TestPageRequestSecondViewController.m */; };
 		D7E82C641DBDF83700EF6564 /* TestCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E82C621DBDF83700EF6564 /* TestCollectionViewCell.m */; };
 		D7E82C651DBDF83700EF6564 /* TestCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E82C631DBDF83700EF6564 /* TestCollectionViewCell.xib */; };
+		D7E82C681DBE508E00EF6564 /* TestPageRequestThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E82C671DBE508E00EF6564 /* TestPageRequestThirdViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		D7E82C611DBDF83700EF6564 /* TestCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCollectionViewCell.h; sourceTree = "<group>"; };
 		D7E82C621DBDF83700EF6564 /* TestCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionViewCell.m; sourceTree = "<group>"; };
 		D7E82C631DBDF83700EF6564 /* TestCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCollectionViewCell.xib; sourceTree = "<group>"; };
+		D7E82C661DBE508E00EF6564 /* TestPageRequestThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPageRequestThirdViewController.h; sourceTree = "<group>"; };
+		D7E82C671DBE508E00EF6564 /* TestPageRequestThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPageRequestThirdViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +326,8 @@
 				D71040B01DBCA905000A8F9B /* TestPageRequestViewController.m */,
 				D7E82C5E1DBDF42F00EF6564 /* TestPageRequestSecondViewController.h */,
 				D7E82C5F1DBDF42F00EF6564 /* TestPageRequestSecondViewController.m */,
+				D7E82C661DBE508E00EF6564 /* TestPageRequestThirdViewController.h */,
+				D7E82C671DBE508E00EF6564 /* TestPageRequestThirdViewController.m */,
 				D71040B51DBCF2CA000A8F9B /* TestDownloadRequestViewController.h */,
 				D71040B61DBCF2CA000A8F9B /* TestDownloadRequestViewController.m */,
 				D71040B81DBCF2E1000A8F9B /* TestUploadRequestViewController.h */,
@@ -589,6 +594,7 @@
 				D7A09F831DBC0D0E00C93B2D /* TestOneRequestViewController.m in Sources */,
 				D71040B11DBCA906000A8F9B /* TestPageRequestViewController.m in Sources */,
 				D7A09F4D1DBB9C5500C93B2D /* PullToRefreshView.m in Sources */,
+				D7E82C681DBE508E00EF6564 /* TestPageRequestThirdViewController.m in Sources */,
 				D7A09F521DBBB4DB00C93B2D /* UIImage+ImageEffects.m in Sources */,
 				D7BB78E31DB91CB20073B2DC /* AppDelegate.m in Sources */,
 				D71040BA1DBCF2E1000A8F9B /* TestUploadRequestViewController.m in Sources */,

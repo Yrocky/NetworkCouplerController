@@ -1,0 +1,165 @@
+//
+//  TestPageRequestThirdViewController.m
+//  HLLRoot
+//
+//  Created by Rocky Young on 16/10/24.
+//  Copyright © 2016年 HLL. All rights reserved.
+//
+
+#import "TestPageRequestThirdViewController.h"
+#import "PullToRefreshView.h"
+
+@interface TestPageRequestThirdViewController ()
+
+@end
+
+@implementation TestPageRequestThirdViewController
+
+-(void)viewDidLoad{
+    
+    [super viewDidLoad];
+    
+    self.allowHUDWhenRequestLoading = NO;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 64.0f);
+    self.tableView.tableFooterView = [UIView new];
+    [self configureTableView];
+    [self.view addSubview:self.tableView];
+    
+    [self addNoDataView:@"没有数据~" image:@"no_data"];
+    
+    [self addRefreshForListView:self.tableView headerHandle:^{
+        
+        [weakSelf.listRequest refresh];
+    } footerHandle:^{
+        
+        [weakSelf.listRequest loadMore];
+    } ];
+}
+
+- (HLLBaseRequestAdapter *)generateListRequest{
+    
+    return [[TestPageThridAPI alloc] initWithNetworkManager:self.networkManager];
+}
+
+- (void)refreshUIWithRequest:(TestPageThridAPI *)request withUserInfo:(id)userInfo{
+    
+    [self.tableView reloadData];
+    
+}
+#pragma mark -
+#pragma mark UITableViewDataSource,UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.listRequest.items.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    }
+    id data = [self.listRequest objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"#6F818D"];
+    cell.textLabel.text = [NSString stringWithFormat:@"NO.%ld\t%@\t%@",(long)indexPath.row + 1,data[@"title"],data[@"year"]];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark CustomPullToRefreshView
+
+- (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
+    
+    // add pull to refresh
+    PullToRefreshView * pullToRefreshView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
+    [self.tableView hll_AddPullToRefreshWithHandleView:pullToRefreshView
+                                         actionHandler:headerHandle];
+    self.tableView.pullToRefreshContentView.autoFadeEffect = YES;
+    self.tableView.pullToRefreshContentView.detectDisplayStatusMode = YES;
+    [self.tableView hll_TriggerPullToRefresh];
+}
+
+- (void) addRefreshForListView:(UIScrollView *)scrollView footerHandle:(void(^)())footerHandle{
+    
+    // add bottom view
+    PullToRefreshView * infiniteScrollingView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
+    [self.tableView hll_AddInfiniteScrollingWithHandleView:infiniteScrollingView
+                                             actionHandler:footerHandle];
+    self.tableView.infiniteScrollingContentView.autoFadeEffect = YES;
+}
+
+- (void) hidenRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
+    
+    if (header) {
+        
+        [self.tableView.pullToRefreshContentView stopAnimatingAndScrollToTop];
+        
+        [self autoHidenNoDataView:!noMore];
+    }
+    if (footer) {
+        
+        [self.tableView.infiniteScrollingContentView stopAnimating];
+        
+        [self autoHidenNoDataView:YES];
+        
+//        if (noMore) {
+//            
+//            [scrollView.mj_footer setState:MJRefreshStateNoMoreData];
+//        }else{
+//            
+//            [scrollView.mj_footer setState:MJRefreshStateIdle];
+//        }
+    }
+}
+
+@end
+
+
+@implementation TestPageThridAPI
+
+- (void)refresh
+{
+    self.currentPage = 0;
+    [self startRequest];
+}
+
+- (void)loadMore
+{
+    self.currentPage += self.pageSize;
+    [self startRequest];
+}
+
+- (NSString *)userInfo{
+    
+    return @"test-list-thrid-api";
+}
+
+- (void)startRequest{
+    
+    NSDictionary * parmars = @{@"start":@(self.currentPage),
+                               @"count":@(self.pageSize)};
+    
+    [self get:@"https://api.douban.com/v2/movie/top250" parameters:parmars userInfo:self.userInfo];
+}
+
+- (NSArray *)parsePage:(id)response withUserInfo:(id)userInfo{
+    
+    return response[@"subjects"];
+}
+@end
+
+
+
+

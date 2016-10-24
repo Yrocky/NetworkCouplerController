@@ -22,6 +22,13 @@
  */
 - (UIImage *)blurImage;
 
+/**
+ *  获得一个blur image .
+ *  default blurRadius 高斯模糊程度
+ *          tinColoe is 
+ *
+ *  @return Blured image.
+ */
 - (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor;
 
 /**

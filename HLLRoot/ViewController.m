@@ -43,6 +43,7 @@
                        @"多请求",
                        @"分页请求 01",
                        @"分页请求 02",
+                       @"分页请求 03",
                        @"下载文件",
                        @"上传文件"];
     
@@ -50,6 +51,7 @@
                         @"TestMultiRequestViewController",
                         @"TestPageRequestViewController",
                         @"TestPageRequestSecondViewController",
+                        @"TestPageRequestThirdViewController",
                         @"TestDownloadRequestViewController",
                         @"TestUploadRequestViewController"];
 }
