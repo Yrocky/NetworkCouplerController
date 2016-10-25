@@ -37,7 +37,7 @@ extern NSString * const HLLHostURL;
 - (instancetype)initWithNetworkManager:(HLLNetworking *)manager;
 
 - (void)post:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
-- (void)get:(NSString*)url parameters:(id)parameters userInfo:(id)userInfo;
+- (void) get:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 
 - (void)startRequest;
 - (void)refreshRequest;
@@ -51,6 +51,20 @@ extern NSString * const HLLHostURL;
 + (NSMutableDictionary *)createParamWithApp:(NSString *)app class:(NSString *)cls;
 
 @end
+
+
+
+
+/*///////////////
+ 
+ 该类为网络请求的基类，用于对控制器之间进行网络加载以及数据交互
+ 
+ 支持发送基本的`post`、`get`请求，支持发送请求以及重复发送请求等操作
+ 
+ ///////////////*/
+
+
+
 
 /*///////////////
 

@@ -32,7 +32,7 @@
         self.session         = [AFHTTPSessionManager manager];
         
         self.HTTPHeaderFieldsWithValues = [NSMutableDictionary dictionary];
-
+        
         self.timesToRetry       = 0;
         self.intervalInSeconds  = 0;
         
@@ -42,9 +42,9 @@
 }
 
 - (void)startRequest{
-
+    
     NSParameterAssert(self.urlString);
-
+    
     [self resetData];
     [self accessRequestSerializer];
     [self accessHeaderFiled];
@@ -102,9 +102,11 @@
         
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
             
-            
-            [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                      data:response];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf.delegate networkingDidRequestSuccess:weakSelf
+                                                          data:response];
+            });
             // 打印成功信息
             [weakSelf logWithSuccessResponse:response
                                          url:weakSelf.urlString
@@ -118,8 +120,11 @@
         weakSelf.isRunning = NO;
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)] && !cacheResponse) {
             
-            [weakSelf.delegate networkingDidRequestFailed:weakSelf
-                                                    error:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                        error:error];
+            });
             
             [weakSelf logWithFailError:error
                                    url:weakSelf.urlString
@@ -128,9 +133,12 @@
         
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:response:error:)] && cacheResponse) {
             
-            [weakSelf.delegate networkingDidRequestFailed:weakSelf
-                                                 response:cacheResponse
-                                                    error:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                     response:cacheResponse
+                                                        error:error];
+            });
             
             [weakSelf logWithFailError:error
                                    url:weakSelf.urlString
@@ -164,13 +172,13 @@
 }
 
 - (void) resetData{
-
+    
     self.originalResponseData = nil;
     self.serializerResponseData = nil;
 }
 
 - (void) accessRequestSerializer{
-
+    
     // 设置最大并发数，不宜过多
     self.session.operationQueue.maxConcurrentOperationCount = 5;
     
@@ -188,7 +196,7 @@
     }
 }
 - (void) accessResponseSerializer{
-
+    
     if ([self.responseType isKindOfClass:[HLLHttpDataType class]]) {
         
         self.session.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -207,7 +215,7 @@
     
 }
 - (void) accessHeaderFiled{
-
+    
     if (self.HTTPHeaderFieldsWithValues) {
         NSArray * allKeys = self.HTTPHeaderFieldsWithValues.allKeys;
         for (NSString * headerField in allKeys) {
@@ -223,12 +231,12 @@
     }
 }
 - (void)cancelRequest{
-
+    
     [self.dataTask cancel];
 }
 
 - (NSDictionary *) accessRequestDictionarySerializerWithRequestDictionary:(NSDictionary *)requestDictionary{
- 
+    
     if (self.requestDictionarySerializer &&
         [self.requestDictionarySerializer respondsToSelector:@selector(serializerRequestDictionary:)]) {
         return [self.requestDictionarySerializer serializerRequestDictionary:requestDictionary];
@@ -241,7 +249,7 @@
                      requestDictionary:(NSDictionary *)requestDictioinary
                        requestBodyType:(HLLRequestBodyType *)requestType
                       responseDataType:(HLLResponseDataType *)responseType{
-
+    
     HLLNetworking * networking = [[V_3_X_Networking alloc] init];
     networking.urlString = urlString;
     networking.requestDictionary = requestDictioinary;
@@ -277,10 +285,89 @@
 
 
 #pragma mark -
-#pragma mark HLLUploadFileProtocol
+#pragma mark 上传文件操作
 
-+ (void)postUploadWithUrl:(NSString *)urlStr fileUrl:(NSURL *)fileURL fileName:(NSString *)fileName fileType:(NSString *)fileTye success:(void (^)(id))success fail:(void (^)())fail{
-
+- (void)uploadWithUrl:(NSString *)urlString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(nullable void (^)(id <AFMultipartFormData> formData))block{
     
+    NSParameterAssert(urlString);
+    
+    [self resetData];
+    [self accessRequestSerializer];
+    [self accessHeaderFiled];
+    [self accessResponseSerializer];
+    [self accessTimeoutInterval];
+    
+    self.isRunning = YES;
+    
+    typeof(self) weakSelf = self;
+    
+    NSDictionary * requestDictionary = [self accessRequestDictionarySerializerWithRequestDictionary:parameters];
+    
+    void (^uploadProgress)(NSProgress *)
+    = ^(NSProgress *uploadProgress){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (weakSelf.uploadFileDelegate && [weakSelf.uploadFileDelegate respondsToSelector:@selector(networkingDidUploadFile:progress:)]) {
+                
+                [weakSelf.uploadFileDelegate networkingDidUploadFile:weakSelf
+                                                            progress:uploadProgress];
+            }
+        });
+    };
+    
+    void (^success)(NSURLSessionDataTask *, id _Nullable)
+    = ^(NSURLSessionDataTask *task, id _Nullable responseObject){
+        
+        weakSelf.isRunning = NO;
+        weakSelf.originalResponseData = responseObject;
+        
+        // 如果设置了转换策略，则进行数据的转换
+        if (weakSelf.responseDataSerializer && [weakSelf.responseDataSerializer respondsToSelector:@selector(serializerResponseDictionary:)]) {
+            weakSelf.serializerResponseData = [weakSelf.responseDataSerializer serializerResponseDictionary:responseObject];
+        }
+        
+        id response = (weakSelf.serializerResponseData == nil ?
+                       weakSelf.originalResponseData :
+                       weakSelf.serializerResponseData);
+        
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf.delegate networkingDidRequestSuccess:weakSelf
+                                                          data:response];
+            });
+            // 打印成功信息
+            [weakSelf logWithSuccessResponse:response
+                                         url:urlString
+                                      params:parameters];
+        }
+    };
+    
+    void (^failure)(NSURLSessionDataTask * _Nullable, NSError *)
+    = ^(NSURLSessionDataTask * _Nullable task, NSError *error){
+        
+        weakSelf.isRunning = NO;
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                        error:error];
+            });
+            
+            [weakSelf logWithFailError:error
+                                   url:weakSelf.urlString
+                                params:requestDictionary];
+        }
+    };
+    
+    _dataTask = [self.session POST:urlString
+                        parameters:requestDictionary
+         constructingBodyWithBlock:block
+                          progress:uploadProgress
+                           success:success
+                           failure:failure];
 }
 @end

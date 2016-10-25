@@ -30,7 +30,7 @@
 #pragma mark -
 #pragma mark API
 
-- (HLLBaseListItem *)generateListRequest{
+- (HLLBasePagingAdapter *)generateListRequest{
     
     /** 供子类重写，进行生成可以分页请求的网络加载 */
     return nil;

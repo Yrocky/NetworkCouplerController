@@ -8,8 +8,10 @@
 
 #import "TestUploadRequestViewController.h"
 #import "HLLPlaceholderTextView.h"
+#import "UIKit+AFNetworking.h"
 
-@interface TestUploadRequestViewController ()
+
+@interface TestUploadRequestViewController ()<HLLBaseFileHandleAdapterProtocol>
 
 @property (nonatomic ,strong) HLLPlaceholderTextView * logView;
 
@@ -17,6 +19,7 @@
 
 @property (nonatomic ,strong) UIImageView * imageView;
 
+@property (nonatomic ,strong) UIButton * uploadButton;
 @end
 
 @implementation TestUploadRequestViewController
@@ -49,7 +52,9 @@
     [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"FE8A8A"]] forState:UIControlStateNormal];
     button.layer.cornerRadius = 5.0f;
     button.layer.masksToBounds = YES;
+    button.enabled = NO;
     [self.view addSubview:button];
+    self.uploadButton = button;
     
     self.logView = [[HLLPlaceholderTextView alloc] init];
     self.logView.placeholder = @"上传进度会在这里进行输出";
@@ -67,7 +72,7 @@
     self.progressView.layer.masksToBounds = YES;
     self.progressView.tintColor = [UIColor colorWithHexString:@"FE8A8A"];
     self.progressView.backgroundColor = [UIColor colorWithHexString:@"84949E"];
-    [self.progressView setProgress:0.43];
+    [self.progressView setProgress:0.];
     [self.view addSubview:self.progressView];
     
     self.imageView = [[UIImageView alloc] init];
@@ -80,18 +85,93 @@
 
 - (void) chooseFile:(UIButton *)button{
     
-    UIImage * image = [UIImage imageWithColor:[UIColor randomColor]];
+    self.uploadButton.enabled = YES;
+    [self.progressView setProgress:0.0f];
+    
+//    UIImage * image = [UIImage imageWithColor:[UIColor randomColor]];
+    UIImage * image = [UIImage imageNamed:@"background.jpeg"];
     
     self.imageView.image = image;
 }
 
 - (void) startTestRequest{
     
+    self.uploadButton.enabled = NO;
+    TestUploadAPI * upload = (TestUploadAPI *)self.baseRequest;
+    NSDictionary * params = @{
+                              @"app":@"Cas",
+                              @"birthday": @"1982-10-25",
+                              @"class": @"UpdateUserInfo",
+                              @"gender": @"1",
+                              @"nickname":@"我的头像",
+                              @"sign":@"f6064718029e5389255f818aaac6e59d",
+                              @"uid" :@"1932891"};
+    NSDictionary * header = @{@"fileName":@"1932891.jpg",
+                              @"name":@"image",
+                              @"mimeType":@"image/jpeg"};
+    [upload post:@"http://175.102.24.16/api" parameters:params image:self.imageView.image appendHTTPHeader:header];
 }
 
 - (HLLBaseRequestAdapter *)generateRequest{
 
-    return nil;
+    TestUploadAPI * upload = [[TestUploadAPI alloc] initWithNetworkManager:self.networkManager];
+    upload.fileHandleDelegate = self;
+    
+    return upload;
 }
 
+
+#pragma mark -
+#pragma mark HLLBaseFileHandleAdapterProtocol
+
+- (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter uploadFileProgress:(NSProgress *)progress{
+
+    CGFloat progressValue = progress.fractionCompleted;
+
+    [self.progressView setProgress:progressValue];
+    
+    self.logView.text = [NSString stringWithFormat:@"当前进度为：%.3f%%",progressValue];
+}
+
+- (void)requestAdapterDidStartRequest:(HLLBaseRequestAdapter *)requestAdapter{
+
+    [super requestAdapterDidStartRequest:requestAdapter];
+    
+    [self hud_showLoading];
+}
+
+- (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo{
+
+    [super requestAdapter:requestAdapter didCompleteWithUserInfo:userInfo];
+
+    self.uploadButton.enabled = YES;
+    
+    [self hud_hidenLoading];
+}
+
+
+- (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error{
+    
+    [super requestAdapter:requestAdapter didFailWithError:error];
+ 
+    self.uploadButton.enabled = YES;
+    
+    [self hud_showErrorWithMessage:error.localizedDescription];
+}
+
+@end
+
+
+
+@implementation TestUploadAPI
+
+- (NSString *)userInfo{
+
+    return @"test-file-upload-api";
+}
+
+- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
+
+    
+}
 @end

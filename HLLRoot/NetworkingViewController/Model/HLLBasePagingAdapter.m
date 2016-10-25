@@ -1,14 +1,14 @@
 //
-//  HLLBaseListItem.m
+//  HLLBasePagingAdapter.m
 //  HLLRoot
 //
-//  Created by Rocky Young on 16/10/23.
+//  Created by Rocky Young on 16/10/25.
 //  Copyright © 2016年 HLL. All rights reserved.
 //
 
-#import "HLLBaseListItem.h"
+#import "HLLBasePagingAdapter.h"
 
-@implementation HLLBaseListItem
+@implementation HLLBasePagingAdapter
 
 - (instancetype)initWithNetworkManager:(HLLNetworking *)manager
 {
@@ -61,7 +61,7 @@
 
 /** 模型执行startRequest-->self.networkmanager请求成功-->self.networkmanager的代理模型执行request-->请求成功后调用parseResponse:withUserInfo:*/
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
-
+    
     [super parseResponse:response withUserInfo:userInfo];
     
     if(_currentPage == 0){
@@ -75,12 +75,12 @@
 }
 
 - (void)startRequest{
-
-    [super startRequest];    
+    
+    [super startRequest];
 }
 
 - (NSArray *)parsePage:(id)response withUserInfo:(id)userInfo{
-
+    
     [NSException raise:@"List item parse Data with response"
                 format:@"You Must Override This Method."];
     

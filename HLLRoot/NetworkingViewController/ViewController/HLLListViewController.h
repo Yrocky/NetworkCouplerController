@@ -7,19 +7,19 @@
 //
 
 #import "HLLBaseViewController.h"
-#import "HLLBaseListItem.h"
+#import "HLLBasePagingAdapter.h"
 #import "HLLNoDataView.h"
 #import "MJRefresh.h"
 
 @interface HLLListViewController : HLLBaseViewController<UITableViewDataSource, UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property (nonatomic, readonly) HLLBaseListItem * listRequest;
+@property (nonatomic, readonly) HLLBasePagingAdapter * listRequest;
 
 @property (strong, nonatomic) UITableView * tableView;
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 
-- (HLLBaseListItem *)generateListRequest;
+- (HLLBasePagingAdapter *)generateListRequest;
 
 - (void) configureTableView;
 

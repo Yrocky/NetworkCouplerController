@@ -14,6 +14,6 @@
 
 
 
-@interface TestPageThridAPI : HLLBaseListItem
+@interface TestPageThridAPI : HLLBasePagingAdapter
 
 @end

@@ -18,7 +18,7 @@
 
 @protocol HLLUploadFileProtocol <NSObject>
 
-+ (void)postUploadWithUrl:(NSString *)urlStr fileUrl:(NSURL *)fileURL fileName:(NSString *)fileName fileType:(NSString *)fileTye success:(void (^)(id responseObject))success fail:(void (^)())fail;
+- (void) networkingDidUploadFile:(HLLNetworking *)networking progress:(NSProgress *)progress;
 
 @end
 
@@ -40,6 +40,7 @@
 @property (nonatomic ,strong) NSString * urlString;
 
 @property (nonatomic ,weak) id<HLLNetworkingDelegate> delegate;
+@property (nonatomic ,weak) id<HLLUploadFileProtocol> uploadFileDelegate;
 // GET、POST
 @property (nonatomic ,strong) HLLRequestMethodType * method;
 

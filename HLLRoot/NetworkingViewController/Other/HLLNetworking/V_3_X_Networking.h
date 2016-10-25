@@ -8,6 +8,8 @@
 
 #import "HLLNetworking.h"
 
-@interface V_3_X_Networking : HLLNetworking<HLLUploadFileProtocol>
+@interface V_3_X_Networking : HLLNetworking
+
+- (void)uploadWithUrl:(NSString *)urlString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block;
 
 @end

@@ -101,10 +101,13 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
     [self parseResponse:data withUserInfo:networking.tag];
     
-    if([_delegate respondsToSelector:@selector(requestAdapter:didCompleteWithUserInfo:)]){
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        [_delegate requestAdapter:self didCompleteWithUserInfo:networking.tag];
-    }
+        if([_delegate respondsToSelector:@selector(requestAdapter:didCompleteWithUserInfo:)]){
+            
+            [_delegate requestAdapter:self didCompleteWithUserInfo:networking.tag];
+        }
+    });
 }
 
 - (void) networkingDidRequestFailed:(HLLNetworking *)networking error:(NSError *)error{

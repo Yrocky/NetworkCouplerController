@@ -7,13 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "TestOneRequestViewController.h"
-#import "TestMultiRequestViewController.h"
-#import "TestPageRequestViewController.h"
-#import "TestDownloadRequestViewController.h"
-#import "TestUploadRequestViewController.h"
-#import "TestPageRequestSecondViewController.h"
-
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 

@@ -1,14 +1,14 @@
 //
-//  HLLBaseListItem.h
+//  HLLBasePagingAdapter.h
 //  HLLRoot
 //
-//  Created by Rocky Young on 16/10/23.
+//  Created by Rocky Young on 16/10/25.
 //  Copyright © 2016年 HLL. All rights reserved.
 //
 
 #import "HLLBaseRequestAdapter.h"
 
-@interface HLLBaseListItem : HLLBaseRequestAdapter
+@interface HLLBasePagingAdapter : HLLBaseRequestAdapter
 
 @property (nonatomic, assign) int pageSize;
 @property (nonatomic, assign) NSInteger currentPage;
@@ -41,7 +41,9 @@
  
  具体需要根据接口文档来操作，这里仅仅默认是前一种情况
  
-///////////////*/
+ ///////////////*/
+
+
 
 
 /*///////////////
@@ -54,23 +56,23 @@
  msg:""
  status:""
  data:(
-    {},
-    {},
-    ...
+     {},
+     {},
+     ...
  )
  
  或者是如下这种可能:
  msg:""
  status:""
  data:(
-    file:(
-        {},
-        {},
-        ...
-    ),
-    whaterver:""
+     file:(
+         {},
+         {},
+         ...
+     ),
+     whaterver:""
  )
-///////////////*/
+ ///////////////*/
 
 
 

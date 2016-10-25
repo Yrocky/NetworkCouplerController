@@ -14,7 +14,7 @@
 
 
 
-@interface TestPageSecondAPI : HLLBaseListItem
+@interface TestPageSecondAPI : HLLBasePagingAdapter
 
 @end
 

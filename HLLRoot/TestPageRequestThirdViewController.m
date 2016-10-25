@@ -45,10 +45,14 @@
     return [[TestPageThridAPI alloc] initWithNetworkManager:self.networkManager];
 }
 
-- (void)refreshUIWithRequest:(TestPageThridAPI *)request withUserInfo:(id)userInfo{
+- (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
     
     [self.tableView reloadData];
-    
+}
+
+- (void)dealloc{
+
+    NSLog(@"++++");
 }
 #pragma mark -
 #pragma mark UITableViewDataSource,UITableViewDelegate
@@ -80,12 +84,18 @@
 #pragma mark -
 #pragma mark CustomPullToRefreshView
 
+- (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle footerHandle:(void(^)())footerHandle{
+    
+    [self addRefreshForListView:scrollView headerHandle:headerHandle];
+    [self addRefreshForListView:scrollView footerHandle:footerHandle];
+}
+
 - (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
     
     // add pull to refresh
     PullToRefreshView * pullToRefreshView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(scrollView.bounds), 60)];
     [scrollView hll_AddPullToRefreshWithHandleView:pullToRefreshView
-                                         actionHandler:headerHandle];
+                                     actionHandler:headerHandle];
     scrollView.pullToRefreshContentView.autoFadeEffect = YES;
     scrollView.pullToRefreshContentView.detectDisplayStatusMode = YES;
     [scrollView hll_TriggerPullToRefresh];
@@ -94,9 +104,9 @@
 - (void) addRefreshForListView:(UIScrollView *)scrollView footerHandle:(void(^)())footerHandle{
     
     // add bottom view
-    PullToRefreshView * infiniteScrollingView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 60)];
+    PullToRefreshView * infiniteScrollingView = [[PullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(scrollView.bounds), 60)];
     [scrollView hll_AddInfiniteScrollingWithHandleView:infiniteScrollingView
-                                             actionHandler:footerHandle];
+                                         actionHandler:footerHandle];
     scrollView.infiniteScrollingContentView.alwaysDisplayNoMoreDataView = YES;
     scrollView.infiniteScrollingContentView.autoFadeEffect = YES;
 }

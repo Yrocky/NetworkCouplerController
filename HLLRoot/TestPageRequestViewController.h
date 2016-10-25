@@ -13,6 +13,6 @@
 @end
 
 
-@interface TestPageAPI : HLLBaseListItem
+@interface TestPageAPI : HLLBasePagingAdapter
 
 @end
