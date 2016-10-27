@@ -12,4 +12,5 @@
 
 - (void)uploadWithUrl:(NSString *)urlString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block;
 
+- (void)downloadWithUrl:(NSString *)urlString destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination;
 @end

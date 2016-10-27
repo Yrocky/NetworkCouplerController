@@ -184,6 +184,14 @@
                            alpha:1.0f];
 }
 
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha{
+
+    return [UIColor colorWithRed:(arc4random()%256)/256.f
+                           green:(arc4random()%256)/256.f
+                            blue:(arc4random()%256)/256.f
+                           alpha:alpha];
+}
+
 + (UIColor *)colorWithRGBHex:(UInt32)hex{
     int r = (hex >> 16) & 0xFF;
     int g = (hex >> 8) & 0xFF;

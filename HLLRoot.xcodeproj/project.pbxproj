@@ -37,6 +37,7 @@
 		D7BB78F91DB91CB20073B2DC /* HLLRootUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB78F81DB91CB20073B2DC /* HLLRootUITests.m */; };
 		D7BB790B1DB925080073B2DC /* HLLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB790A1DB925080073B2DC /* HLLBaseViewController.m */; };
 		D7CDB8821DBEEDAE00925DE2 /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CDB8811DBEEDAE00925DE2 /* PullToRefreshView.m */; };
+		D7D46B931DC0FCE3004B0B95 /* FileHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D46B921DC0FCE3004B0B95 /* FileHandle.m */; };
 		D7E82C601DBDF42F00EF6564 /* TestPageRequestSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E82C5F1DBDF42F00EF6564 /* TestPageRequestSecondViewController.m */; };
 		D7E82C641DBDF83700EF6564 /* TestCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E82C621DBDF83700EF6564 /* TestCollectionViewCell.m */; };
 		D7E82C651DBDF83700EF6564 /* TestCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E82C631DBDF83700EF6564 /* TestCollectionViewCell.xib */; };
@@ -44,6 +45,7 @@
 		D7EB3E2E1DBFA0B4004B6730 /* HLLBaseFileHandleAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EB3E2D1DBFA0B4004B6730 /* HLLBaseFileHandleAdapter.m */; };
 		D7EB3E311DBFA0F3004B6730 /* HLLBasePagingAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EB3E301DBFA0F3004B6730 /* HLLBasePagingAdapter.m */; };
 		D7EB3E331DBFCE2E004B6730 /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D7EB3E321DBFCE2E004B6730 /* background.jpeg */; };
+		D7EB3E361DC0403C004B6730 /* UIViewController+PhotoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EB3E351DC0403C004B6730 /* UIViewController+PhotoPicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,8 @@
 		D7BB790A1DB925080073B2DC /* HLLBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLBaseViewController.m; sourceTree = "<group>"; };
 		D7CDB8801DBEEDAE00925DE2 /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
 		D7CDB8811DBEEDAE00925DE2 /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
+		D7D46B911DC0FCE3004B0B95 /* FileHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHandle.h; sourceTree = "<group>"; };
+		D7D46B921DC0FCE3004B0B95 /* FileHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHandle.m; sourceTree = "<group>"; };
 		D7E82C5E1DBDF42F00EF6564 /* TestPageRequestSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPageRequestSecondViewController.h; sourceTree = "<group>"; };
 		D7E82C5F1DBDF42F00EF6564 /* TestPageRequestSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPageRequestSecondViewController.m; sourceTree = "<group>"; };
 		D7E82C611DBDF83700EF6564 /* TestCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCollectionViewCell.h; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 		D7EB3E2F1DBFA0F3004B6730 /* HLLBasePagingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLBasePagingAdapter.h; sourceTree = "<group>"; };
 		D7EB3E301DBFA0F3004B6730 /* HLLBasePagingAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLBasePagingAdapter.m; sourceTree = "<group>"; };
 		D7EB3E321DBFCE2E004B6730 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
+		D7EB3E341DC0403C004B6730 /* UIViewController+PhotoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PhotoPicker.h"; sourceTree = "<group>"; };
+		D7EB3E351DC0403C004B6730 /* UIViewController+PhotoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PhotoPicker.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,8 @@
 				D71040BF1DBD255C000A8F9B /* NSString+Common.m */,
 				D71040BB1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.h */,
 				D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */,
+				D7EB3E341DC0403C004B6730 /* UIViewController+PhotoPicker.h */,
+				D7EB3E351DC0403C004B6730 /* UIViewController+PhotoPicker.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -389,6 +397,7 @@
 			children = (
 				D7A09F7A1DBC07F700C93B2D /* Protocol */,
 				D7A09F401DBB9C5500C93B2D /* Category */,
+				D7EB3E371DC0927A004B6730 /* Manager */,
 				D71040A81DBC9E71000A8F9B /* HLLPlaceholderTextView */,
 				D7A09F561DBBD72D00C93B2D /* HLLNetworking */,
 				D7A09F431DBB9C5500C93B2D /* HLLBannerView */,
@@ -424,6 +433,15 @@
 				D7A09F3F1DBB9A3100C93B2D /* PrefixHeader.pch */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		D7EB3E371DC0927A004B6730 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D7D46B911DC0FCE3004B0B95 /* FileHandle.h */,
+				D7D46B921DC0FCE3004B0B95 /* FileHandle.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -588,12 +606,14 @@
 				D71040BD1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m in Sources */,
 				D7A09F6A1DBBD72D00C93B2D /* HLLNetworking.m in Sources */,
 				D7BB78E61DB91CB20073B2DC /* ViewController.m in Sources */,
+				D7D46B931DC0FCE3004B0B95 /* FileHandle.m in Sources */,
 				D7A09F551DBBD11000C93B2D /* HLLListViewController.m in Sources */,
 				D7A09F4F1DBB9C5500C93B2D /* UIScrollView+HLLPullToRefreshView.m in Sources */,
 				D71040AE1DBC9FD2000A8F9B /* UILabel+ContentSize.m in Sources */,
 				D71040C01DBD255C000A8F9B /* NSString+Common.m in Sources */,
 				D71040AB1DBC9E71000A8F9B /* HLLPlaceholderTextView.m in Sources */,
 				D7A09F4E1DBB9C5500C93B2D /* UIScrollView+HLLInfiniteScrollingView.m in Sources */,
+				D7EB3E361DC0403C004B6730 /* UIViewController+PhotoPicker.m in Sources */,
 				D7EB3E2E1DBFA0B4004B6730 /* HLLBaseFileHandleAdapter.m in Sources */,
 				D7A09F831DBC0D0E00C93B2D /* TestOneRequestViewController.m in Sources */,
 				D71040B11DBCA906000A8F9B /* TestPageRequestViewController.m in Sources */,

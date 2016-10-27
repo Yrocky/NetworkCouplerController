@@ -17,6 +17,9 @@
 
 @property (nonatomic ,strong) NSURLSessionDataTask * dataTask;
 
+@property (nonatomic ,strong) NSURLSessionDownloadTask * downloadTask;
+
+
 @end
 @implementation V_3_X_Networking
 
@@ -25,11 +28,13 @@
     self = [super init];
     if (self) {
         
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
         self.method          = [HLLGETMethodType type];
         self.requestType     = [HLLHTTPBodyType type];
         self.responseType    = [HLLHttpDataType type];
         self.timeoutInterval = @(15);
-        self.session         = [AFHTTPSessionManager manager];
+        self.session         = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];;
         
         self.HTTPHeaderFieldsWithValues = [NSMutableDictionary dictionary];
         
@@ -308,9 +313,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if (weakSelf.uploadFileDelegate && [weakSelf.uploadFileDelegate respondsToSelector:@selector(networkingDidUploadFile:progress:)]) {
+            if (weakSelf.fileHandleDelegate && [weakSelf.fileHandleDelegate respondsToSelector:@selector(networkingDidUploadFile:progress:)]) {
                 
-                [weakSelf.uploadFileDelegate networkingDidUploadFile:weakSelf
+                [weakSelf.fileHandleDelegate networkingDidUploadFile:weakSelf
                                                             progress:uploadProgress];
             }
         });
@@ -369,5 +374,75 @@
                           progress:uploadProgress
                            success:success
                            failure:failure];
+}
+
+
+
+#pragma mark -
+#pragma mark 下载文件
+
+
+- (void)downloadWithUrl:(NSString *)urlString destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination{
+
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    typeof(self) weakSelf = self;
+
+    void (^downloadProgress)(NSProgress *)
+    = ^(NSProgress *uploadProgress){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (weakSelf.fileHandleDelegate && [weakSelf.fileHandleDelegate respondsToSelector:@selector(networkingDidUploadFile:progress:)]) {
+                
+                [weakSelf.fileHandleDelegate networkingDidDownloadFile:weakSelf
+                                                              progress:uploadProgress];
+            }
+        });
+    };
+    
+    void (^completionHandler)(NSURLResponse *, NSURL *, NSError *)
+    = ^(NSURLResponse *response, NSURL *filePath, NSError *error){
+    
+        if(error) {
+            
+            weakSelf.isRunning = NO;
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)]) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [weakSelf.delegate networkingDidRequestFailed:weakSelf
+                                                            error:error];
+                });
+                
+                [weakSelf logWithFailError:error
+                                       url:urlString
+                                    params:nil];
+            }
+        }else {
+            
+            NSLog(@"File downloaded to: %@", filePath);
+            
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [weakSelf.delegate networkingDidRequestSuccess:weakSelf
+                                                              data:filePath];
+                });
+                // 打印成功信息
+                [weakSelf logWithSuccessResponse:response
+                                             url:urlString
+                                          params:nil];
+            }
+        }
+    };
+    NSURLSessionDownloadTask * downloadTask
+    = [self.session downloadTaskWithRequest:request progress:downloadProgress destination:destination completionHandler:completionHandler];
+    
+    [downloadTask resume];
+    
+    _downloadTask = downloadTask;
 }
 @end

@@ -7,13 +7,15 @@
 //
 
 #import "HLLBaseViewController.h"
+#import "HLLBaseFileHandleAdapter.h"
+
 
 @interface TestDownloadRequestViewController : HLLBaseViewController
 
 @end
 
 
-@interface TestDownload : HLLBaseRequestAdapter
+@interface TestDownloadAPI : HLLBaseFileHandleAdapter
 
 @end
 

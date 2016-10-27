@@ -13,16 +13,19 @@
 
 - (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter uploadFileProgress:(NSProgress *)progress;
 
+- (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter downloadFileProgress:(NSProgress *)progress;
 @end
 
 
-@interface HLLBaseFileHandleAdapter : HLLBaseRequestAdapter<HLLUploadFileProtocol>
+@interface HLLBaseFileHandleAdapter : HLLBaseRequestAdapter<HLLFileHandleProtocol>
 
 @property (nonatomic ,weak) id<HLLBaseFileHandleAdapterProtocol> fileHandleDelegate;
 
 /** 具体设定逻辑需要和服务器那边进行协调，需要的HTTP header字段有`filename`、`name`、`mimeType` */
 - (void) post:(NSString *)url parameters:(id)parameters image:(UIImage *)image appendHTTPHeader:(NSDictionary *)header;
 
+/** 根据URL下载文件到指定的文件夹，需要设定文件的名字 */
+- (void)download:(NSString *)url documentsDirectoryPath:(NSString *)documents fileName:(NSString *)fileName;
 @end
 
 
@@ -54,17 +57,6 @@
  
  ///////////////*/
 
-
-
-
-
-/*///////////////
- 
- 该类用于封装具有特殊网络请求的操作
- 
- 比如下载文件、上传文件，特殊的如上传图片
- 
- ///////////////*/
 
 
 

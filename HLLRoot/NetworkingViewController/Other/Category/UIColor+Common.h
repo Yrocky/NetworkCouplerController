@@ -57,6 +57,7 @@
  *   返回一个随机颜色实例
  */
 + (UIColor *)randomColor;
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha;
 
 /**
  *  根据RGBHex返回颜色实例，16711680 = redColor

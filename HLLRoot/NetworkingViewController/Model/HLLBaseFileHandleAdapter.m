@@ -14,7 +14,7 @@
 {
     if( self = [super initWithNetworkManager:manager])
     {
-        manager.uploadFileDelegate = self;
+        manager.fileHandleDelegate = self;
     }
     
     return self;
@@ -37,16 +37,28 @@
     }];
 }
 
+- (void)download:(NSString *)url documentsDirectoryPath:(NSString *)documents fileName:(NSString *)fileName{
+
+    [self.networkManager downloadWithUrl:url destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+       
+        NSString * name = fileName;
+        if (!name) {
+            name = [NSString stringWithFormat:@"%@", [response suggestedFilename]];
+        }
+        NSString * mediaPath = [documents stringByAppendingPathComponent:fileName];
+        
+        return [NSURL fileURLWithPath:mediaPath];
+    }];
+}
 - (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
 
     [NSException raise:@"Upload file is continue ,there is the progress"
                 format:@"You Must Override This Method."];
-    
 }
 
 
 #pragma mark -
-#pragma mark HLLUploadFileProtocol
+#pragma mark HLLFileHandleProtocol
 
 - (void) networkingDidUploadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
 
@@ -54,7 +66,17 @@
         
         [_fileHandleDelegate requestAdapter:self uploadFileProgress:progress];
     }
-    [self progress:0 withUserInfo:networking.tag];
+    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
+}
+
+
+- (void)networkingDidDownloadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
+
+    if([_fileHandleDelegate respondsToSelector:@selector(requestAdapter:downloadFileProgress:)]){
+        
+        [_fileHandleDelegate requestAdapter:self downloadFileProgress:progress];
+    }
+    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
 }
 
 @end

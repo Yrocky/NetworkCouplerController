@@ -9,6 +9,8 @@
 #import "TestUploadRequestViewController.h"
 #import "HLLPlaceholderTextView.h"
 #import "UIKit+AFNetworking.h"
+#import "UIViewController+PhotoPicker.h"
+#import "UIImage+ImageEffects.h"
 
 
 @interface TestUploadRequestViewController ()<HLLBaseFileHandleAdapterProtocol>
@@ -87,11 +89,19 @@
     
     self.uploadButton.enabled = YES;
     [self.progressView setProgress:0.0f];
-    
+    self.logView.text = nil;
 //    UIImage * image = [UIImage imageWithColor:[UIColor randomColor]];
-    UIImage * image = [UIImage imageNamed:@"background.jpeg"];
+//    UIImage * image = [UIImage imageNamed:@"background.jpeg"];
     
-    self.imageView.image = image;
+    [self photoPickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary result:^(UIImage *image) {
+        
+        if (image) {
+            UIColor * color = [UIColor randomColorWithAlpha:0.5f];
+            
+            image = [image applyBlurWithRadius:10 tintColor:color];
+            self.imageView.image = image;
+        }
+    }];
 }
 
 - (void) startTestRequest{
@@ -130,14 +140,7 @@
 
     [self.progressView setProgress:progressValue];
     
-    self.logView.text = [NSString stringWithFormat:@"当前进度为：%.3f%%",progressValue];
-}
-
-- (void)requestAdapterDidStartRequest:(HLLBaseRequestAdapter *)requestAdapter{
-
-    [super requestAdapterDidStartRequest:requestAdapter];
-    
-    [self hud_showLoading];
+    self.logView.text = [NSString stringWithFormat:@"<%@>当前进度为：%.6f%%",requestAdapter.userInfo,progressValue];
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo{
@@ -145,8 +148,6 @@
     [super requestAdapter:requestAdapter didCompleteWithUserInfo:userInfo];
 
     self.uploadButton.enabled = YES;
-    
-    [self hud_hidenLoading];
 }
 
 
@@ -155,8 +156,7 @@
     [super requestAdapter:requestAdapter didFailWithError:error];
  
     self.uploadButton.enabled = YES;
-    
-    [self hud_showErrorWithMessage:error.localizedDescription];
+
 }
 
 @end
