@@ -206,7 +206,6 @@ NSString * const infiniteScrollingHandleViewKey;
 
 - (void)setState:(HLLInfiniteScrollingState)state
 {
-    
     if (self.enableState != HLLInfiniteScrollingStateNormal) {
         return;
     }
