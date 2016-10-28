@@ -59,7 +59,7 @@
 - (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params {
     
     if (self.EnableLogParseResponseDebug) {
-//        NSLog(@"================================\nRequest success\n URL: %@\n params:%@\n response:%@",[self generateGETAbsoluteURL:url params:params],params,[self tryToParseData:response]);
+        NSLog(@"================================\nRequest success\n URL: %@\n params:%@\n response:%@",[self generateGETAbsoluteURL:url params:params],params,[self tryToParseData:response]);
     }
 }
 
@@ -73,9 +73,9 @@
         }
         
         if ([error code] == NSURLErrorCancelled) {
-//            NSLog(@"================================\nRequest was canceled mannully \n URL: %@ %@%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params);
+            NSLog(@"================================\nRequest was canceled mannully \n URL: %@ %@%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params);
         } else {
-//            NSLog(@"\nRequest error \n URL: %@ %@%@\n errorInfos:%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params,[error localizedDescription]);
+            NSLog(@"\nRequest error \n URL: %@ %@%@\n errorInfos:%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params,[error localizedDescription]);
         }
     }
 }

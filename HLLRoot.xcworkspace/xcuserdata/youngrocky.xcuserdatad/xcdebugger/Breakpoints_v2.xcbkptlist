@@ -122,7 +122,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "-getCacheResponseWithURL:parameters:"
+            landmarkName = "-getCacheResponseWithRequest:parameters:"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
@@ -178,7 +178,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "232"
             endingLineNumber = "232"
-            landmarkName = "-getCacheResponseWithURL:parameters:"
+            landmarkName = "-getCacheResponseWithRequest:parameters:"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
@@ -233,7 +233,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
             endingLineNumber = "229"
-            landmarkName = "-getCacheResponseWithURL:parameters:"
+            landmarkName = "-getCacheResponseWithRequest:parameters:"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy

@@ -154,7 +154,7 @@
 //    retryInterval:self.intervalInSeconds
     }
     
-//    NSLog(@"RequestURL:%@",[self generateGETAbsoluteURL:self.urlString params:requestDictionary]);
+    NSLog(@"RequestURL:%@",[self generateGETAbsoluteURL:self.urlString params:requestDictionary]);
 }
 
 - (void) resetData{
