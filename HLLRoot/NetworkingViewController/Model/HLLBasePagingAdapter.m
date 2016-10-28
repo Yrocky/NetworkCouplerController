@@ -37,13 +37,13 @@
 - (void)refresh
 {
     _currentPage = 1;
-    [self startRequest];
+    [self start];
 }
 
 - (void)loadMore
 {
     _currentPage += 1;
-    [self startRequest];
+    [self start];
 }
 
 - (id)objectAtIndex:(NSInteger)index
@@ -74,9 +74,9 @@
     _result = [self parsePage:response withUserInfo:userInfo];
 }
 
-- (void)startRequest{
+- (void)start{
     
-    [super startRequest];
+    [super start];
 }
 
 - (NSArray *)parsePage:(id)response withUserInfo:(id)userInfo{

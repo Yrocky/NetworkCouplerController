@@ -29,7 +29,7 @@
 @protocol HLLNetworkingDelegate <NSObject>
 
 /** 请求成功的时候调用 */
-- (void) networkingDidRequestSuccess:(HLLNetworking *)networking data:(id)data;
+- (void) networkingDidRequestSuccess:(HLLNetworking *)networking response:(id)response;
 
 /** 请求失败的时候调用 */
 - (void) networkingDidRequestFailed:(HLLNetworking *)networking error:(NSError *)error;
@@ -114,7 +114,30 @@
 - (void)cacheResponseObject:(id)responseObject
                     request:(NSURLRequest *)request
                  parameters:params ;
-- (id)getCacheResponseWithURL:(NSString *)url
-                   parameters:params ;
+- (id)getCacheResponseWithRequest:(NSURLRequest *)request
+                       parameters:params ;
 @end
+
+
+
+/*///////////////
+ 
+ 为网络请求添加缓存机制，
+ 
+ 具体缓存机制见方法`-cacheResponseObject: request: parameters:`
+ 
+ 具体操作流程为：
+ 
+             __需要缓存__-->`缓存响应结果`
+    请求成功--|                           -->`返回成功的请求结果`
+             __不需要缓存__
+             
+             
+             __缓存中有对应的数据__-->`返回相应结果并且抛出异常`
+    请求失败--|
+             __没有缓存数据__-->`抛出异常`
+ 
+ ///////////////*/
+
+
 

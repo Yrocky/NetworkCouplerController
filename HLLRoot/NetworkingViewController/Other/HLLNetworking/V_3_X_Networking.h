@@ -14,3 +14,4 @@
 
 - (void)downloadWithUrl:(NSString *)urlString destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination;
 @end
+

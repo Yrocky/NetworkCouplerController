@@ -224,13 +224,6 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		D7A09F431DBB9C5500C93B2D /* HLLBannerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HLLBannerView;
-			sourceTree = "<group>";
-		};
 		D7A09F441DBB9C5500C93B2D /* HLLPullToRefreshView */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,7 +398,6 @@
 				D7EB3E371DC0927A004B6730 /* Manager */,
 				D71040A81DBC9E71000A8F9B /* HLLPlaceholderTextView */,
 				D7A09F561DBBD72D00C93B2D /* HLLNetworking */,
-				D7A09F431DBB9C5500C93B2D /* HLLBannerView */,
 				D7A09F441DBB9C5500C93B2D /* HLLPullToRefreshView */,
 			);
 			path = Other;

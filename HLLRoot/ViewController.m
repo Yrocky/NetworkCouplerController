@@ -34,7 +34,7 @@
     
     self.listItems = @[@"单请求",
                        @"多请求",
-                       @"加密参数",
+//                       @"对参数进行操作",
                        @"分页请求 01",
                        @"分页请求 02",
                        @"分页请求 03",
@@ -43,7 +43,7 @@
     
     self.classItems = @[@"TestOneRequestViewController",
                         @"TestMultiRequestViewController",
-                        @"TestEncryptionRequestViewController",
+//                        @"TestEncryptionRequestViewController",
                         @"TestPageRequestViewController",
                         @"TestPageRequestSecondViewController",
                         @"TestPageRequestThirdViewController",

@@ -40,6 +40,7 @@
         
         self.timesToRetry       = 0;
         self.intervalInSeconds  = 0;
+        self.needCache          = YES;
         
         self.EnableLogParseResponseDebug = YES;
     }
@@ -60,28 +61,6 @@
     typeof(self) weakSelf = self;
     
     NSDictionary * requestDictionary = [self accessRequestDictionarySerializerWithRequestDictionary:self.requestDictionary];
-    
-    //获得缓存中的响应数据
-    // 这里有一个bug，那就回如果是同样的url和param，那一直就是这样的数据，不会是最新的数据了，还需要一个时间戳进行标识
-    id cacheResponse = [self getCacheResponseWithURL:self.urlString parameters:self.requestDictionary];
-    
-    if( cacheResponse ){
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
-                
-                [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                          data:cacheResponse];
-                // 打印成功信息
-                [self logWithSuccessResponse:cacheResponse
-                                         url:self.urlString
-                                      params:requestDictionary];
-            }
-        });
-        // 有数据，直接发给请求发起者，结束
-        return;
-    }
     
     void (^success)(NSURLSessionDataTask *, id)
     = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -106,12 +85,12 @@
                                parameters:requestDictionary];
         }
         
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:response:)]) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                          data:response];
+                                                      response:response];
             });
             // 打印成功信息
             [weakSelf logWithSuccessResponse:response
@@ -124,6 +103,11 @@
     = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         
         weakSelf.isRunning = NO;
+        
+        //获得缓存中的响应数据
+        id cacheResponse = [self getCacheResponseWithRequest:task.currentRequest
+                                                  parameters:requestDictionary];
+        
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:error:)] && !cacheResponse) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -131,10 +115,6 @@
                 [weakSelf.delegate networkingDidRequestFailed:weakSelf
                                                         error:error];
             });
-            
-            [weakSelf logWithFailError:error
-                                   url:weakSelf.urlString
-                                params:requestDictionary];
         }
         
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestFailed:response:error:)] && cacheResponse) {
@@ -146,10 +126,10 @@
                                                         error:error];
             });
             
-            [weakSelf logWithFailError:error
-                                   url:weakSelf.urlString
-                                params:requestDictionary];
         }
+        [weakSelf logWithFailError:error
+                               url:weakSelf.urlString
+                            params:requestDictionary];
     };
     
     
@@ -159,9 +139,9 @@
                            parameters:requestDictionary
                              progress:nil
                               success:success
-                              failure:failure
-                            autoRetry:self.timesToRetry
-                        retryInterval:self.intervalInSeconds];
+                              failure:failure];
+//    autoRetry:self.timesToRetry
+//    retryInterval:self.intervalInSeconds
         
     }else if ([self.method isKindOfClass:[HLLPOSTMethodType class]]){
         
@@ -169,12 +149,12 @@
                             parameters:requestDictionary
                               progress:nil
                                success:success
-                               failure:failure
-                             autoRetry:self.timesToRetry
-                         retryInterval:self.intervalInSeconds];
+                               failure:failure];
+//    autoRetry:self.timesToRetry
+//    retryInterval:self.intervalInSeconds
     }
     
-    NSLog(@"RequestURL:%@",[self generateGETAbsoluteURL:self.urlString params:self.requestDictionary]);
+//    NSLog(@"RequestURL:%@",[self generateGETAbsoluteURL:self.urlString params:requestDictionary]);
 }
 
 - (void) resetData{
@@ -337,12 +317,12 @@
                        weakSelf.originalResponseData :
                        weakSelf.serializerResponseData);
         
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:response:)]) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                          data:response];
+                                                      response:response];
             });
             // 打印成功信息
             [weakSelf logWithSuccessResponse:response
@@ -425,12 +405,12 @@
             
             NSLog(@"File downloaded to: %@", filePath);
             
-            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:data:)]) {
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:response:)]) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                              data:filePath];
+                                                              response:filePath];
                 });
                 // 打印成功信息
                 [weakSelf logWithSuccessResponse:response

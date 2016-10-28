@@ -50,7 +50,7 @@
 
 - (void)startTestRequest:(UIButton *)sender{
 
-    [self.baseRequest refreshRequest];
+    [self.baseRequest refresh];
 }
 
 - (HLLBaseRequestAdapter *)generateRequest{
@@ -72,7 +72,7 @@
     return @"test-api";
 }
 
-- (void)startRequest{
+- (void)start{
 
     [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
 }

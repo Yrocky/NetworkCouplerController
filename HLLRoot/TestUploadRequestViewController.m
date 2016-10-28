@@ -121,7 +121,10 @@
     NSDictionary * header = @{@"fileName":@"1932891.jpg",
                               @"name":@"image",
                               @"mimeType":@"image/jpeg"};
-    [upload post:@"http://175.102.24.16/api" parameters:params image:self.imageView.image appendHTTPHeader:header];
+    [upload post:@"http://175.102.24.16/api"
+      parameters:params
+           image:self.imageView.image
+appendHTTPHeader:header];
 }
 
 - (HLLBaseRequestAdapter *)generateRequest{

@@ -52,16 +52,14 @@
 
 - (void)dealloc
 {
+    // 如果使用了`UIScrollView+HLLInfiniteScrollingView`以及`UIScrollView+HLLPullToRefreshView`
+    // 必须要在控制器dealloc的时候进行如下操作来去除监听
     self.tableView.showInfiniteScrolling = NO;
     self.tableView.showPullToRefresh = NO;
 }
+
 #pragma mark -
 #pragma mark UITableViewDataSource,UITableViewDelegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.listRequest.list.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -140,13 +138,13 @@
 - (void)refresh
 {
     self.currentPage = 0;
-    [self startRequest];
+    [self start];
 }
 
 - (void)loadMore
 {
     self.currentPage += self.pageSize;
-    [self startRequest];
+    [self start];
 }
 
 - (NSString *)userInfo{
@@ -154,7 +152,7 @@
     return @"test-list-thrid-api";
 }
 
-- (void)startRequest{
+- (void)start{
     
     NSDictionary * parmars = @{@"start":@(self.currentPage),
                                @"count":@(self.pageSize)};

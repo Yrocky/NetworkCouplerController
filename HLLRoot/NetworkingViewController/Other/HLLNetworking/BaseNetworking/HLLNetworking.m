@@ -59,7 +59,7 @@
 - (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params {
     
     if (self.EnableLogParseResponseDebug) {
-        NSLog(@"================================\nRequest success\n URL: %@\n params:%@\n response:%@",[self generateGETAbsoluteURL:url params:params],params,[self tryToParseData:response]);
+//        NSLog(@"================================\nRequest success\n URL: %@\n params:%@\n response:%@",[self generateGETAbsoluteURL:url params:params],params,[self tryToParseData:response]);
     }
 }
 
@@ -73,9 +73,9 @@
         }
         
         if ([error code] == NSURLErrorCancelled) {
-            NSLog(@"================================\nRequest was canceled mannully \n URL: %@ %@%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params);
+//            NSLog(@"================================\nRequest was canceled mannully \n URL: %@ %@%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params);
         } else {
-            NSLog(@"\nRequest error \n URL: %@ %@%@\n errorInfos:%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params,[error localizedDescription]);
+//            NSLog(@"\nRequest error \n URL: %@ %@%@\n errorInfos:%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params,[error localizedDescription]);
         }
     }
 }
@@ -216,22 +216,22 @@
     }
 }
 
-- (id)getCacheResponseWithURL:(NSString *)url parameters:params {
+- (id)getCacheResponseWithRequest:(NSURLRequest *)request parameters:params {
     
     id cacheData = nil;
     
-    if (url) {
+    if (request) {
         // 缓存路径
         NSString *directoryPath = cachePath();
-        // 生成get绝对路径url
-        NSString *absoluteURL = [self generateGETAbsoluteURL:url params:params];
+        
+        NSString *absoluteURL = [self generateGETAbsoluteURL:request.URL.absoluteString params:params];
         NSString *key = [absoluteURL md5];
         NSString *path = [directoryPath stringByAppendingPathComponent:key];
         
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
         if (data) {
             cacheData = data;
-            NSLog(@"Read data from cache for url: %@\n", url);
+            NSLog(@"Read data from cache for url: %@\n", absoluteURL);
         }
     }
     

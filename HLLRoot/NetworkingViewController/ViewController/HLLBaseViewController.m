@@ -128,7 +128,6 @@
 - (void) hud_showErrorWithMessage:(NSString *)message{
 
     [SVProgressHUD showErrorWithStatus:message];
-    
 }
 - (void) hud_hidenLoading{
 

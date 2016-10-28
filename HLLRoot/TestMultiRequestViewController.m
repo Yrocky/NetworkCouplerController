@@ -41,6 +41,11 @@
     self.logView.frame = CGRectMake(20, CGRectGetMaxY(segmentControl.frame) + 40, CGRectGetWidth(segmentControl.frame), 300);
     self.logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.logView];
+    
+    self.testOneAPI = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testOneAPI.delegate = self;
+    self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testTwoAPI.delegate = self;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -64,17 +69,13 @@
 
 - (void) testOne{
     
-    self.testOneAPI = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
-    self.testOneAPI.delegate = self;
-    [self.testOneAPI startRequest];
+    [self.testOneAPI start];
 }
 
 - (void) testTwo{
     
-    self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
-    self.testTwoAPI.delegate = self;
 //    [self.testTwoAPI setTimesToRetry:3 intervalInSeconds:1];
-    [self.testTwoAPI startRequest];
+    [self.testTwoAPI start];
 }
 
 - (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
@@ -97,7 +98,7 @@
     return @"test-one-api";
 }
 
-- (void)startRequest{
+- (void)start{
     
     [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
 }
@@ -117,7 +118,7 @@
     return @"test-two-api";
 }
 
-- (void)startRequest{
+- (void)start{
     
     NSDictionary * p = @{
                          @"app" :@"Goods",

@@ -26,7 +26,7 @@
 - (void) configureCollectionView;
 
 #pragma mark -
-#pragma mark MJRefresh
+#pragma mark RefreshView
 
 - (void) addRefreshForListView:(UIScrollView *)scrollView
                   headerHandle:(void(^)())headerHandle

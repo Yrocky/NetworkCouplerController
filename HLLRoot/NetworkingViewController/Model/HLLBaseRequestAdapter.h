@@ -42,8 +42,8 @@ extern NSString * const HLLHostURL;
 - (void)post:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 - (void) get:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 
-- (void)startRequest;
-- (void)refreshRequest;
+- (void)start;
+- (void)refresh;
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo;
 
 /** 为请求失败设置重连次数以及每次之间的时间间隔 */

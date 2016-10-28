@@ -27,15 +27,15 @@ NSString * const HLLHostURL = @"www.baidu.com";
     return self;
 }
 
-- (void)startRequest{
+- (void)start{
  
     [NSException raise:@"Reauest Adapter did start request"
                 format:@"You Must Override This Method."];
 }
 
-- (void)refreshRequest{
+- (void)refresh{
     
-    [self startRequest];
+    [self start];
 }
 
 - (id)objectForKey:(NSString *)key{
@@ -101,11 +101,11 @@ NSString * const HLLHostURL = @"www.baidu.com";
 #pragma mark -
 #pragma mark HLLNetworkingDelegate
 
-- (void) networkingDidRequestSuccess:(HLLNetworking *)networking data:(id)data{
+- (void) networkingDidRequestSuccess:(HLLNetworking *)networking response:(id)response{
 
-    self.response = data;
+    self.response = response;
 
-    [self parseResponse:data withUserInfo:networking.tag];
+    [self parseResponse:response withUserInfo:networking.tag];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

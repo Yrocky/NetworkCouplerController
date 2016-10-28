@@ -50,12 +50,6 @@
 #pragma mark -
 #pragma mark UITableViewDataSource,UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.listRequest.list.count;
-}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -83,13 +77,13 @@
 - (void)refresh
 {
     self.currentPage = 0;
-    [self startRequest];
+    [self start];
 }
 
 - (void)loadMore
 {
     self.currentPage += self.pageSize;
-    [self startRequest];
+    [self start];
 }
 
 - (NSString *)userInfo{
@@ -97,7 +91,7 @@
     return @"test-list-api";
 }
 
-- (void)startRequest{
+- (void)start{
 
     NSDictionary * parmars = @{@"start":@(self.currentPage),
                                @"count":@(self.pageSize)};

@@ -65,11 +65,6 @@
 #pragma mark -
 #pragma mark UICollectionViewDataSource,UICollectionViewDelegate
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    return self.listRequest.list.count;
-}
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     TestCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:[TestCollectionViewCell cellIdentifier] forIndexPath:indexPath];
@@ -88,13 +83,13 @@
 - (void)refresh
 {
     self.currentPage = 0;
-    [self startRequest];
+    [self start];
 }
 
 - (void)loadMore
 {
     self.currentPage += self.pageSize;
-    [self startRequest];
+    [self start];
 }
 
 - (NSString *)userInfo{
@@ -102,7 +97,7 @@
     return @"test-list-api";
 }
 
-- (void)startRequest{
+- (void)start{
     
     NSDictionary * parmars = @{@"start":@(self.currentPage),
                                @"count":@(self.pageSize)};

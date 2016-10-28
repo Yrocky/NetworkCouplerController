@@ -104,7 +104,6 @@
 
     [super requestAdapterDidStartRequest:requestAdapter];
     
-    
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo{

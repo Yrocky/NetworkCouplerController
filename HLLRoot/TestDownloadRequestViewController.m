@@ -121,7 +121,9 @@
     
     FileHandle * fileHandle = [FileHandle sharedFileHandle];
     [fileHandle creatCacheFile];
-    [download download:urlString documentsDirectoryPath:[fileHandle getMediaCachePath] fileName:@"vedio.mp4"];
+    [download download:urlString
+documentsDirectoryPath:[fileHandle getMediaCachePath]
+              fileName:@"vedio.mp4"];
 }
 
 
@@ -206,7 +208,7 @@
     return @"test-download-api";
 }
 
-- (void)startRequest{
+- (void)start{
 
     
 }
