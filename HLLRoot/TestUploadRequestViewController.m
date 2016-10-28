@@ -87,7 +87,6 @@
 
 - (void) chooseFile:(UIButton *)button{
     
-    self.uploadButton.enabled = YES;
     [self.progressView setProgress:0.0f];
     self.logView.text = nil;
 //    UIImage * image = [UIImage imageWithColor:[UIColor randomColor]];
@@ -101,6 +100,9 @@
             image = [image applyBlurWithRadius:10 tintColor:color];
             self.imageView.image = image;
         }
+        self.uploadButton.enabled = YES;
+    }cancel:^{
+        
     }];
 }
 
@@ -140,7 +142,7 @@
 
     [self.progressView setProgress:progressValue];
     
-    self.logView.text = [NSString stringWithFormat:@"<%@>当前进度为：%.6f%%",requestAdapter.userInfo,progressValue];
+    self.logView.text = [NSString stringWithFormat:@"<%@>当前进度为：%.6f%%",requestAdapter.userInfo,progressValue * 100];
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo{

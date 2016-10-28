@@ -60,3 +60,12 @@
 
 
 
+/*///////////////
+ 
+ `-download:documentsDirectoryPath:fileName:`方法将给定的URL下的网络资源下载到本地
+ 
+ `documents`是要下载到的文件夹位置、`fileName`是下载之后文件的名字，要有文件后缀
+ 
+ ///////////////*/
+
+

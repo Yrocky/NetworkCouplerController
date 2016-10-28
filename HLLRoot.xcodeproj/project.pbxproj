@@ -17,6 +17,7 @@
 		D71040BA1DBCF2E1000A8F9B /* TestUploadRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040B91DBCF2E1000A8F9B /* TestUploadRequestViewController.m */; };
 		D71040BD1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */; };
 		D71040C01DBD255C000A8F9B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D71040BF1DBD255C000A8F9B /* NSString+Common.m */; };
+		D7606FA31DC2FEA500B34533 /* TestEncryptionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7606FA21DC2FEA500B34533 /* TestEncryptionRequestViewController.m */; };
 		D7A09F3E1DBB99CD00C93B2D /* HLLNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F3D1DBB99CD00C93B2D /* HLLNoDataView.m */; };
 		D7A09F4C1DBB9C5500C93B2D /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F421DBB9C5500C93B2D /* UIColor+Common.m */; };
 		D7A09F4E1DBB9C5500C93B2D /* UIScrollView+HLLInfiniteScrollingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F491DBB9C5500C93B2D /* UIScrollView+HLLInfiniteScrollingView.m */; };
@@ -80,6 +81,8 @@
 		D71040BC1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+AutoRetry.m"; sourceTree = "<group>"; };
 		D71040BE1DBD255C000A8F9B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
 		D71040BF1DBD255C000A8F9B /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
+		D7606FA11DC2FEA500B34533 /* TestEncryptionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestEncryptionRequestViewController.h; sourceTree = "<group>"; };
+		D7606FA21DC2FEA500B34533 /* TestEncryptionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestEncryptionRequestViewController.m; sourceTree = "<group>"; };
 		D7A09F3C1DBB99CD00C93B2D /* HLLNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLNoDataView.h; sourceTree = "<group>"; };
 		D7A09F3D1DBB99CD00C93B2D /* HLLNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLNoDataView.m; sourceTree = "<group>"; };
 		D7A09F3F1DBB9A3100C93B2D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				D7A09F821DBC0D0E00C93B2D /* TestOneRequestViewController.m */,
 				D71040B21DBCCD3A000A8F9B /* TestMultiRequestViewController.h */,
 				D71040B31DBCCD3A000A8F9B /* TestMultiRequestViewController.m */,
+				D7606FA11DC2FEA500B34533 /* TestEncryptionRequestViewController.h */,
+				D7606FA21DC2FEA500B34533 /* TestEncryptionRequestViewController.m */,
 				D71040AF1DBCA905000A8F9B /* TestPageRequestViewController.h */,
 				D71040B01DBCA905000A8F9B /* TestPageRequestViewController.m */,
 				D7E82C5E1DBDF42F00EF6564 /* TestPageRequestSecondViewController.h */,
@@ -630,6 +635,7 @@
 				D7CDB8821DBEEDAE00925DE2 /* PullToRefreshView.m in Sources */,
 				D7A09F3E1DBB99CD00C93B2D /* HLLNoDataView.m in Sources */,
 				D71040B71DBCF2CA000A8F9B /* TestDownloadRequestViewController.m in Sources */,
+				D7606FA31DC2FEA500B34533 /* TestEncryptionRequestViewController.m in Sources */,
 				D7A09F711DBBDF1600C93B2D /* HLLBaseRequestAdapter.m in Sources */,
 				D7BB78E01DB91CB20073B2DC /* main.m in Sources */,
 				D71040A71DBC9821000A8F9B /* UIImage+Common.m in Sources */,

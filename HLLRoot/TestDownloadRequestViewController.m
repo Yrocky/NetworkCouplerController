@@ -117,7 +117,7 @@
     self.downloadButton.enabled = NO;
     TestDownloadAPI * download = (TestDownloadAPI *)self.baseRequest;
     
-    NSString * urlString = @"http://v.jxvdy.com/sendfile/ui0Q_04WTq1xYUltzQCGxzogOK5vSC0Np8iT1yd_sLJFmkHhelpxgnRFXib7UrH2CukCy7vYDAObqwdcgUypx3jehDpRcA";
+    NSString * urlString = @"http://v.jxvdy.com/sendfile/TsSTUO6VkwJYnAqO1pIgdKchiEHopan-P8YoKE1_HHuczV4gCNDf6gM3m8-wA7fHCBdyr4qrAvEZn7T9EJVhy2xUvJiYHA";
     
     FileHandle * fileHandle = [FileHandle sharedFileHandle];
     [fileHandle creatCacheFile];
@@ -169,7 +169,7 @@
     
     [self.progressView setProgress:progressValue];
     
-    self.logView.text = [NSString stringWithFormat:@"<%@>当前进度为：%.6f%%",requestAdapter.userInfo,progressValue];
+    self.logView.text = [NSString stringWithFormat:@"<%@>当前进度为：%.6f%%",requestAdapter.userInfo,progressValue * 100];
 }
 
 - (void)requestAdapter:(TestDownloadAPI *)requestAdapter didCompleteWithUserInfo:(id)userInfo{

@@ -48,7 +48,7 @@ extern NSString * const HLLHostURL;
 
 - (id)objectForKey:(NSString *)key;
 
-+ (NSMutableDictionary *)createParamWithApp:(NSString *)app class:(NSString *)cls;
++ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)cls;
 
 @end
 
@@ -96,9 +96,11 @@ extern NSString * const HLLHostURL;
 
 /*///////////////
  
- 一般而言，某些公司的网络请求会有一些相同的参数字段，用来标示表等作用
+ 一般而言，某些公司的网络请求会有一些相同的参数字段，用来标示表等作用，
  
- `+createParamWithApp:class:`是一个胶水代码，用来生成一个具有相同部分的请求的参数
+ 有的作用是将某些参数进行加密操作，这些都是些相同代码，可以在父类中进行统一操作
+ 
+ `+createCommonParamWithApp:class:`是一个胶水代码，用来生成一个具有相同部分的请求的参数
  
  ///////////////*/
 

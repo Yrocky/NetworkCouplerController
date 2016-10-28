@@ -57,11 +57,16 @@ NSString * const HLLHostURL = @"www.baidu.com";
     /** 供子类进行解析response的操作 */
 }
 
-+ (NSMutableDictionary *)createParamWithApp:(NSString *)app class:(NSString *)cls
++ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)cls
 {
     
     NSMutableDictionary * ret = [NSMutableDictionary dictionary];
     /** 根据自己后台服务器的请求规则进行相同参数的设定 */
+    // 一个例子如下，
+    ret[@"app"] = app;
+    ret[@"class"] = cls;
+    ret[@"sign"] = @"";// 使用md5或者base64进行加密app、class操作然后赋值给sign参数
+
     return ret;
 }
 

@@ -62,21 +62,23 @@
 
 - (void) networkingDidUploadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
 
+    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
+    
     if([_fileHandleDelegate respondsToSelector:@selector(requestAdapter:uploadFileProgress:)]){
         
         [_fileHandleDelegate requestAdapter:self uploadFileProgress:progress];
     }
-    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
 }
 
 
 - (void)networkingDidDownloadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
 
+    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
+    
     if([_fileHandleDelegate respondsToSelector:@selector(requestAdapter:downloadFileProgress:)]){
         
         [_fileHandleDelegate requestAdapter:self downloadFileProgress:progress];
     }
-    [self progress:progress.completedUnitCount withUserInfo:networking.tag];
 }
 
 @end

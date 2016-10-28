@@ -123,6 +123,8 @@
 - (void) hud_showErrorWithMessage:(NSString *)message{
 
     [SVProgressHUD showErrorWithStatus:message];
+    
+    [SVProgressHUD dismissWithDelay:1.25];
 }
 - (void) hud_hidenLoading{
 

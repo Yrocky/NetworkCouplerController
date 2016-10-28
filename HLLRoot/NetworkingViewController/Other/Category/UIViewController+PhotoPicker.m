@@ -26,12 +26,22 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
+- (void)setCancel:(CancelHandle)cancel{
+ 
+    objc_setAssociatedObject(self, @selector(cancel), cancel, OBJC_ASSOCIATION_COPY);
+}
+
+- (CancelHandle)cancel{
+ 
+    return objc_getAssociatedObject(self, _cmd);
+}
 #pragma mark -
 #pragma mark Photo Picker handle
 
-- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result{
+- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result cancel:(CancelHandle)cancel{
     
     self.result = result;
+    self.cancel = cancel;
     
     if (type == UIImagePickerControllerSourceTypeCamera){
         
@@ -59,6 +69,9 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+    if (self.cancel) {
+        self.cancel();
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

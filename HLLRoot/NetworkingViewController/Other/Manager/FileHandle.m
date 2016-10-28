@@ -138,11 +138,9 @@ static FileHandle *_instance;
 
     NSFileManager * fileManager = [NSFileManager defaultManager];
     
-    NSFileManager* manager = [NSFileManager defaultManager];
-    
     if (![fileManager fileExistsAtPath:[self getMediaCachePath]]) return 0;
     
-    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:[self getMediaCachePath]] objectEnumerator];
+    NSEnumerator *childFilesEnumerator = [[fileManager subpathsAtPath:[self getMediaCachePath]] objectEnumerator];
     
     NSString* fileName;
     
@@ -150,7 +148,7 @@ static FileHandle *_instance;
     
     while ((fileName = [childFilesEnumerator nextObject]) != nil){
         NSLog(@"fileName:%@",fileName);
-        fileName = [fileName stringByDeletingPathExtension];
+//        fileName = [fileName stringByDeletingPathExtension];
         folderSize += [self getFileSizeWithFileName:fileName];
     }
     

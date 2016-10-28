@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^PhotoPickerResult)(UIImage *image);
+typedef void(^CancelHandle)();
 
 @interface UIViewController (PhotoPicker)<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic ,copy) PhotoPickerResult result;
+@property (nonatomic ,copy) CancelHandle cancel;
 
-- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result;
+- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result cancel:(CancelHandle)cancel;
+
 @end
