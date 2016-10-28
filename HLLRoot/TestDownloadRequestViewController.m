@@ -99,9 +99,15 @@
     [button2 setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"FE8A8A"]] forState:UIControlStateNormal];
     button2.layer.cornerRadius = 5.0f;
     button2.layer.masksToBounds = YES;
-    button2.hidden = NO;
+    button2.hidden = YES;
     [self.view addSubview:button2];
     self.playButton = button2;
+    
+    FileHandle * fileHandle = [FileHandle sharedFileHandle];
+    float size = [fileHandle getCacheFileSizeAtCachePath];
+    if (size > 2) {
+        self.logView.text = [NSString stringWithFormat:@"当前缓存文件下有文件大小 %.2f M",size];
+    }
 }
 
 -(AVPlayerItem *)getPlayItem{
@@ -120,9 +126,9 @@
     NSString * urlString = @"http://v.jxvdy.com/sendfile/TsSTUO6VkwJYnAqO1pIgdKchiEHopan-P8YoKE1_HHuczV4gCNDf6gM3m8-wA7fHCBdyr4qrAvEZn7T9EJVhy2xUvJiYHA";
     
     FileHandle * fileHandle = [FileHandle sharedFileHandle];
-    [fileHandle creatCacheFile];
+    [fileHandle creatCacheFolder];
     [download download:urlString
-documentsDirectoryPath:[fileHandle getMediaCachePath]
+documentsDirectoryPath:[fileHandle getFileCachePath]
               fileName:@"vedio.mp4"];
 }
 
@@ -131,7 +137,8 @@ documentsDirectoryPath:[fileHandle getMediaCachePath]
     
     FileHandle * fileHandle = [FileHandle sharedFileHandle];
     
-    [fileHandle removeMediaCacheFileWithFileName:@"vedio.mp4"];
+    [fileHandle removeFileWithFileName:@"vedio.mp4"];
+
     self.clearButton.hidden = YES;
 }
 
@@ -139,7 +146,8 @@ documentsDirectoryPath:[fileHandle getMediaCachePath]
     
     if (!self.currentItem) {
         
-        NSURL * url = [[FileHandle sharedFileHandle] getMediaUrlWithMediaName:@"vedio.mp4"];
+        NSURL * url = [[FileHandle sharedFileHandle] getFileUrlWithMediaName:@"vedio.mp4"];
+        
         self.currentItem = [AVPlayerItem playerItemWithURL:url];
         self.player = [AVPlayer playerWithPlayerItem:self.currentItem];
         self.playerLayer.player = self.player;

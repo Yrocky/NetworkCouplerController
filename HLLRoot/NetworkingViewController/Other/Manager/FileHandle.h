@@ -10,26 +10,28 @@
 
 @interface FileHandle : NSObject
 
-#warning 本文件操作仅仅针对于Documents/Private_Documents/Cache下的文件
+#warning 本文件操作仅仅针对于`Documents/Private_Documents/Cache`路径下的文件
 #warning 切记！！！
+
 + (FileHandle *)sharedFileHandle;
 
 /** 创建缓存文件夹 */
-- (void) creatCacheFile;
+- (void) creatCacheFolder;
 
-// 获得对应视频的path
-- (NSString *) getMediaPathWithFileName:(NSString *)fileName;
-// 获得对应视频的url
-- (NSURL *) getMediaUrlWithMediaName:(NSString *)fileName;
-// 获得视频缓存文件夹的地址
-- (NSString *) getMediaCachePath;
-// 获取视频缓存文件夹的URL
-- (NSURL *) getMediaPath;
+// 获得对应文件的path
+- (NSString *) getFilePathWithFileName:(NSString *)fileName;
+// 获得对应文件的url
+- (NSURL *) getFileUrlWithMediaName:(NSString *)fileName;
+// 获得缓存文件夹的地址
+- (NSString *) getFileCachePath;
+// 获取缓存文件夹的URL
+- (NSURL *) getFileCacheUrl;
 
-// 删除缓存视频的文件夹
-- (void) clearMediaCacheFolder;
-// 删除缓存视频
-- (void) removeMediaCacheFileWithFileName:(NSString *)fileName;
+
+// 删除缓存的文件夹
+- (void) clearFileCacheFolder;
+// 删除本地缓存的文件
+- (void) removeFileWithFileName:(NSString *)fileName;
 
 
 // 获取指定文件名的文件大小 - - 多少M

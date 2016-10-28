@@ -30,9 +30,23 @@ static FileHandle *_instance;
     return _instance;
 }
 
-- (void) creatCacheFile{
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        [self creatCacheFolder];
+    }
+    return self;
+}
+
+
+#pragma mark -
+#pragma mark Create
+
+- (void) creatCacheFolder{
     
-    NSString * cachePath = [self getMediaCachePath];
+    NSString * cachePath = [self getFileCachePath];
     
     NSFileManager *fileManager=[NSFileManager defaultManager];
     
@@ -41,48 +55,51 @@ static FileHandle *_instance;
         [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
-#pragma mark - get
-// 获得视频缓存文件夹的地址
-- (NSString *) getMediaCachePath{
 
+#pragma mark - get
+
+// 获得对应文件的url
+- (NSURL *) getFileUrlWithMediaName:(NSString *)fileName{
+    
+    NSURL * fileUrl = [NSURL fileURLWithPath:[self getFilePathWithFileName:fileName]];
+    return fileUrl;
+}
+// 获得对应文件的path
+- (NSString *) getFilePathWithFileName:(NSString *)fileName{
+    
+    NSString * cachePath = [self getFileCachePath];
+    NSString * filePath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
+    return filePath;
+}
+
+// 获得视频缓存文件夹的地址
+- (NSString *) getFileCachePath{
+    
     return [NSHomeDirectory() stringByAppendingPathComponent:Documents_Media_Cache_Path];
 }
-// 获得对应视频的url
-- (NSURL *) getMediaUrlWithMediaName:(NSString *)fileName{
-    
-    NSURL * mediaUrl = [NSURL fileURLWithPath:[self getMediaPathWithFileName:fileName]];
-    return mediaUrl;
-}
-// 获得对应视频的path
-- (NSString *) getMediaPathWithFileName:(NSString *)fileName{
-    
-    NSString * cachePath = [self getMediaCachePath];
-    NSString * mediaPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",fileName]];
-    return mediaPath;
-}
 
-- (NSURL *) getMediaPath{
+- (NSURL *) getFileCacheUrl{
     
-    NSURL * mediaPath = [NSURL URLWithString:[self getMediaCachePath]];
-    return mediaPath;
+    NSURL * fileCacheUrl = [NSURL URLWithString:[self getFileCachePath]];
+    return fileCacheUrl;
 }
 #pragma mark - delete
 // 删除缓存视频文件夹
-- (void) clearMediaCacheFolder{
+- (void) clearFileCacheFolder{
     
-    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSString *cachePath = [self getMediaCachePath];
+    NSString *cachePath = [self getFileCachePath];
     
     [fileManager removeItemAtPath:cachePath error:nil];
 }
 
-// 删除本地缓存的视频
-- (void) removeMediaCacheFileWithFileName:(NSString *)fileName{
+// 删除本地缓存的文件
+- (void) removeFileWithFileName:(NSString *)fileName{
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSString * mediaPath = [self getMediaPathWithFileName:fileName];
+    NSString * mediaPath = [self getFilePathWithFileName:fileName];
     
     [fileManager removeItemAtPath:mediaPath error:nil];
 }
@@ -91,7 +108,7 @@ static FileHandle *_instance;
 // 返回cache文件夹
 - (NSDictionary *) getCacheFileAttributes{
     
-    NSString * cachePath = [self getMediaCachePath];
+    NSString * cachePath = [self getFileCachePath];
     NSFileManager * filemanager = [NSFileManager defaultManager];
     
     if ([filemanager fileExistsAtPath:cachePath]) {
@@ -102,7 +119,7 @@ static FileHandle *_instance;
 // 返回指定文件名的文件信息
 - (NSDictionary *) getFileAttributesWithFileName:(NSString *)fileName{
 
-    NSString * mediaPath = [self getMediaPathWithFileName:fileName];
+    NSString * mediaPath = [self getFilePathWithFileName:fileName];
     NSFileManager * filemanager = [NSFileManager defaultManager];
     
     if ([filemanager fileExistsAtPath:mediaPath]) {
@@ -138,9 +155,9 @@ static FileHandle *_instance;
 
     NSFileManager * fileManager = [NSFileManager defaultManager];
     
-    if (![fileManager fileExistsAtPath:[self getMediaCachePath]]) return 0;
+    if (![fileManager fileExistsAtPath:[self getFileCachePath]]) return 0;
     
-    NSEnumerator *childFilesEnumerator = [[fileManager subpathsAtPath:[self getMediaCachePath]] objectEnumerator];
+    NSEnumerator *childFilesEnumerator = [[fileManager subpathsAtPath:[self getFileCachePath]] objectEnumerator];
     
     NSString* fileName;
     
@@ -152,7 +169,7 @@ static FileHandle *_instance;
         folderSize += [self getFileSizeWithFileName:fileName];
     }
     
-    return folderSize/(1024.0*1024.0);
+    return folderSize;
 }
 // 获取指定文件名的创建时间，格式为yyyy-MM-dd hh:mm
 - (NSString *) getFileCreationDateWithFileName:(NSString *)fileName{

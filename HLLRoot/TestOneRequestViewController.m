@@ -20,7 +20,8 @@
 
     [super viewDidLoad];
     
-    self.networkManager.needCache = YES;
+    self.networkManager.needCache = YES;// 测试缓存数据
+    
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(80, 30, CGRectGetWidth(self.view.bounds) - 160, 40);
     button.titleLabel.font = [UIFont systemFontOfSize:15];

@@ -40,7 +40,7 @@
         
         self.timesToRetry       = 0;
         self.intervalInSeconds  = 0;
-        self.needCache          = YES;
+        self.needCache          = NO;
         
         self.EnableLogParseResponseDebug = YES;
     }
