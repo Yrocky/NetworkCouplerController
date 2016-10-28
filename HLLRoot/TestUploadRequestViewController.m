@@ -117,7 +117,7 @@
                               @"gender": @"1",
                               @"nickname":@"我的头像",
                               @"sign":@"f6064718029e5389255f818aaac6e59d",
-                              @"uid" :@"1932891"};
+                              @"uid" :@"2122208"};
     NSDictionary * header = @{@"fileName":@"1932891.jpg",
                               @"name":@"image",
                               @"mimeType":@"image/jpeg"};

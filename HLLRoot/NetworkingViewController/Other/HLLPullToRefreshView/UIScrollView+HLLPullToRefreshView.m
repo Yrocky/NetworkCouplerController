@@ -122,6 +122,7 @@ NSString * const pullToRefreshContentViewBottomMarginKey;
 - (void)setShowPullToRefresh:(BOOL)showPullToRefresh
 {
     HLLPullToRefreshContentView *pullToRefreshContentView = self.pullToRefreshContentView;
+    
     if (pullToRefreshContentView) {
         pullToRefreshContentView.hidden = !showPullToRefresh;
         if (showPullToRefresh) {
@@ -156,7 +157,7 @@ NSString * const pullToRefreshContentViewBottomMarginKey;
 
 - (CGFloat)pullToRefreshContentViewBottomMargin
 {
-    return self.pullToRefreshContentView.pullToRefreshContentViewBottomMargin;
+    return self.pullToRefreshContentView.pullToRefreshContentViewBottomMargin;   
 }
 
 @end

@@ -12,8 +12,9 @@
 
 @property (nonatomic, assign) int pageSize;
 @property (nonatomic, assign) NSInteger currentPage;
-/** 本次请求之前的所有数据，下拉的时候星空，上提的时候向里面追加数据 */
-@property (nonatomic, strong ,readonly) NSMutableArray * items;
+
+/** 本次请求之前的所有数据，下拉的时候清空，上提的时候向里面追加数据 */
+@property (nonatomic, strong ,readonly) NSMutableArray * list;
 /** 当前一次请求得到的数据，用来判断是否有获取到数据 */
 @property (nonatomic ,strong ,readonly) NSArray * result;
 
@@ -48,7 +49,7 @@
 
 /*///////////////
  
- `-parsePage:`方法是对response的数据进行分组的解析
+ `-parsePage:withUserInfo:`方法是对response的数据进行分组的解析
  
  子类必须重写该方法，以解决针对不同的返回数据结构进行解析
  

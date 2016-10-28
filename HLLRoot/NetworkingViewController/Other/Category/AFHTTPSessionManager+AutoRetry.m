@@ -142,6 +142,7 @@ SYNTHESIZE_ASC_OBJ(__retryDelayCalcBlock, setRetryDelayCalcBlock);
               error.localizedDescription, originalRetryCount - retriesRemainingCount + 1, originalRetryCount);
         void (^addRetryOperation)() = ^{
             [self setTimeout:[NSURLSessionConfiguration defaultSessionConfiguration].timeoutIntervalForRequest*1.5f];
+            
             [self requestUrlWithAutoRetry:retriesRemaining - 1 retryInterval:intervalInSeconds originalRequestCreator:taskCreator originalFailure:failure];
         };
         RetryDelayCalcBlock delayCalc = self.retryDelayCalcBlock;

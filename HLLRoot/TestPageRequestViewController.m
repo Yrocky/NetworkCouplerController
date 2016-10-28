@@ -43,7 +43,7 @@
 
 - (void)refreshUIWithRequest:(TestPageAPI *)request withUserInfo:(id)userInfo{
 
-    NSLog(@"%lu",(unsigned long)request.items.count);
+    NSLog(@"%lu",(unsigned long)request.list.count);
     [self.tableView reloadData];
 
 }
@@ -52,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.listRequest.items.count;
+    return self.listRequest.list.count;
 }
 
 

@@ -62,6 +62,7 @@
     NSDictionary * requestDictionary = [self accessRequestDictionarySerializerWithRequestDictionary:self.requestDictionary];
     
     //获得缓存中的响应数据
+    // 这里有一个bug，那就回如果是同样的url和param，那一直就是这样的数据，不会是最新的数据了，还需要一个时间戳进行标识
     id cacheResponse = [self getCacheResponseWithURL:self.urlString parameters:self.requestDictionary];
     
     if( cacheResponse ){

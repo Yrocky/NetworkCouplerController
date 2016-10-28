@@ -18,8 +18,10 @@
 
 @protocol HLLFileHandleProtocol <NSObject>
 
+/** 上传文件的进度回调 */
 - (void) networkingDidUploadFile:(HLLNetworking *)networking progress:(NSProgress *)progress;
 
+/** 下载文件的进度回调 */
 - (void) networkingDidDownloadFile:(HLLNetworking *)networking progress:(NSProgress *)progress;
 
 @end

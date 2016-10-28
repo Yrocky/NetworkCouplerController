@@ -54,17 +54,18 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
     
+    self.data = response;// 这里先将原始数据赋给data属性，子类如果需要具体的数据结构可以进行重写该方法
     /** 供子类进行解析response的操作 */
 }
 
-+ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)cls
++ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)class
 {
     
     NSMutableDictionary * ret = [NSMutableDictionary dictionary];
     /** 根据自己后台服务器的请求规则进行相同参数的设定 */
     // 一个例子如下，
     ret[@"app"] = app;
-    ret[@"class"] = cls;
+    ret[@"class"] = class;
     ret[@"sign"] = @"";// 使用md5或者base64进行加密app、class操作然后赋值给sign参数
 
     return ret;
@@ -123,4 +124,19 @@ NSString * const HLLHostURL = @"www.baidu.com";
     }
 }
 
+// 请求失败之后，从缓存中获取的数据
+- (void)networkingDidRequestFailed:(HLLNetworking *)networking response:(id)response error:(NSError *)error{
+
+    self.response = response;
+    
+    [self parseResponse:response withUserInfo:networking.tag];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if([_delegate respondsToSelector:@selector(requestAdapter:didCompleteWithUserInfo:)]){
+            
+            [_delegate requestAdapter:self didCompleteWithUserInfo:networking.tag];
+        }
+    });
+}
 @end

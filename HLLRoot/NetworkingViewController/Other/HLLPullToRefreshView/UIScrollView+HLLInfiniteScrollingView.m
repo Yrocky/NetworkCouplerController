@@ -56,11 +56,15 @@ NSString * const infiniteScrollingHandleViewKey;
         
         [infiniteScrollingContentView addSubview:infiniteScrollingHandleView];
         
-        UIView * noMoreDataView = [infiniteScrollingHandleView HLLInfiniteScrollViewNoMoreDataView:self];
-        noMoreDataView.hidden = YES;
-        [infiniteScrollingContentView addSubview:noMoreDataView];
+        if ([infiniteScrollingHandleView respondsToSelector:@selector(HLLInfiniteScrollViewNoMoreDataView:)]) {
+            
+            UIView * noMoreDataView = [infiniteScrollingHandleView HLLInfiniteScrollViewNoMoreDataView:self];
+            noMoreDataView.hidden = YES;
+            [infiniteScrollingContentView addSubview:noMoreDataView];
+            
+            infiniteScrollingContentView.noMoreDataView = noMoreDataView;
+        }
         
-        infiniteScrollingContentView.noMoreDataView = noMoreDataView;
         infiniteScrollingContentView.originalTopInset = self.contentInset.top;
         infiniteScrollingContentView.originalBottomInset = self.contentInset.bottom;
         infiniteScrollingContentView.infiniteScrollingActionHandler = actionHandler;

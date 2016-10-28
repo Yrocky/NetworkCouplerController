@@ -22,7 +22,10 @@
 
 - (HLLBaseRequestAdapter *)generateRequest;
 
+/** 供子类重写，以获取网络加载的数据 */
 - (void) refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo;
+/** 供子类重写，以获取网络加载失败时候的信的数据 */
+- (void) showError:(NSError *)error withUserInfo:(id)userInfo;
 
 /** HUD */
 - (void) hud_showLoading;

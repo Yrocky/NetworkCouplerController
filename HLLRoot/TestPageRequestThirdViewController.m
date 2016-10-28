@@ -50,16 +50,17 @@
     [self.tableView reloadData];
 }
 
-- (void)dealloc{
-
-    NSLog(@"++++");
+- (void)dealloc
+{
+    self.tableView.showInfiniteScrolling = NO;
+    self.tableView.showPullToRefresh = NO;
 }
 #pragma mark -
 #pragma mark UITableViewDataSource,UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.listRequest.items.count;
+    return self.listRequest.list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -83,12 +84,6 @@
 
 #pragma mark -
 #pragma mark CustomPullToRefreshView
-
-- (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle footerHandle:(void(^)())footerHandle{
-    
-    [self addRefreshForListView:scrollView headerHandle:headerHandle];
-    [self addRefreshForListView:scrollView footerHandle:footerHandle];
-}
 
 - (void) addRefreshForListView:(UIScrollView *)scrollView headerHandle:(void(^)())headerHandle{
     

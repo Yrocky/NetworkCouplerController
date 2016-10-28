@@ -9,7 +9,9 @@
 #import "HLLBaseRequestAdapter.h"
 
 @class HLLBaseFileHandleAdapter;
-@protocol HLLBaseFileHandleAdapterProtocol <NSObject>
+@protocol HLLBaseFileHandleAdapterProtocol <HLLBaseRequestAdapterProtocol>
+
+@optional;
 
 - (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter uploadFileProgress:(NSProgress *)progress;
 

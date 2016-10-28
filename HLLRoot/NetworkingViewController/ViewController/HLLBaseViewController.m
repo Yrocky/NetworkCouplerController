@@ -105,6 +105,11 @@
     /** 供子类重写，以获取网络加载的数据 */
 }
 
+- (void) showError:(NSError *)error withUserInfo:(id)userInfo{
+    
+    /** 供子类重写，以获取网络加载失败时候的信的数据 */    
+}
+
 #pragma mark -
 #pragma mark HUD
 
@@ -124,7 +129,6 @@
 
     [SVProgressHUD showErrorWithStatus:message];
     
-    [SVProgressHUD dismissWithDelay:1.25];
 }
 - (void) hud_hidenLoading{
 
@@ -152,6 +156,8 @@
 }
 
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error{
+    
+    [self showError:error withUserInfo:requestAdapter.userInfo];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self hud_showErrorWithMessage:[error localizedDescription]];

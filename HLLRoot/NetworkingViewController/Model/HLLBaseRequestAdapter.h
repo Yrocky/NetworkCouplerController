@@ -14,8 +14,11 @@ extern NSString * const HLLHostURL;
 @class HLLBaseRequestAdapter;
 @protocol HLLBaseRequestAdapterProtocol <NSObject>
 
+@optional;
 - (void)requestAdapterDidStartRequest:(HLLBaseRequestAdapter *)requestAdapter;
+
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo;
+
 - (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error;
 @end
 
@@ -76,7 +79,9 @@ extern NSString * const HLLHostURL;
  
     }
 
- 那么`data`属性是用来方便取相应数据中data部分的
+ 那么`response`属性就是这样的一个原始结构
+ 
+ 而`data`属性可用来方便取相应数据中data部分的
  
  并且用`-parseResponse:withUserInfo:`对`data`进行获取，以及`-objectForKey:`具体字段下数据的获取
  针对于其他的response结构可以重新实现`-parseResponse:withUserInfo:`方法

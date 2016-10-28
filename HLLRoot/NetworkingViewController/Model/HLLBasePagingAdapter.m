@@ -16,7 +16,7 @@
     {
         _pageSize = 50;
         _currentPage = 0;
-        _items = [NSMutableArray array];
+        _list = [NSMutableArray array];
     }
     
     return self;
@@ -29,7 +29,7 @@
     {
         _pageSize = 50;
         _currentPage = 0;
-        _items = [NSMutableArray array];
+        _list = [NSMutableArray array];
     }
     return self;
 }
@@ -48,13 +48,13 @@
 
 - (id)objectAtIndex:(NSInteger)index
 {
-    return _items[index];
+    return _list[index];
 }
 
 
 - (void)clear
 {
-    [_items removeAllObjects];
+    [_list removeAllObjects];
     
     _result = nil;
 }
@@ -69,7 +69,7 @@
         [self clear];
     }
     
-    [_items addObjectsFromArray:[self parsePage:response withUserInfo:userInfo]];
+    [_list addObjectsFromArray:[self parsePage:response withUserInfo:userInfo]];
     
     _result = [self parsePage:response withUserInfo:userInfo];
 }

@@ -20,12 +20,16 @@
 
 - (NSString *)userInfo{
     
-    return @"test-api";
+    return @"test-encryption-one-api";
 }
 
 - (void)startRequest{
     
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    NSMutableDictionary * parmars = [TestEncryptionThreeAPI createCommonParamWithApp:@"app1" class:@"class1"];
+    parmars[@"arg1"] = @"value1";
+    parmars[@"arg2"] = @"value2";
+    parmars[@"arg3"] = @"value3";
+    [self get:@"url" parameters:parmars userInfo:self.userInfo];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
@@ -42,16 +46,19 @@
 
 - (NSString *)userInfo{
     
-    return @"test-api";
+    return @"test-encryption-two-api";
 }
 
 - (void)startRequest{
     
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    NSMutableDictionary * parmars = [TestEncryptionThreeAPI createCommonParamWithApp:@"app2" class:@"class2"];
+    parmars[@"arg1"] = @"value1";
+    [self get:@"url" parameters:parmars userInfo:self.userInfo];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
     
+    [super parseResponse:response withUserInfo:userInfo];
 }
 
 @end
@@ -63,12 +70,15 @@
 
 - (NSString *)userInfo{
     
-    return @"test-api";
+    return @"test-encryption-three-api";
 }
 
 - (void)startRequest{
-//    NSMutableDictionary * parmars
-//    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    
+    NSMutableDictionary * parmars = [TestEncryptionThreeAPI createCommonParamWithApp:@"app3" class:@"class3"];
+    parmars[@"arg1"] = @"value1";
+    parmars[@"arg2"] = @"value2";
+    [self get:@"url" parameters:parmars userInfo:self.userInfo];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{

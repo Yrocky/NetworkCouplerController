@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "HLLRoot/NetworkingViewController/Model/HLLBaseRequestAdapter.m"
-            timestampString = "499319519.560432"
+            timestampString = "499330748.606668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-networkingDidRequestFailed:error:"
             landmarkType = "7">
             <Actions>
@@ -76,12 +76,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLLRoot/NetworkingViewController/Other/HLLNetworking/V_3_X_Networking.m"
-            timestampString = "499319743.163173"
+            timestampString = "499330748.606668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-startRequest"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HLLRoot/NetworkingViewController/Other/HLLPullToRefreshView/UIScrollView+HLLPullToRefreshView.m"
+            timestampString = "499330899.39099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-setShowPullToRefresh:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HLLRoot/NetworkingViewController/Other/HLLPullToRefreshView/UIScrollView+HLLInfiniteScrollingView.m"
+            timestampString = "499338853.990647"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-willRemoveSubview:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HLLRoot/NetworkingViewController/Other/HLLPullToRefreshView/UIScrollView+HLLPullToRefreshView.m"
+            timestampString = "499331957.741372"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-willRemoveSubview:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
