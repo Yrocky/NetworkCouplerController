@@ -50,9 +50,9 @@
     self.logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.logView];
     
-    self.oneAPI = [[TestEncryptionOneAPI alloc] initWithNetworkManager:self.networkManager];
-    self.twoAPI = [[TestEncryptionTwoAPI alloc] initWithNetworkManager:self.networkManager];
-    self.threeAPI = [[TestEncryptionThreeAPI alloc] initWithNetworkManager:self.networkManager];
+    self.oneAPI = [[TestEncryptionOneAPI alloc] init];
+    self.twoAPI = [[TestEncryptionTwoAPI alloc] init];
+    self.threeAPI = [[TestEncryptionThreeAPI alloc] init];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

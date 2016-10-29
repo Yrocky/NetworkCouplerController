@@ -65,7 +65,6 @@
 - (void)dealloc {
 
     [self hud_hidenLoading];
-    [self.networkManager cancelRequest];
 }
 
 #pragma mark -
@@ -73,7 +72,6 @@
 
 - (void) commonInit{
     
-    _networkManager = [[V_3_X_Networking alloc] init];
 }
 
 - (void) loadDefaultConfigure{

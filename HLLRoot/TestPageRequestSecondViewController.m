@@ -54,7 +54,7 @@
 
 - (HLLBaseRequestAdapter *)generateListRequest{
     
-    return [[TestPageSecondAPI alloc] initWithNetworkManager:self.networkManager];
+    return [[TestPageSecondAPI alloc] init];
 }
 
 - (void)refreshUIWithRequest:(TestPageSecondAPI *)request withUserInfo:(id)userInfo{

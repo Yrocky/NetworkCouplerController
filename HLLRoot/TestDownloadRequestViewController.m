@@ -156,7 +156,7 @@ documentsDirectoryPath:[fileHandle getFileCachePath]
 
 - (HLLBaseRequestAdapter *)generateRequest{
     
-    TestDownloadAPI * download = [[TestDownloadAPI alloc] initWithNetworkManager:self.networkManager];
+    TestDownloadAPI * download = [[TestDownloadAPI alloc] init];
     download.fileHandleDelegate = self;
     
     return download;

@@ -42,7 +42,7 @@
 
 - (HLLBaseRequestAdapter *)generateListRequest{
     
-    return [[TestPageThridAPI alloc] initWithNetworkManager:self.networkManager];
+    return [[TestPageThridAPI alloc] init];
 }
 
 - (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{

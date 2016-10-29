@@ -16,6 +16,17 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 @implementation HLLBaseRequestAdapter
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        _networkManager = [[V_3_X_Networking alloc] init];
+        _networkManager.delegate = self;
+    }
+    return self;
+}
+
 - (instancetype)initWithNetworkManager:(HLLNetworking *)manager
 {
     if( self = [super init] )
@@ -25,6 +36,16 @@ NSString * const HLLHostURL = @"www.baidu.com";
     }
     
     return self;
+}
+
+-(void)dealloc{
+
+    [self.networkManager cancelRequest];
+}
+
+- (void)setNeedCache:(BOOL)needCache{
+
+    _networkManager.needCache = needCache;
 }
 
 - (void)start{

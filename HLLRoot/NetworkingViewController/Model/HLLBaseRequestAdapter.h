@@ -28,6 +28,9 @@ extern NSString * const HLLHostURL;
 
 @property (nonatomic, weak) id<HLLBaseRequestAdapterProtocol> delegate;
 
+/** 是否需要进行缓存 */
+@property (nonatomic ,assign) BOOL needCache;
+
 /** 在网络请求成功之后返回的原始数据 */
 @property (nonatomic ,strong) id response;
 

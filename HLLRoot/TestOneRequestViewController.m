@@ -20,8 +20,6 @@
 
     [super viewDidLoad];
     
-    self.networkManager.needCache = YES;// 测试缓存数据
-    
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(80, 30, CGRectGetWidth(self.view.bounds) - 160, 40);
     button.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -56,7 +54,9 @@
 
 - (HLLBaseRequestAdapter *)generateRequest{
 
-    return [[TestAPI alloc] initWithNetworkManager:self.networkManager];
+    TestAPI * test = [[TestAPI alloc] init];
+    test.needCache = YES;
+    return test;
 }
 
 - (void)refreshUIWithRequest:(TestAPI *)request withUserInfo:(id)userInfo{

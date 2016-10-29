@@ -129,7 +129,7 @@ appendHTTPHeader:header];
 
 - (HLLBaseRequestAdapter *)generateRequest{
 
-    TestUploadAPI * upload = [[TestUploadAPI alloc] initWithNetworkManager:self.networkManager];
+    TestUploadAPI * upload = [[TestUploadAPI alloc] init];
     upload.fileHandleDelegate = self;
     
     return upload;

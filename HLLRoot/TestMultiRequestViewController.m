@@ -42,9 +42,9 @@
     self.logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.logView];
     
-    self.testOneAPI = [[TestOneAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testOneAPI = [[TestOneAPI alloc] init];
     self.testOneAPI.delegate = self;
-    self.testTwoAPI = [[TestTwoAPI alloc] initWithNetworkManager:self.networkManager];
+    self.testTwoAPI = [[TestTwoAPI alloc] init];
     self.testTwoAPI.delegate = self;
 }
 

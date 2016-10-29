@@ -11,12 +11,10 @@
 
 @interface HLLBaseViewController : UIViewController<HLLBaseRequestAdapterProtocol>
 
-/** 是否隐藏导航栏，默认不隐藏 */
+/** 是否隐藏导航栏，默认不隐藏，为NO */
 @property (nonatomic ,assign ,getter=isHidenNavigationBar) BOOL hidenNavigationBar;
 /** 是否在进行网络请求的时候出现HUD，默认YES */
 @property (nonatomic ,assign) BOOL allowHUDWhenRequestLoading;
-
-@property (nonatomic, readonly, strong) V_3_X_Networking * networkManager;
 
 @property (nonatomic, readonly, strong) HLLBaseRequestAdapter * baseRequest;
 
