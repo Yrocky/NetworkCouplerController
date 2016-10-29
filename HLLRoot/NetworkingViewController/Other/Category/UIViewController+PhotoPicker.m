@@ -11,8 +11,6 @@
 
 @implementation UIViewController (PhotoPicker)
 
-
-
 #pragma mark -
 #pragma mark runtimer
 

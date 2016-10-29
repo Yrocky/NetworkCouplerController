@@ -24,13 +24,13 @@
 		D7A09F4F1DBB9C5500C93B2D /* UIScrollView+HLLPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F4B1DBB9C5500C93B2D /* UIScrollView+HLLPullToRefreshView.m */; };
 		D7A09F521DBBB4DB00C93B2D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F511DBBB4DB00C93B2D /* UIImage+ImageEffects.m */; };
 		D7A09F551DBBD11000C93B2D /* HLLListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F541DBBD11000C93B2D /* HLLListViewController.m */; };
-		D7A09F6A1DBBD72D00C93B2D /* HLLNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F5B1DBBD72D00C93B2D /* HLLNetworking.m */; };
-		D7A09F6B1DBBD72D00C93B2D /* HLLRequestBodyType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F5E1DBBD72D00C93B2D /* HLLRequestBodyType.m */; };
-		D7A09F6C1DBBD72D00C93B2D /* HLLRequestMethodType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F621DBBD72D00C93B2D /* HLLRequestMethodType.m */; };
-		D7A09F6D1DBBD72D00C93B2D /* HLLResponseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F661DBBD72D00C93B2D /* HLLResponseDataType.m */; };
-		D7A09F6E1DBBD72D00C93B2D /* V_3_X_Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F681DBBD72D00C93B2D /* V_3_X_Networking.m */; };
 		D7A09F711DBBDF1600C93B2D /* HLLBaseRequestAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F701DBBDF1600C93B2D /* HLLBaseRequestAdapter.m */; };
 		D7A09F831DBC0D0E00C93B2D /* TestOneRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A09F821DBC0D0E00C93B2D /* TestOneRequestViewController.m */; };
+		D7B5D7381DC495F8002D0819 /* HLLNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B5D72A1DC495F8002D0819 /* HLLNetworking.m */; };
+		D7B5D7391DC495F8002D0819 /* HLLRequestBodyType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B5D72D1DC495F8002D0819 /* HLLRequestBodyType.m */; };
+		D7B5D73A1DC495F8002D0819 /* HLLRequestMethodType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B5D7311DC495F8002D0819 /* HLLRequestMethodType.m */; };
+		D7B5D73B1DC495F8002D0819 /* HLLResponseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B5D7351DC495F8002D0819 /* HLLResponseDataType.m */; };
+		D7B5D73C1DC495F8002D0819 /* V_3_X_Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B5D7371DC495F8002D0819 /* V_3_X_Networking.m */; };
 		D7BB78E01DB91CB20073B2DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB78DF1DB91CB20073B2DC /* main.m */; };
 		D7BB78E31DB91CB20073B2DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB78E21DB91CB20073B2DC /* AppDelegate.m */; };
 		D7BB78E61DB91CB20073B2DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB78E51DB91CB20073B2DC /* ViewController.m */; };
@@ -97,23 +97,23 @@
 		D7A09F511DBBB4DB00C93B2D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D7A09F531DBBD11000C93B2D /* HLLListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLListViewController.h; sourceTree = "<group>"; };
 		D7A09F541DBBD11000C93B2D /* HLLListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLListViewController.m; sourceTree = "<group>"; };
-		D7A09F5A1DBBD72D00C93B2D /* HLLNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLNetworking.h; sourceTree = "<group>"; };
-		D7A09F5B1DBBD72D00C93B2D /* HLLNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLNetworking.m; sourceTree = "<group>"; };
-		D7A09F5D1DBBD72D00C93B2D /* HLLRequestBodyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestBodyType.h; sourceTree = "<group>"; };
-		D7A09F5E1DBBD72D00C93B2D /* HLLRequestBodyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLRequestBodyType.m; sourceTree = "<group>"; };
-		D7A09F5F1DBBD72D00C93B2D /* HLLRequestDictionarySerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestDictionarySerializer.h; sourceTree = "<group>"; };
-		D7A09F611DBBD72D00C93B2D /* HLLRequestMethodType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestMethodType.h; sourceTree = "<group>"; };
-		D7A09F621DBBD72D00C93B2D /* HLLRequestMethodType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLRequestMethodType.m; sourceTree = "<group>"; };
-		D7A09F641DBBD72D00C93B2D /* HLLResponseDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLResponseDataSerializer.h; sourceTree = "<group>"; };
-		D7A09F651DBBD72D00C93B2D /* HLLResponseDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLResponseDataType.h; sourceTree = "<group>"; };
-		D7A09F661DBBD72D00C93B2D /* HLLResponseDataType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLResponseDataType.m; sourceTree = "<group>"; };
-		D7A09F671DBBD72D00C93B2D /* V_3_X_Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V_3_X_Networking.h; sourceTree = "<group>"; };
-		D7A09F681DBBD72D00C93B2D /* V_3_X_Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V_3_X_Networking.m; sourceTree = "<group>"; };
 		D7A09F6F1DBBDF1600C93B2D /* HLLBaseRequestAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLBaseRequestAdapter.h; sourceTree = "<group>"; };
 		D7A09F701DBBDF1600C93B2D /* HLLBaseRequestAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLBaseRequestAdapter.m; sourceTree = "<group>"; };
 		D7A09F7B1DBC080A00C93B2D /* HLLNibProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLNibProtocol.h; sourceTree = "<group>"; };
 		D7A09F811DBC0D0E00C93B2D /* TestOneRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestOneRequestViewController.h; sourceTree = "<group>"; };
 		D7A09F821DBC0D0E00C93B2D /* TestOneRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestOneRequestViewController.m; sourceTree = "<group>"; };
+		D7B5D7291DC495F8002D0819 /* HLLNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLNetworking.h; sourceTree = "<group>"; };
+		D7B5D72A1DC495F8002D0819 /* HLLNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLNetworking.m; sourceTree = "<group>"; };
+		D7B5D72C1DC495F8002D0819 /* HLLRequestBodyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestBodyType.h; sourceTree = "<group>"; };
+		D7B5D72D1DC495F8002D0819 /* HLLRequestBodyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLRequestBodyType.m; sourceTree = "<group>"; };
+		D7B5D72E1DC495F8002D0819 /* HLLRequestDictionarySerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestDictionarySerializer.h; sourceTree = "<group>"; };
+		D7B5D7301DC495F8002D0819 /* HLLRequestMethodType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLRequestMethodType.h; sourceTree = "<group>"; };
+		D7B5D7311DC495F8002D0819 /* HLLRequestMethodType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLRequestMethodType.m; sourceTree = "<group>"; };
+		D7B5D7331DC495F8002D0819 /* HLLResponseDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLResponseDataSerializer.h; sourceTree = "<group>"; };
+		D7B5D7341DC495F8002D0819 /* HLLResponseDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLLResponseDataType.h; sourceTree = "<group>"; };
+		D7B5D7351DC495F8002D0819 /* HLLResponseDataType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLLResponseDataType.m; sourceTree = "<group>"; };
+		D7B5D7361DC495F8002D0819 /* V_3_X_Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V_3_X_Networking.h; sourceTree = "<group>"; };
+		D7B5D7371DC495F8002D0819 /* V_3_X_Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V_3_X_Networking.m; sourceTree = "<group>"; };
 		D7BB78DB1DB91CB20073B2DC /* HLLRoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HLLRoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7BB78DF1DB91CB20073B2DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D7BB78E11DB91CB20073B2DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -236,63 +236,63 @@
 			path = HLLPullToRefreshView;
 			sourceTree = "<group>";
 		};
-		D7A09F561DBBD72D00C93B2D /* HLLNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				D7A09F671DBBD72D00C93B2D /* V_3_X_Networking.h */,
-				D7A09F681DBBD72D00C93B2D /* V_3_X_Networking.m */,
-				D7A09F571DBBD72D00C93B2D /* BaseNetworking */,
-				D7A09F5C1DBBD72D00C93B2D /* RequestBodyType */,
-				D7A09F601DBBD72D00C93B2D /* RequestMethodType */,
-				D7A09F631DBBD72D00C93B2D /* ResponseDataType */,
-			);
-			path = HLLNetworking;
-			sourceTree = "<group>";
-		};
-		D7A09F571DBBD72D00C93B2D /* BaseNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				D7A09F5A1DBBD72D00C93B2D /* HLLNetworking.h */,
-				D7A09F5B1DBBD72D00C93B2D /* HLLNetworking.m */,
-			);
-			path = BaseNetworking;
-			sourceTree = "<group>";
-		};
-		D7A09F5C1DBBD72D00C93B2D /* RequestBodyType */ = {
-			isa = PBXGroup;
-			children = (
-				D7A09F5D1DBBD72D00C93B2D /* HLLRequestBodyType.h */,
-				D7A09F5E1DBBD72D00C93B2D /* HLLRequestBodyType.m */,
-				D7A09F5F1DBBD72D00C93B2D /* HLLRequestDictionarySerializer.h */,
-			);
-			path = RequestBodyType;
-			sourceTree = "<group>";
-		};
-		D7A09F601DBBD72D00C93B2D /* RequestMethodType */ = {
-			isa = PBXGroup;
-			children = (
-				D7A09F611DBBD72D00C93B2D /* HLLRequestMethodType.h */,
-				D7A09F621DBBD72D00C93B2D /* HLLRequestMethodType.m */,
-			);
-			path = RequestMethodType;
-			sourceTree = "<group>";
-		};
-		D7A09F631DBBD72D00C93B2D /* ResponseDataType */ = {
-			isa = PBXGroup;
-			children = (
-				D7A09F641DBBD72D00C93B2D /* HLLResponseDataSerializer.h */,
-				D7A09F651DBBD72D00C93B2D /* HLLResponseDataType.h */,
-				D7A09F661DBBD72D00C93B2D /* HLLResponseDataType.m */,
-			);
-			path = ResponseDataType;
-			sourceTree = "<group>";
-		};
 		D7A09F7A1DBC07F700C93B2D /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				D7A09F7B1DBC080A00C93B2D /* HLLNibProtocol.h */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D7B5D7271DC495F8002D0819 /* HLLNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D7B5D7361DC495F8002D0819 /* V_3_X_Networking.h */,
+				D7B5D7371DC495F8002D0819 /* V_3_X_Networking.m */,
+				D7B5D7281DC495F8002D0819 /* BaseNetworking */,
+				D7B5D72B1DC495F8002D0819 /* RequestBodyType */,
+				D7B5D72F1DC495F8002D0819 /* RequestMethodType */,
+				D7B5D7321DC495F8002D0819 /* ResponseDataType */,
+			);
+			path = HLLNetworking;
+			sourceTree = "<group>";
+		};
+		D7B5D7281DC495F8002D0819 /* BaseNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D7B5D7291DC495F8002D0819 /* HLLNetworking.h */,
+				D7B5D72A1DC495F8002D0819 /* HLLNetworking.m */,
+			);
+			path = BaseNetworking;
+			sourceTree = "<group>";
+		};
+		D7B5D72B1DC495F8002D0819 /* RequestBodyType */ = {
+			isa = PBXGroup;
+			children = (
+				D7B5D72C1DC495F8002D0819 /* HLLRequestBodyType.h */,
+				D7B5D72D1DC495F8002D0819 /* HLLRequestBodyType.m */,
+				D7B5D72E1DC495F8002D0819 /* HLLRequestDictionarySerializer.h */,
+			);
+			path = RequestBodyType;
+			sourceTree = "<group>";
+		};
+		D7B5D72F1DC495F8002D0819 /* RequestMethodType */ = {
+			isa = PBXGroup;
+			children = (
+				D7B5D7301DC495F8002D0819 /* HLLRequestMethodType.h */,
+				D7B5D7311DC495F8002D0819 /* HLLRequestMethodType.m */,
+			);
+			path = RequestMethodType;
+			sourceTree = "<group>";
+		};
+		D7B5D7321DC495F8002D0819 /* ResponseDataType */ = {
+			isa = PBXGroup;
+			children = (
+				D7B5D7331DC495F8002D0819 /* HLLResponseDataSerializer.h */,
+				D7B5D7341DC495F8002D0819 /* HLLResponseDataType.h */,
+				D7B5D7351DC495F8002D0819 /* HLLResponseDataType.m */,
+			);
+			path = ResponseDataType;
 			sourceTree = "<group>";
 		};
 		D7BB78D21DB91CB20073B2DC = {
@@ -370,8 +370,9 @@
 			isa = PBXGroup;
 			children = (
 				D7BB79061DB924D70073B2DC /* ViewController */,
-				D7A09F3B1DBB99BA00C93B2D /* View */,
 				D7BB79041DB924D70073B2DC /* Model */,
+				D7A09F3B1DBB99BA00C93B2D /* View */,
+				D7B5D7271DC495F8002D0819 /* HLLNetworking */,
 				D7BB79051DB924D70073B2DC /* Other */,
 			);
 			path = NetworkingViewController;
@@ -397,7 +398,6 @@
 				D7A09F401DBB9C5500C93B2D /* Category */,
 				D7EB3E371DC0927A004B6730 /* Manager */,
 				D71040A81DBC9E71000A8F9B /* HLLPlaceholderTextView */,
-				D7A09F561DBBD72D00C93B2D /* HLLNetworking */,
 				D7A09F441DBB9C5500C93B2D /* HLLPullToRefreshView */,
 			);
 			path = Other;
@@ -601,13 +601,16 @@
 				D7A09F4C1DBB9C5500C93B2D /* UIColor+Common.m in Sources */,
 				D7BB790B1DB925080073B2DC /* HLLBaseViewController.m in Sources */,
 				D71040BD1DBD0C55000A8F9B /* AFHTTPSessionManager+AutoRetry.m in Sources */,
-				D7A09F6A1DBBD72D00C93B2D /* HLLNetworking.m in Sources */,
 				D7BB78E61DB91CB20073B2DC /* ViewController.m in Sources */,
 				D7D46B931DC0FCE3004B0B95 /* FileHandle.m in Sources */,
 				D7A09F551DBBD11000C93B2D /* HLLListViewController.m in Sources */,
 				D7A09F4F1DBB9C5500C93B2D /* UIScrollView+HLLPullToRefreshView.m in Sources */,
 				D71040AE1DBC9FD2000A8F9B /* UILabel+ContentSize.m in Sources */,
+				D7B5D73A1DC495F8002D0819 /* HLLRequestMethodType.m in Sources */,
+				D7B5D7391DC495F8002D0819 /* HLLRequestBodyType.m in Sources */,
 				D71040C01DBD255C000A8F9B /* NSString+Common.m in Sources */,
+				D7B5D73B1DC495F8002D0819 /* HLLResponseDataType.m in Sources */,
+				D7B5D73C1DC495F8002D0819 /* V_3_X_Networking.m in Sources */,
 				D71040AB1DBC9E71000A8F9B /* HLLPlaceholderTextView.m in Sources */,
 				D7A09F4E1DBB9C5500C93B2D /* UIScrollView+HLLInfiniteScrollingView.m in Sources */,
 				D7EB3E361DC0403C004B6730 /* UIViewController+PhotoPicker.m in Sources */,
@@ -615,14 +618,12 @@
 				D7A09F831DBC0D0E00C93B2D /* TestOneRequestViewController.m in Sources */,
 				D71040B11DBCA906000A8F9B /* TestPageRequestViewController.m in Sources */,
 				D7E82C681DBE508E00EF6564 /* TestPageRequestThirdViewController.m in Sources */,
+				D7B5D7381DC495F8002D0819 /* HLLNetworking.m in Sources */,
 				D7A09F521DBBB4DB00C93B2D /* UIImage+ImageEffects.m in Sources */,
 				D7BB78E31DB91CB20073B2DC /* AppDelegate.m in Sources */,
 				D71040BA1DBCF2E1000A8F9B /* TestUploadRequestViewController.m in Sources */,
-				D7A09F6E1DBBD72D00C93B2D /* V_3_X_Networking.m in Sources */,
 				D7E82C601DBDF42F00EF6564 /* TestPageRequestSecondViewController.m in Sources */,
-				D7A09F6B1DBBD72D00C93B2D /* HLLRequestBodyType.m in Sources */,
 				D71040B41DBCCD3A000A8F9B /* TestMultiRequestViewController.m in Sources */,
-				D7A09F6D1DBBD72D00C93B2D /* HLLResponseDataType.m in Sources */,
 				D7EB3E311DBFA0F3004B6730 /* HLLBasePagingAdapter.m in Sources */,
 				D7CDB8821DBEEDAE00925DE2 /* PullToRefreshView.m in Sources */,
 				D7A09F3E1DBB99CD00C93B2D /* HLLNoDataView.m in Sources */,
@@ -632,7 +633,6 @@
 				D7BB78E01DB91CB20073B2DC /* main.m in Sources */,
 				D71040A71DBC9821000A8F9B /* UIImage+Common.m in Sources */,
 				D7E82C641DBDF83700EF6564 /* TestCollectionViewCell.m in Sources */,
-				D7A09F6C1DBBD72D00C93B2D /* HLLRequestMethodType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -319,6 +319,9 @@
         
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(networkingDidRequestSuccess:response:)]) {
             
+            // 尝试解析成json
+            response = [self tryToParseData:response];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.delegate networkingDidRequestSuccess:weakSelf
@@ -410,7 +413,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [weakSelf.delegate networkingDidRequestSuccess:weakSelf
-                                                              response:filePath];
+                                                          response:filePath];
                 });
                 // 打印成功信息
                 [weakSelf logWithSuccessResponse:response

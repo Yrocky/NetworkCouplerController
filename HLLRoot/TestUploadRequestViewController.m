@@ -64,7 +64,7 @@
     self.logView.userInteractionEnabled = NO;
     self.logView.textColor = [UIColor colorWithHexString:@"#84949E"];
     self.logView.font = [UIFont systemFontOfSize:14];
-    self.logView.frame = CGRectMake(20, CGRectGetMaxY(button.frame) + 40, CGRectGetWidth(self.view.bounds) - 40, 30);
+    self.logView.frame = CGRectMake(20, CGRectGetMaxY(button.frame) + 40, CGRectGetWidth(self.view.bounds) - 40, 60);
     self.logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.logView];
     
@@ -117,7 +117,7 @@
                               @"gender": @"1",
                               @"nickname":@"我的头像",
                               @"sign":@"f6064718029e5389255f818aaac6e59d",
-                              @"uid" :@"2122208"};
+                              @"uid" :@"1932948"};
     NSDictionary * header = @{@"fileName":@"1932891.jpg",
                               @"name":@"image",
                               @"mimeType":@"image/jpeg"};
@@ -153,6 +153,8 @@ appendHTTPHeader:header];
     [super requestAdapter:requestAdapter didCompleteWithUserInfo:userInfo];
 
     self.uploadButton.enabled = YES;
+    
+    self.logView.text = [NSString stringWithFormat:@"%@",requestAdapter.data];
 }
 
 
@@ -161,11 +163,9 @@ appendHTTPHeader:header];
     [super requestAdapter:requestAdapter didFailWithError:error];
  
     self.uploadButton.enabled = YES;
-
 }
 
 @end
-
 
 
 @implementation TestUploadAPI
@@ -177,6 +177,10 @@ appendHTTPHeader:header];
 
 - (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
 
-    
+}
+
+- (void)parseResponse:(id)response withUserInfo:(id)userInfo{
+
+    self.data = response[@"data"][@"avatar"];
 }
 @end
