@@ -110,14 +110,6 @@
     }
 }
 
--(AVPlayerItem *)getPlayItem{
-    
-    NSString * filePath = @"";
-    AVAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:filePath] options:nil];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
-    return playerItem;
-}
-
 - (void)startTestRequest:(UIButton *)sender{
     
     self.downloadButton.enabled = NO;
@@ -153,7 +145,8 @@ documentsDirectoryPath:[fileHandle getFileCachePath]
         self.playerLayer.player = self.player;
     }
     
-    if (self.player.timeControlStatus != AVPlayerTimeControlStatusPlaying) {
+    
+    if (self.player.actionAtItemEnd != AVPlayerActionAtItemEndPause) {
         
         [self.player play];
     }else{
