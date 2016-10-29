@@ -20,6 +20,12 @@
     return self;
 }
 
+- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
+    
+    [NSException raise:@"Upload file is continue ,there is the progress"
+                format:@"You Must Override This Method."];
+}
+
 - (void) post:(NSString *)url parameters:(id)parameters image:(UIImage *)image appendHTTPHeader:(NSDictionary *)header{
 
     self.networkManager.tag = self.userInfo;
@@ -50,12 +56,6 @@
         return [NSURL fileURLWithPath:mediaPath];
     }];
 }
-- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
-
-    [NSException raise:@"Upload file is continue ,there is the progress"
-                format:@"You Must Override This Method."];
-}
-
 
 #pragma mark -
 #pragma mark HLLFileHandleProtocol
@@ -69,7 +69,6 @@
         [_fileHandleDelegate requestAdapter:self uploadFileProgress:progress];
     }
 }
-
 
 - (void)networkingDidDownloadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
 

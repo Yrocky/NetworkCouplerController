@@ -20,11 +20,12 @@
 
 @property (nonatomic, readonly, strong) HLLBaseRequestAdapter * baseRequest;
 
+/** 供子类重写，以返回进行网络请求的实例对象 */
 - (HLLBaseRequestAdapter *)generateRequest;
 
 /** 供子类重写，以获取网络加载的数据 */
 - (void) refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo;
-/** 供子类重写，以获取网络加载失败时候的信的数据 */
+/** 供子类重写，处理网络加载失败的情况 */
 - (void) showError:(NSError *)error withUserInfo:(id)userInfo;
 
 /** HUD */
@@ -79,3 +80,7 @@
  因为有的控制器具有下拉刷新功能，一般下拉刷新都有动画进行指示，不需要额外再多一个HUD
  
  ///////////////*/
+
+
+
+

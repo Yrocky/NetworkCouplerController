@@ -58,8 +58,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
     /** 供子类进行解析response的操作 */
 }
 
-+ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)class
-{
++ (NSMutableDictionary *)createCommonParamWithApp:(NSString *)app class:(NSString *)class{
     
     NSMutableDictionary * ret = [NSMutableDictionary dictionary];
     /** 根据自己后台服务器的请求规则进行相同参数的设定 */

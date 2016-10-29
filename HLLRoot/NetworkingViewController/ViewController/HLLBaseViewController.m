@@ -107,7 +107,7 @@
 
 - (void) showError:(NSError *)error withUserInfo:(id)userInfo{
     
-    /** 供子类重写，以获取网络加载失败时候的信的数据 */    
+    /** 供子类重写，处理网络加载失败的情况 */
 }
 
 #pragma mark -

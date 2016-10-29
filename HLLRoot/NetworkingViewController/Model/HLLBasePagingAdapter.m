@@ -59,7 +59,7 @@
     _result = nil;
 }
 
-/** 模型执行startRequest-->self.networkmanager请求成功-->self.networkmanager的代理模型执行request-->请求成功后调用parseResponse:withUserInfo:*/
+/** Adapter执行start-->self.networkmanager请求成功-->self.networkmanager的代理Adapter执行request-->请求成功后调用parseResponse:withUserInfo:*/
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
     
     [super parseResponse:response withUserInfo:userInfo];

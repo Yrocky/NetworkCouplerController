@@ -79,7 +79,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    /** 不建议在这里做很多东西，子类可以重写改数据源方法 */
+    /** 不建议在这里做很多东西，子类可以重写该数据源方法 */
     return nil;
 }
 
@@ -93,7 +93,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
-    /** 不建议在这里做很多东西，子类可以重写改数据源方法 */
+    /** 不建议在这里做很多东西，子类可以重写该数据源方法 */
     return nil;
 }
 

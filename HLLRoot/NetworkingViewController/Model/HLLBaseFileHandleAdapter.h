@@ -23,6 +23,9 @@
 
 @property (nonatomic ,weak) id<HLLBaseFileHandleAdapterProtocol> fileHandleDelegate;
 
+/** 供子类重写，获取下载或者上传就进度 */
+- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo;
+
 /** 具体设定逻辑需要和服务器那边进行协调，需要的HTTP header字段有`filename`、`name`、`mimeType` */
 - (void) post:(NSString *)url parameters:(id)parameters image:(UIImage *)image appendHTTPHeader:(NSDictionary *)header;
 

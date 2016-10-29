@@ -42,8 +42,11 @@ extern NSString * const HLLHostURL;
 - (void)post:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 - (void) get:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 
+/** 供子类重写，以发起一个网络请求，强制性重写 */
 - (void)start;
+/** 供子类调用，重新发起本次网络请求 */
 - (void)refresh;
+/** 供子类重写，以对获取的数据进行解析处理，非强制性重写 */
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo;
 
 /** 为请求失败设置重连次数以及每次之间的时间间隔 */

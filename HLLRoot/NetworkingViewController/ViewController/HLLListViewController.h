@@ -19,10 +19,11 @@
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 
+/** 供子类重写，以获取可以分页加载的请求实例对象 */
 - (HLLBasePagingAdapter *)generateListRequest;
 
+/** 供子类调用，以对List View进行代理数据源的设置 */
 - (void) configureTableView;
-
 - (void) configureCollectionView;
 
 #pragma mark -

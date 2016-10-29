@@ -18,13 +18,13 @@
 /** 当前一次请求得到的数据，用来判断是否有获取到数据 */
 @property (nonatomic ,strong ,readonly) NSArray * result;
 
-- (void)refresh;//刷新
 - (void)loadMore;//加载更多
 
 - (id)objectAtIndex:(NSInteger)index;//items中的对象
 
 - (void)clear;//清除所有数据
 
+/** 供子类重写，以对响应的数据进行解析处理 */
 - (NSArray *)parsePage:(id)response withUserInfo:(id)userInfo;
 
 @end
