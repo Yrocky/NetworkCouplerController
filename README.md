@@ -108,12 +108,12 @@ Adapter与网络部分的连接使用的是代理回调，在成功之后交给�
 
 ### 如何使用
 
-`第一步`，创建控制器使其有如此继承`@interface TestOneRequestViewController : HLLBaseViewController`，并且重写父类的这两个方法
+`第一步`，创建控制器类使其有如此继承`@interface TestOneRequestViewController : HLLBaseViewController`，并且重写父类的这两个方法
 
 ```
 - (HLLBaseRequestAdapter *)generateRequest{
 
-    return [[TestAPI alloc] initWithNetworkManager:self.networkManager];
+    return [[TestAPI alloc] init];
 }
 
 - (void)refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
@@ -122,7 +122,7 @@ Adapter与网络部分的连接使用的是代理回调，在成功之后交给�
 }
 ```
 
-`第二步`，创建一个发送请求的对象`@interface TestAPI : HLLBaseRequestAdapter`
+`第二步`，创建一个发送请求的类`@interface TestAPI : HLLBaseRequestAdapter`
 ，然后重写父类的以下方法，第三个可选重写
 
 ```
@@ -151,13 +151,13 @@ Adapter与网络部分的连接使用的是代理回调，在成功之后交给�
 }
 ```
 
-具体其他情况请看各个测试类中的方法
+其他具体情况请看各个测试类中的方法
 
 ### 测试情况
 
 * 单个请求测试，ok
 * 多个请求测试，ok
-* `多个请求同时发送，no`
+* 多个请求同时发送，ok
 * UITableView下的分页请求测试，ok
 * UICollectionView下的分页请求测试，ok
 * UITableView下的自定义控件分页请求测试，ok
@@ -169,11 +169,13 @@ Adapter与网络部分的连接使用的是代理回调，在成功之后交给�
 
 * 在没有网络但是有缓存的时候进行列表请求，使用自定义的下拉刷新以及上提加载更多控件，前两页有缓存，第三页没有缓存，当加载第三页失败之后会闪现到顶部
 * 网络请求的打印不是很完整，打印内容仅仅是一部分(在Xcode7.0版本可以完全打印，但是在Xcode8.0版本就不能完全打印)
+* 下载文件之后当删除了缓存文件夹，再次进行下载就会出现读取不到文件夹下文件
 * 。。。
 
 ### Todo
 
  * backgroundState 下的下载以及上传功能
+ * 增加具有依赖的网络请求功能
  * 网络状态的添加
  * 增加UISearchController部分
  * 。。。
