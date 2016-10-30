@@ -218,7 +218,8 @@
 }
 - (void)cancelRequest{
     
-    [self.dataTask cancel];
+    [_dataTask cancel];
+    [_downloadTask cancel];
 }
 
 - (NSDictionary *) accessRequestDictionarySerializerWithRequestDictionary:(NSDictionary *)requestDictionary{

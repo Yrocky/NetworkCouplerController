@@ -8,8 +8,10 @@
 
 #import "TestMultiRequestViewController.h"
 #import "HLLPlaceholderTextView.h"
+#import "HLLChainRequest.h"
 
-@interface TestMultiRequestViewController ()
+@interface TestMultiRequestViewController ()<HLLChainRequestDelegate>
+
 @property (nonatomic ,strong) UISegmentedControl * segmentControl;
 @property (nonatomic ,strong) HLLPlaceholderTextView * logView;
 @end
@@ -62,8 +64,18 @@
         [self testTwo];
     }else if (sender.selectedSegmentIndex == 2) {
         self.logView.text = nil;
-        [self testOne];
-        [self testTwo];
+        
+        TestOneAPI * oneAPI = [TestOneAPI api];
+        
+        HLLChainRequest * chainRequest = [[HLLChainRequest alloc] init];
+        [chainRequest addRequest:oneAPI callback:^(HLLChainRequest *chain, HLLBaseRequestAdapter *request) {
+            
+            TestTwoAPI * twoAPI = [TestTwoAPI api];
+            
+            [chain addRequest:twoAPI callback:nil];
+        }];
+        chainRequest.delegate = self;
+        [chainRequest start];
     }
 }
 
@@ -74,7 +86,6 @@
 
 - (void) testTwo{
     
-//    [self.testTwoAPI setTimesToRetry:3 intervalInSeconds:1];
     [self.testTwoAPI start];
 }
 
@@ -88,6 +99,23 @@
         self.logView.text = [NSString stringWithFormat:@"%@请求成功\n================\n%@",userInfo,request.response];
     }
 }
+
+
+#pragma mark -
+#pragma mark HLLChainRequestDelegate
+
+- (void) chainRequestDidFinished:(HLLChainRequest *)chainRequest{
+
+    for (HLLBaseRequestAdapter * request in chainRequest.requestsArray) {
+        
+        self.logView.text = [NSString stringWithFormat:@"%@\n%@请求成功\n",self.logView.text,request.userInfo];
+    }
+}
+
+- (void) chainRequestDidFailed:(HLLChainRequest *)chainRequest withRequest:(HLLBaseRequestAdapter *)request{
+
+    NSLog(@"----%@",request.userInfo);
+}
 @end
 
 
@@ -100,7 +128,7 @@
 
 - (void)start{
     
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
@@ -127,7 +155,7 @@
                          @"uid" :@"1932891"
                          };
     
-    [self post:@"http://175.102.24.16/api" parameters:p userInfo:self.userInfo];
+    [self post:@"http://175.102.24.16/api" parameters:p];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{

@@ -75,7 +75,7 @@
 
 - (void)start{
 
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{

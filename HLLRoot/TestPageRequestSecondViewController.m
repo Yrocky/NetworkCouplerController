@@ -102,7 +102,7 @@
     NSDictionary * parmars = @{@"start":@(self.currentPage),
                                @"count":@(self.pageSize)};
     
-    [self get:@"https://api.douban.com/v2/movie/top250" parameters:parmars userInfo:self.userInfo];
+    [self get:@"https://api.douban.com/v2/movie/top250" parameters:parmars];
 }
 
 - (NSArray *)parsePage:(id)response withUserInfo:(id)userInfo{

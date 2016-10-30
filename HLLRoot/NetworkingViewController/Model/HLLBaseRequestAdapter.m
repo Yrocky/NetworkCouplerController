@@ -16,6 +16,11 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 @implementation HLLBaseRequestAdapter
 
++ (instancetype) api{
+
+    return [[self alloc] init];
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -59,6 +64,11 @@ NSString * const HLLHostURL = @"www.baidu.com";
     [self start];
 }
 
+- (void)stop{
+
+    [_networkManager cancelRequest];
+}
+
 - (id)objectForKey:(NSString *)key{
     
     if (key) {
@@ -91,16 +101,21 @@ NSString * const HLLHostURL = @"www.baidu.com";
     return ret;
 }
 
-- (void)post:(NSString*)url parameters:(id)parameters userInfo:(id)userInfo{
-    
-    self.networkManager.method = [HLLPOSTMethodType type];
-    [self _configureNetworkManagerWithUrl:url parameters:parameters tag:userInfo];
+- (NSString *)userInfo{
+
+    return @"base-request";
 }
 
-- (void)get:(NSString*)url parameters:(id)parameters userInfo:(id)userInfo{
+- (void)post:(NSString*)url parameters:(id)parameters{
+    
+    self.networkManager.method = [HLLPOSTMethodType type];
+    [self _configureNetworkManagerWithUrl:url parameters:parameters tag:self.userInfo];
+}
+
+- (void)get:(NSString*)url parameters:(id)parameters{
     
     self.networkManager.method = [HLLGETMethodType type];
-    [self _configureNetworkManagerWithUrl:url parameters:parameters tag:userInfo];
+    [self _configureNetworkManagerWithUrl:url parameters:parameters tag:self.userInfo];
 }
 
 - (void) _configureNetworkManagerWithUrl:(NSString *)url parameters:(id)parameters tag:(id)tag{

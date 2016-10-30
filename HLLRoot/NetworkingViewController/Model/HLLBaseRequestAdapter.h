@@ -40,15 +40,20 @@ extern NSString * const HLLHostURL;
 /** 用来标示每一个request，类似于tag */
 @property (nonatomic ,strong) NSString * userInfo;
 
++ (instancetype) api;
+
 - (instancetype)initWithNetworkManager:(__kindof HLLNetworking *)manager;
 
-- (void)post:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
-- (void) get:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
+- (void)post:(NSString *)url parameters:(id)parameters;
+- (void) get:(NSString *)url parameters:(id)parameters;
 
 /** 供子类重写，以发起一个网络请求，强制性重写 */
 - (void)start;
 /** 供子类调用，重新发起本次网络请求 */
 - (void)refresh;
+/** 供子类调用，停止本次请求 */
+- (void) stop;
+
 /** 供子类重写，以对获取的数据进行解析处理，非强制性重写 */
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo;
 
