@@ -209,10 +209,6 @@ documentsDirectoryPath:[fileHandle getFileCachePath]
     return @"test-download-api";
 }
 
-- (void)start{
-
-    
-}
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{
 
@@ -220,10 +216,6 @@ documentsDirectoryPath:[fileHandle getFileCachePath]
     NSLog(@"filePath:%@",response);
 }
 
-- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
-    
-    
-}
 @end
 
 

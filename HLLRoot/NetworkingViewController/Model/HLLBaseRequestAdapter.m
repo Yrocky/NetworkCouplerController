@@ -27,7 +27,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
     return self;
 }
 
-- (instancetype)initWithNetworkManager:(HLLNetworking *)manager
+- (instancetype)initWithNetworkManager:(__kindof HLLNetworking *)manager
 {
     if( self = [super init] )
     {
@@ -121,7 +121,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
 #pragma mark -
 #pragma mark HLLNetworkingDelegate
 
-- (void) networkingDidRequestSuccess:(HLLNetworking *)networking response:(id)response{
+- (void) networkingDidRequestSuccess:(__kindof HLLNetworking *)networking response:(id)response{
 
     self.response = response;
 
@@ -136,7 +136,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
     });
 }
 
-- (void) networkingDidRequestFailed:(HLLNetworking *)networking error:(NSError *)error{
+- (void) networkingDidRequestFailed:(__kindof HLLNetworking *)networking error:(NSError *)error{
 
     if( [_delegate respondsToSelector:@selector(requestAdapter:didFailWithError:)]){
         
@@ -145,7 +145,7 @@ NSString * const HLLHostURL = @"www.baidu.com";
 }
 
 // 请求失败之后，从缓存中获取的数据
-- (void)networkingDidRequestFailed:(HLLNetworking *)networking response:(id)response error:(NSError *)error{
+- (void)networkingDidRequestFailed:(__kindof HLLNetworking *)networking response:(id)response error:(NSError *)error{
 
     self.response = response;
     

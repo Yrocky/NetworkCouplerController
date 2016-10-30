@@ -15,11 +15,11 @@ extern NSString * const HLLHostURL;
 @protocol HLLBaseRequestAdapterProtocol <NSObject>
 
 @optional;
-- (void)requestAdapterDidStartRequest:(HLLBaseRequestAdapter *)requestAdapter;
+- (void)requestAdapterDidStartRequest:(__kindof HLLBaseRequestAdapter *)requestAdapter;
 
-- (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo;
+- (void)requestAdapter:(__kindof HLLBaseRequestAdapter *)requestAdapter didCompleteWithUserInfo:(id)userInfo;
 
-- (void)requestAdapter:(HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error;
+- (void)requestAdapter:(__kindof HLLBaseRequestAdapter *)requestAdapter didFailWithError:(NSError *)error;
 @end
 
 @interface HLLBaseRequestAdapter : NSObject<HLLNetworkingDelegate>
@@ -34,13 +34,13 @@ extern NSString * const HLLHostURL;
 /** 在网络请求成功之后返回的原始数据 */
 @property (nonatomic ,strong) id response;
 
-/** 在网络请求返回的数据进行解析之后的有用数据，详见`-parseResponse:withUserInfo:`方法 */
+/** 在网络请求返回的数据进行解析之后的有关数据，详见`-parseResponse:withUserInfo:`方法 */
 @property (nonatomic, strong) id data;
 
 /** 用来标示每一个request，类似于tag */
 @property (nonatomic ,strong) NSString * userInfo;
 
-- (instancetype)initWithNetworkManager:(HLLNetworking *)manager;
+- (instancetype)initWithNetworkManager:(__kindof HLLNetworking *)manager;
 
 - (void)post:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;
 - (void) get:(NSString *)url parameters:(id)parameters userInfo:(id)userInfo;

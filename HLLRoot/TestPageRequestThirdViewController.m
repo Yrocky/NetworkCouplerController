@@ -104,7 +104,7 @@
     scrollView.infiniteScrollingContentView.autoFadeEffect = YES;
 }
 
-- (void) hidenRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
+- (void) hideRefreshForListView:(UIScrollView *)scrollView header:(BOOL)header footer:(BOOL)footer noMoreData:(BOOL)noMore{
     
     if (header) {
         

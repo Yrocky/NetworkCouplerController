@@ -12,17 +12,17 @@
 @interface HLLBaseViewController : UIViewController<HLLBaseRequestAdapterProtocol>
 
 /** 是否隐藏导航栏，默认不隐藏，为NO */
-@property (nonatomic ,assign ,getter=isHidenNavigationBar) BOOL hidenNavigationBar;
+@property (nonatomic ,assign ,getter=isHideNavigationBar) BOOL hideNavigationBar;
 /** 是否在进行网络请求的时候出现HUD，默认YES */
 @property (nonatomic ,assign) BOOL allowHUDWhenRequestLoading;
 
-@property (nonatomic, readonly, strong) HLLBaseRequestAdapter * baseRequest;
+@property (nonatomic, readonly, strong) __kindof HLLBaseRequestAdapter * baseRequest;
 
 /** 供子类重写，以返回进行网络请求的实例对象 */
-- (HLLBaseRequestAdapter *)generateRequest;
+- (__kindof HLLBaseRequestAdapter *)generateRequest;
 
 /** 供子类重写，以获取网络加载的数据 */
-- (void) refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo;
+- (void) refreshUIWithRequest:(__kindof HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo;
 /** 供子类重写，处理网络加载失败的情况 */
 - (void) showError:(NSError *)error withUserInfo:(id)userInfo;
 
@@ -30,7 +30,7 @@
 - (void) hud_showLoading;
 - (void) hud_showSuccessWithMessage:(NSString *)message;
 - (void) hud_showErrorWithMessage:(NSString *)message;
-- (void) hud_hidenLoading;
+- (void) hud_hideLoading;
 
 @end
 

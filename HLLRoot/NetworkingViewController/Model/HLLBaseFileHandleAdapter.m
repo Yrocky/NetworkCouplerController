@@ -10,7 +10,7 @@
 
 @implementation HLLBaseFileHandleAdapter
 
-- (instancetype)initWithNetworkManager:(HLLNetworking *)manager
+- (instancetype)initWithNetworkManager:(__kindof HLLNetworking *)manager
 {
     if( self = [super initWithNetworkManager:manager])
     {
@@ -20,17 +20,20 @@
     return self;
 }
 
+- (void)start{
+
+    [super start];
+    
+}
 - (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
     
-    [NSException raise:@"Upload file is continue ,there is the progress"
-                format:@"You Must Override This Method."];
+    /** 供子类重写，获取下载或者上传进度 */
 }
 
-- (void) post:(NSString *)url parameters:(id)parameters image:(UIImage *)image appendHTTPHeader:(NSDictionary *)header{
+- (void) post:(NSString *)url parameters:(id)parameters data:(NSData *)data appendHTTPHeader:(NSDictionary *)header{
 
     self.networkManager.tag = self.userInfo;
     
-    NSData * data = UIImageJPEGRepresentation(image, 1.0);
     [self.networkManager uploadWithUrl:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         if (data) {
@@ -60,7 +63,7 @@
 #pragma mark -
 #pragma mark HLLFileHandleProtocol
 
-- (void) networkingDidUploadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
+- (void) networkingDidUploadFile:(__kindof HLLNetworking *)networking progress:(NSProgress *)progress{
 
     [self progress:progress.completedUnitCount withUserInfo:networking.tag];
     
@@ -70,7 +73,7 @@
     }
 }
 
-- (void)networkingDidDownloadFile:(HLLNetworking *)networking progress:(NSProgress *)progress{
+- (void)networkingDidDownloadFile:(__kindof HLLNetworking *)networking progress:(NSProgress *)progress{
 
     [self progress:progress.completedUnitCount withUserInfo:networking.tag];
     

@@ -178,10 +178,8 @@
 }
 
 + (UIColor *)randomColor{
-    return [UIColor colorWithRed:(arc4random()%256)/256.f
-                           green:(arc4random()%256)/256.f
-                            blue:(arc4random()%256)/256.f
-                           alpha:1.0f];
+    
+    return [UIColor randomColorWithAlpha:1.0f];
 }
 
 + (UIColor *)randomColorWithAlpha:(CGFloat)alpha{

@@ -58,13 +58,13 @@
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:self.hidenNavigationBar
+    [self.navigationController setNavigationBarHidden:self.hideNavigationBar
                                              animated:YES];
 }
 
 - (void)dealloc {
 
-    [self hud_hidenLoading];
+    [self hud_hideLoading];
 }
 
 #pragma mark -
@@ -76,7 +76,7 @@
 
 - (void) loadDefaultConfigure{
     
-    self.hidenNavigationBar = NO;
+    self.hideNavigationBar = NO;
     self.allowHUDWhenRequestLoading = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
     
@@ -92,13 +92,13 @@
 #pragma mark -
 #pragma mark API
 
-- (HLLBaseRequestAdapter *)generateRequest{
+- (__kindof HLLBaseRequestAdapter *)generateRequest{
 
     /** 供子类重写，生成不同的网络请求类 */
     return nil;
 }
 
-- (void) refreshUIWithRequest:(HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
+- (void) refreshUIWithRequest:(__kindof HLLBaseRequestAdapter *)request withUserInfo:(id)userInfo{
 
     /** 供子类重写，以获取网络加载的数据 */
 }
@@ -127,7 +127,7 @@
 
     [SVProgressHUD showErrorWithStatus:message];
 }
-- (void) hud_hidenLoading{
+- (void) hud_hideLoading{
 
     [SVProgressHUD dismiss];
 }
@@ -148,7 +148,7 @@
     [self refreshUIWithRequest:requestAdapter withUserInfo:userInfo];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hud_hidenLoading];
+        [self hud_hideLoading];
     });
 }
 

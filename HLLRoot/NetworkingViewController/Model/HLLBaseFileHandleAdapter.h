@@ -13,9 +13,9 @@
 
 @optional;
 
-- (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter uploadFileProgress:(NSProgress *)progress;
+- (void)requestAdapter:(__kindof HLLBaseFileHandleAdapter *)requestAdapter uploadFileProgress:(NSProgress *)progress;
 
-- (void)requestAdapter:(HLLBaseFileHandleAdapter *)requestAdapter downloadFileProgress:(NSProgress *)progress;
+- (void)requestAdapter:(__kindof HLLBaseFileHandleAdapter *)requestAdapter downloadFileProgress:(NSProgress *)progress;
 @end
 
 
@@ -23,11 +23,11 @@
 
 @property (nonatomic ,weak) id<HLLBaseFileHandleAdapterProtocol> fileHandleDelegate;
 
-/** 供子类重写，获取下载或者上传就进度 */
+/** 供子类重写，获取下载或者上传进度 */
 - (void) progress:(CGFloat)progress withUserInfo:(id)userInfo;
 
 /** 具体设定逻辑需要和服务器那边进行协调，需要的HTTP header字段有`filename`、`name`、`mimeType` */
-- (void) post:(NSString *)url parameters:(id)parameters image:(UIImage *)image appendHTTPHeader:(NSDictionary *)header;
+- (void) post:(NSString *)url parameters:(id)parameters data:(NSData *)data appendHTTPHeader:(NSDictionary *)header;
 
 /** 根据URL下载文件到指定的文件夹，需要设定文件的名字 */
 - (void)download:(NSString *)url documentsDirectoryPath:(NSString *)documents fileName:(NSString *)fileName;

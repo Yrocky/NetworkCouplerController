@@ -89,6 +89,8 @@
     
     [self.progressView setProgress:0.0f];
     self.logView.text = nil;
+    
+//    self.imageView.image = [UIImage imageOutlineWithCornerRadius:200 fillColor:[UIColor randomColor]];
 //    UIImage * image = [UIImage imageWithColor:[UIColor randomColor]];
 //    UIImage * image = [UIImage imageNamed:@"background.jpeg"];
     
@@ -101,9 +103,7 @@
             self.imageView.image = image;
         }
         self.uploadButton.enabled = YES;
-    }cancel:^{
-        
-    }];
+    }cancel:nil];
 }
 
 - (void) startTestRequest{
@@ -121,9 +121,11 @@
     NSDictionary * header = @{@"fileName":@"1932891.jpg",
                               @"name":@"image",
                               @"mimeType":@"image/jpeg"};
+    NSData * data = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+    
     [upload post:@"http://175.102.24.16/api"
       parameters:params
-           image:self.imageView.image
+            data:data
 appendHTTPHeader:header];
 }
 
@@ -173,10 +175,6 @@ appendHTTPHeader:header];
 - (NSString *)userInfo{
 
     return @"test-file-upload-api";
-}
-
-- (void) progress:(CGFloat)progress withUserInfo:(id)userInfo{
-
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{

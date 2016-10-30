@@ -24,19 +24,20 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setCancel:(CancelHandle)cancel{
+- (void)setCancel:(PhotoPickerCancel)cancel{
  
     objc_setAssociatedObject(self, @selector(cancel), cancel, OBJC_ASSOCIATION_COPY);
 }
 
-- (CancelHandle)cancel{
+- (PhotoPickerCancel)cancel{
  
     return objc_getAssociatedObject(self, _cmd);
 }
+
 #pragma mark -
 #pragma mark Photo Picker handle
 
-- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result cancel:(CancelHandle)cancel{
+- (void) photoPickerWithSourceType:(UIImagePickerControllerSourceType)type result:(PhotoPickerResult)result cancel:(PhotoPickerCancel)cancel{
     
     self.result = result;
     self.cancel = cancel;
@@ -62,7 +63,6 @@
     [self presentViewController:imaPic animated:YES completion:nil];
 }
 
-
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -74,7 +74,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image=[[UIImage alloc]init];
+    UIImage *image = [[UIImage alloc]init];
     if (picker.allowsEditing == YES){
         
         image = [info objectForKey:UIImagePickerControllerEditedImage];

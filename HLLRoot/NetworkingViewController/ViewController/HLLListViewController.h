@@ -13,14 +13,14 @@
 
 @interface HLLListViewController : HLLBaseViewController<UITableViewDataSource, UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property (nonatomic, readonly) HLLBasePagingAdapter * listRequest;
+@property (nonatomic, readonly) __kindof HLLBasePagingAdapter * listRequest;
 
 @property (strong, nonatomic) UITableView * tableView;
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 /** 供子类重写，以获取可以分页加载的请求实例对象 */
-- (HLLBasePagingAdapter *)generateListRequest;
+- (__kindof HLLBasePagingAdapter *)generateListRequest;
 
 /** 供子类调用，以对List View进行代理数据源的设置 */
 - (void) configureTableView;
@@ -29,21 +29,21 @@
 #pragma mark -
 #pragma mark RefreshView
 
-- (void) addRefreshForListView:(UIScrollView *)scrollView
+- (void) addRefreshForListView:(__kindof UIScrollView *)scrollView
                   headerHandle:(void(^)())headerHandle
                   footerHandle:(void(^)())footerHandle;
-- (void) addRefreshForListView:(UIScrollView *)scrollView
+- (void) addRefreshForListView:(__kindof UIScrollView *)scrollView
                   headerHandle:(void(^)())headerHandle;
-- (void) addRefreshForListView:(UIScrollView *)scrollView
+- (void) addRefreshForListView:(__kindof UIScrollView *)scrollView
                   footerHandle:(void(^)())footerHandle;
 
 /** `header:`下拉刷新的时候进行处理，`footer:`上提加载的时候进行处理，`noMore:`即用于下拉也用于上提 */
 /** 如果是下拉刷新，`noMore`根据返回的数据个数决定1-0，并且要处理是否显示`noDataView视图` */
 /** 如果是上提加载，`noMore`根据返回的数据个数决定1-0 */
-- (void) hidenRefreshForListView:(UIScrollView *)scrollView
-                          header:(BOOL)header
-                          footer:(BOOL)footer
-                      noMoreData:(BOOL)noMore;
+- (void) hideRefreshForListView:(__kindof UIScrollView *)scrollView
+                         header:(BOOL)header
+                         footer:(BOOL)footer
+                     noMoreData:(BOOL)noMore;
 
 #pragma mark -
 #pragma mark NoDataView
