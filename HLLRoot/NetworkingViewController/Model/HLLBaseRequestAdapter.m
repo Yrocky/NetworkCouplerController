@@ -12,6 +12,8 @@ NSString * const HLLHostURL = @"www.baidu.com";
 
 @interface HLLBaseRequestAdapter ()
 
+@property (nonatomic ,strong ,readwrite) id response;
+
 @end
 
 @implementation HLLBaseRequestAdapter

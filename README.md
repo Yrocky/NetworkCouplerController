@@ -29,7 +29,10 @@ NetworkingViewController
 |	|---HLLBasePagingAdapter(能够发送分页请求的基类)
 |	|
 |	|---HLLBaseFileHandleAdapter(能够完成上传下载文件请求的基类)
+|	|
+|	|---HLLChainRequest(能够进行具有依赖的请求操作)
 |
+
 |---HLLNetworking
 |	|
 |	|---网络请求部分，在AFNetworking的基础上进行基础网络请求以及下载和上传功能的封装
@@ -135,7 +138,7 @@ Adapter与网络部分的连接使用的是代理回调，在成功之后交给�
 
 - (void)start{
 
-    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil userInfo:self.userInfo];
+    [self get:@"http://news-at.zhihu.com/api/4/news/latest" parameters:nil];
 }
 
 - (void)parseResponse:(id)response withUserInfo:(id)userInfo{

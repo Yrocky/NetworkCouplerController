@@ -32,10 +32,10 @@ extern NSString * const HLLHostURL;
 @property (nonatomic ,assign) BOOL needCache;
 
 /** 在网络请求成功之后返回的原始数据 */
-@property (nonatomic ,strong) id response;
+@property (nonatomic ,strong ,readonly) id response;
 
 /** 在网络请求返回的数据进行解析之后的有关数据，详见`-parseResponse:withUserInfo:`方法 */
-@property (nonatomic, strong) id data;
+@property (nonatomic, strong ,readwrite) id data;
 
 /** 用来标示每一个request，类似于tag */
 @property (nonatomic ,strong) NSString * userInfo;

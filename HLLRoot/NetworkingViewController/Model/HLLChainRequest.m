@@ -96,6 +96,7 @@
     [_requestArray removeAllObjects];
     [_requestCallbackArray removeAllObjects];
 }
+
 #pragma mark -
 #pragma mark HLLBaseRequestAdapterProtocol
 
@@ -122,7 +123,6 @@
 }
 
 @end
-
 
 
 @interface HLLChainRequestAgent()
